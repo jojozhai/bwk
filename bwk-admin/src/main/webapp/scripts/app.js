@@ -9,4 +9,4 @@
  * Main module of the application.
  */
 //应用主模块
-angular.module('adminApp', ['admin','userAdminModule', 'posterAdminModule', 'weixinReplyAdminModule', "messageSendModule"]);
+angular.module('adminApp', ['admin','userAdminModule', 'posterAdminModule', 'weixinReplyAdminModule', "messageSendModule", "swiperAdminModule"]);

@@ -21,9 +21,24 @@
 			<version>${mirage.version}</version>
 		</dependency>
 		<dependency>
-            <groupId>com.ymt.mirage</groupId>
-            <artifactId>mirage-swiper</artifactId>
-            <version>${mirage.version}</version>
-        </dependency>
+			<groupId>com.ymt.mirage</groupId>
+			<artifactId>mirage-lesson</artifactId>
+			<version>${mirage.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ymt.mirage</groupId>
+			<artifactId>mirage-tag</artifactId>
+			<version>${mirage.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ymt.mirage</groupId>
+			<artifactId>mirage-swiper</artifactId>
+			<version>${mirage.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ymt.mirage</groupId>
+			<artifactId>mirage-social</artifactId>
+			<version>${mirage.version}</version>
+		</dependency>
 	</dependencies>
 </project>

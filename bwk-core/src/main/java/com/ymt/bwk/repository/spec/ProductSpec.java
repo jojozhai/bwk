@@ -11,6 +11,10 @@
  */
 package com.ymt.bwk.repository.spec;
 
+import javax.persistence.criteria.Predicate;
+
+import org.apache.commons.lang.StringUtils;
+
 import com.ymt.bwk.domain.Product;
 import com.ymt.bwk.dto.ProductInfo;
 import com.ymt.pz365.data.jpa.repository.spec.PzSimpleSpecification;
@@ -28,9 +32,15 @@ public class ProductSpec extends PzSimpleSpecification<Product, ProductInfo> {
         super(condition);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     protected void addCondition(QueryWraper<Product> queryWraper) {
-        addLikeCondition(queryWraper, "name");
+        if(StringUtils.isNotBlank(getCondition().getName())) {
+            Predicate condition1 = queryWraper.getCb().like(getPath(queryWraper.getRoot(), "name"), "%"+getCondition().getName()+"%");
+            Predicate condition2 = queryWraper.getCb().like(getPath(queryWraper.getRoot(), "desc"), "%"+getCondition().getName()+"%");
+            Predicate condition3 = queryWraper.getCb().like(getPath(queryWraper.getRoot(), "lesson.teacher.name"), "%"+getCondition().getName()+"%");
+            queryWraper.getPredicates().add(queryWraper.getCb().or(condition1, condition2, condition3));
+        }
     }
 
 }

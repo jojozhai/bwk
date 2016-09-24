@@ -27,6 +27,7 @@ angular.module('productAdminModule',[]).config(function($stateProvider) {
 	
 	$scope.create = function() {
 		$scope.save({
+			key: false,
 			price: 0,
 			saleCount: 0,
 			saleCountPlus: 0,

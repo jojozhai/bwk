@@ -11,6 +11,8 @@
  */
 package com.ymt.bwk.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -26,6 +28,8 @@ public interface ProductService {
     
     Page<ProductInfo> query(ProductInfo productInfo, Pageable pageable);
     
+    Page<ProductInfo> query(Long id, Pageable pageable);
+    
     ProductInfo create(ProductInfo productInfo) throws Exception;
 
     ProductInfo getInfo(Long id);
@@ -33,5 +37,9 @@ public interface ProductService {
     ProductInfo update(ProductInfo productInfo);
 
     void delete(Long id);
+    
+    List<ProductInfo> findAll();
+
+    
 
 }

@@ -13,10 +13,11 @@ package com.ymt.bwk.repository;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import com.ymt.bwk.domain.Product;
+import com.ymt.bwk.domain.LessonProduct;
 import com.ymt.pz365.data.jpa.repository.PzRepository;
 
 /**
@@ -26,9 +27,10 @@ import com.ymt.pz365.data.jpa.repository.PzRepository;
  * @version 1.0.0
  */
 @Repository
-public interface ProductRepository extends PzRepository<Product> {
+public interface LessonProductRepository extends PzRepository<LessonProduct> {
 
-    @Query("select id,name from Product")
-    List<Object[]> findAllForOption();
+    List<LessonProduct> findByLessonId(Long id);
+
+    Page<LessonProduct> findByLessonId(Long id, Pageable pageable);
 
 }

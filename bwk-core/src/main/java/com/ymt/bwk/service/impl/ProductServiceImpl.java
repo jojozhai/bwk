@@ -21,8 +21,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ymt.bwk.domain.LessonProduct;
 import com.ymt.bwk.domain.Product;
 import com.ymt.bwk.dto.ProductInfo;
+import com.ymt.bwk.repository.LessonProductRepository;
 import com.ymt.bwk.repository.ProductRepository;
 import com.ymt.bwk.repository.spec.ProductSpec;
 import com.ymt.bwk.service.ProductService;
@@ -55,7 +57,24 @@ public class ProductServiceImpl implements ProductService, OrderGoodsService {
     private LessonRepository lessonRepository;
     
     @Autowired
+    private LessonProductRepository lessonProductRepository;
+    
+    @Autowired
     private LessonService lessonService;
+
+    @Override
+    public Page<ProductInfo> query(Long id, Pageable pageable) {
+        Page<LessonProduct> pageData = lessonProductRepository.findByLessonId(id, pageable);
+        return QueryResultConverter.convert(pageData, pageable, new AbstractDomain2InfoConverter<LessonProduct, ProductInfo>() {
+            @Override
+            protected void doConvert(LessonProduct domain, ProductInfo info) throws Exception {
+                info.setId(domain.getProduct().getId());
+                info.setName(domain.getProduct().getName());
+                info.setImage(domain.getProduct().getImage());
+                setTeacherInfoForProductQuery(domain.getProduct(), info);
+            }
+        });
+    }
     
     @Override
     public Page<ProductInfo> query(ProductInfo productInfo, Pageable pageable) {
@@ -134,6 +153,19 @@ public class ProductServiceImpl implements ProductService, OrderGoodsService {
             infos.add(info);
         }
         return infos;
+    }
+
+    @Override
+    public List<ProductInfo> findAll() {
+        List<Object[]> teachers = productRepository.findAllForOption();
+        List<ProductInfo> result = new ArrayList<ProductInfo>();
+        for (Object[] data : teachers) {
+            ProductInfo info = new ProductInfo();
+            info.setId((Long) data[0]);
+            info.setName((String) data[1]);
+            result.add(info);
+        }
+        return result;
     }
 
 }

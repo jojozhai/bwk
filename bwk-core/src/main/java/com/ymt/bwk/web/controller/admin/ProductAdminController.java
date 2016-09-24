@@ -11,6 +11,8 @@
  */
 package com.ymt.bwk.web.controller.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
@@ -60,6 +62,11 @@ public class ProductAdminController {
     @RequestMapping(value = "/product/{id}", method = RequestMethod.DELETE)
     public void delete(@PathVariable Long id) {
         productService.delete(id);
+    }
+    
+    @RequestMapping(value = "/product/all", method = RequestMethod.GET)
+    public List<ProductInfo> findAll() {
+        return productService.findAll();
     }
     
 }

@@ -60,13 +60,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         String[] result = new String[]{};
         for (SecurityRequestConfig config : securityRequestConfigs) {
             if(StringUtils.equals(flag, "get")) {
-                ArrayUtils.addAll(result, config.getGetRequests());
+                result = (String[]) ArrayUtils.addAll(result, config.getGetRequests());
             }else if(StringUtils.equals(flag, "post")) {
-                ArrayUtils.addAll(result, config.getPostRequests());
+                result = (String[]) ArrayUtils.addAll(result, config.getPostRequests());
             }else if(StringUtils.equals(flag, "put")) {
-                ArrayUtils.addAll(result, config.getPutRequests());
+                result = (String[]) ArrayUtils.addAll(result, config.getPutRequests());
             }else if(StringUtils.equals(flag, "delete")) {
-                ArrayUtils.addAll(result, config.getDeleteRequests());
+                result = (String[]) ArrayUtils.addAll(result, config.getDeleteRequests());
             }
         }
         return result;

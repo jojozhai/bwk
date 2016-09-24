@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>报名课程</title>
+    <link rel="stylesheet" href="../css/frozen.css">
+    <link rel="stylesheet" href="../css/public.css">
+    <script src="../lib/zepto.min.js"></script>
+    <script src="../js/frozen.js"></script>
+    <style type="text/css">
+    .ui-lesson-header img {display: block;height: 200px;width: 100%;}
+    .ui-lesson-header .ui-lesson-headerIntro {text-align: center;background-color: #fff;padding: 10px 0;}
+    .ui-lesson-header h3 {font-size: 14px;margin: 10px 0;}
+    .ui-lesson-header h3 span {margin: 0 10px;}
+    .ui-lesson-header .ui-lesson-headerIntro p {color: #a2a2a2;font-size: 12px;margin: 10px 0;}
+    .item-details {background: #fff;margin: 10px 0;padding-bottom: 10px;}
+    .item-details img {width: 96%;margin: 10px auto;display: block;}
+    .item-details .demo-desc {color: #555;font-size: 14px;}
+    .item-details .demo-desc span {margin-right: 10px;color: #000;font-weight: bold;font-size: 14px;}
+    .item-text {background-color: #fff;padding-bottom: 40px;}
+    .item-text p {color: #acacac;margin-bottom: 10px;padding: 20px 10px 0;font-size: 14px;}
+    .item-text .ui-btn-lg {width: 100px;margin: 20px auto 0;}
+    .ui-form-item label:not(.ui-switch):not(.ui-checkbox):not(.ui-checkbox-s):not(.ui-radio){width: 80px;}
+    .ui-sign-lesson .ui-dialog-cnt{width: 80%;}
+    .ui-sign-lesson .ui-dialog-hd{background-color: #fff; margin-bottom: 10px;}
+    .ui-sign-lesson .ui-dialog-hd h3{font-weight: 600;font-size: 14px;color: #3d3d3d;background-color:#fff;}
+    .ui-sign-lesson .ui-form label{color: #424242;}
+    .ui-sign-lesson .but-wrap {text-align: center;background-color: #fff;padding: 20px 0;}
+    .ui-sign-lesson .but-wrap label{color: #7e7e7e;}
+    .ui-sign-lesson .but-wrap .ui-btn-primary{width: 150px;margin: 20px auto 10px;height: 35px;line-height: 35px;}
+    </style>
+</head>
+
+<body ontouchstart>
+    <section class="ui-container">
+        <div class="demo-block ui-lesson-header">
+            <img src="http://placeholder.qiniudn.com/640x200" />
+            <div class="ui-lesson-headerIntro">
+                <h3><span>——</span>两小时颠覆你的PPT视觉<span>——</span></h3>
+                <p>主讲人:雷军</p>
+                <p>时间:8月13日19:00-20:30</p>
+                <p>地点:直播间/北京</p>
+            </div>
+        </div>
+        <div class="demo-item item-details">
+            <p class="demo-desc"><span>|</span>活动详情</p>
+            <img src="../img/detail_ad0.png">
+        </div>
+        <div class="demo-item item-text">
+            <p>接触烘培已经2年多了，刚开始做戚风的时候很不顺利，内心很是抓狂，戚风作为入门级的蛋糕，能做好它以后在烘培界才有机会风生水起~慢慢地才掌握了做蛋糕的诀窍，虽然还是有很多次会败给它。</p>
+            <p>我喜欢吃盐渍橙丁，总是喜欢做蛋糕的时候撒一把进去，既香甜又有嚼劲，层次感更突出，品尝过一次，便不可忽略它的存在。</p>
+            <p>经常看到很多人有晒早餐的习惯，灰常羡慕，厌倦了每天黄豆豆浆&炸油条&肉包子，于是，某天早上，我早起了一会，做了可可戚风，榨了新鲜蔬菜汁，还P了图哈哈~想要把生活搞得活泼起来其实还是很简单的嘛~
+            </p>
+            <button class="ui-btn-lg ui-btn-primary" id="btn1">立即参加</button>
+        </div>
+
+        <div class="demo-block ui-sign-lesson">
+            <div class="ui-dialog">
+                <div class="ui-dialog-cnt">
+                    <header class="ui-dialog-hd">
+                        <h3>完善您的报名信息</h3>
+                        <i class="ui-dialog-close" data-role="button"></i>
+                    </header>
+                    <div class="demo-block">
+                        <div class="ui-form ui-border-t">
+                            <form action="#">
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        姓名：
+                                    </label>
+                                    <input type="text" class="ui-toWd" placeholder="输入您的姓名" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        性别：
+                                    </label>
+                                    <input type="text" class="ui-toWd" placeholder="输入您的性别" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        职业：
+                                    </label>
+                                    <input type="text" class="ui-toWd" placeholder="输入您的职业" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        年龄：
+                                    </label>
+                                    <input type="text" class="ui-toWd" placeholder="输入您的年龄" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        手机号：
+                                    </label>
+                                    <input type="text" class="ui-thWd" placeholder="输入您的手机号" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        微信号：
+                                    </label>
+                                    <input type="text" class="ui-thWd" placeholder="输入您的微信号" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        微信昵称：
+                                    </label>
+                                    <input type="text" class="ui-foWd" placeholder="输入您的微信昵称" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        所在城市：
+                                    </label>
+                                    <input type="text" class="ui-foWd" placeholder="输入您的所在城市" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="but-wrap">
+                        <div class="ui-btn-small">
+                           <label class="ui-checkbox-s">
+                                <input type="checkbox" name="checkbox" checked="">线上
+                            </label>
+                            <label class="ui-checkbox-s">
+                                <input type="checkbox" name="checkbox" checked="">线上
+                            </label>
+                        </div>
+                        <button class="ui-btn-lg ui-btn-primary" id="btn1">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.ui-container-->
+    <script>
+    $('.ui-list li,.ui-tiled li').click(function() {
+        if ($(this).data('href')) {
+            location.href = $(this).data('href');
+        }
+    });
+
+    Zepto(function($) {
+        //轮播
+        $("#btn1").click(function(){
+            $(".ui-dialog").dialog("show");
+        })
+    });
+
+    function _dealImgList(obj) {
+
+
+
+    }
+    </script>
+</body>
+
+</html>

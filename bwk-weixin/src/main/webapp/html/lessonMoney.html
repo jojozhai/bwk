@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>奖学金</title>
+    <link rel="stylesheet" href="../css/frozen.css">
+    <link rel="stylesheet" href="../css/public.css">
+    <script src="../lib/zepto.min.js"></script>
+    <script src="../js/frozen.js"></script>
+    <style type="text/css">
+    .ui-scholship-header img {display: block;height: 200px;width: 100%;}
+    .ui-scholship-header .ui-scholship-title{padding:10px 15px;margin-bottom:10px;font-size: 14px;}
+    .ui-scholship-header .ui-scholship-title .fr{float: right;}
+    .item-range .ui-border-t{line-height: 70px;}
+    .item-range .ui-numList{padding-right: 4px;}
+    .ui-list-info{padding:0 15px 0 0;}
+    .ui-range-score{float:right;color:#fd8834;width: 124px;}
+    .ui-range-score .ui-lineG{width: 0;height: 50px;border-left: 1px solid #ccc;display: inline-block;float: left;margin: 10px 20px 0 0;}
+    .ui-range-score .ui-range-pic{float: right;margin: 10px 0 0 20px;}
+    </style>
+</head>
+
+<body ontouchstart>
+    <footer class="ui-footer ui-footer-btn">
+        <ul class="ui-tiled ui-border-t">
+            <li data-href="lessonTypes.html" >
+                <div class="ui-title-img"><img src="../img/footerType.png"  /></div>
+                <div class="ui-title-name ">课程分类</div>
+            </li>
+            <li data-href="lessonQuestion.html" >
+                <div class="ui-title-img"><img src="../img/footerTeacher.png"  /></div>
+                <div class="ui-title-name ">咨询老师</div>
+            </li>
+            <li data-href="index.html" class="ui-menu-index">
+                <div class="ui-title-img"><img src="../img/menuIndex.png"  /></div>
+            </li>
+            <li data-href="lessonMoney.html">
+                <div class="ui-title-img ui-img-money"><img src="../img/footerMoneySel.png"  /></div>
+                <div class="ui-title-name ui-menu-current">奖学金</div>
+            </li>
+            <li data-href="userCenter.html">
+                <div class="ui-title-img"><img src="../img/footerUser.png"  /></div>
+                <div class="ui-title-name">个人中心</div>
+            </li>
+        </ul>
+    </footer>
+
+    <section class="ui-container">
+        <div class="demo-block ui-scholship-header">
+            <img src="http://placeholder.qiniudn.com/640x200" />
+            <div class="ui-scholship-title">
+               <a href="">获得奖学金攻略</a>
+               <a href="" class="fr">查看我的奖学金</a>
+            </div>
+        </div>
+        <div class="demo-item item-range">
+             <ul class="ui-list ui-border-tb">
+                <li class="ui-border-t">
+                    <span class="ui-numList">1</span>
+                    <div class="ui-avatar">
+                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+                    </div>
+                    <div class="ui-list-info">
+                        <span>远程高数老</span>
+                        <div class="ui-range-score"><span class="ui-lineG"></span><span>￥547</span><img class="ui-range-pic" src="../img/yjiang.png"/></div>
+                    </div>
+                </li>
+               <li class="ui-border-t">
+                    <span class="ui-numList">1</span>
+                    <div class="ui-avatar">
+                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+                    </div>
+                    <div class="ui-list-info">
+                        <span>远程高数老</span>
+                        <div class="ui-range-score"><span class="ui-lineG"></span><span>￥547</span><img class="ui-range-pic" src="../img/gjiang.png"/></div>
+                    </div>
+                </li>
+                <li class="ui-border-t">
+                    <span class="ui-numList">1</span>
+                    <div class="ui-avatar">
+                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+                    </div>
+                    <div class="ui-list-info">
+                        <span>远程高数老</span>
+                        <div class="ui-range-score"><span class="ui-lineG"></span><span>￥547</span><img class="ui-range-pic" src="../img/tjiang.png"/></div>
+                    </div>
+                </li>
+                <li class="ui-border-t">
+                    <span class="ui-numList">1</span>
+                    <div class="ui-avatar">
+                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+                    </div>
+                    <div class="ui-list-info">
+                        <span>远程高数老</span>
+                        <div class="ui-range-score"><span class="ui-lineG"></span><span>￥547</span></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!-- /.ui-container-->
+    <script>
+    $('.ui-list li,.ui-tiled li').click(function() {
+        if ($(this).data('href')) {
+            location.href = $(this).data('href');
+        }
+    });
+
+    Zepto(function($) {
+        //轮播
+        $("#btn1").click(function(){
+            $(".ui-dialog").dialog("show");
+        })
+    });
+
+    function _dealImgList(obj) {
+
+
+
+    }
+    </script>
+</body>
+
+</html>

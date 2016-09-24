@@ -22,6 +22,13 @@
                         <label for="selection" style="margin-top: 4px;"></label>
                     </div>
                 </div>
+                <label class="control-label col-lg-2">关键商品:</label>
+                <div class="col-lg-2">
+                    <div class="custom-checkbox todo-checkbox">
+                        <input id="selection2" ng-model="product.key" ng-checked="product.key" type="checkbox">
+                        <label for="selection2" style="margin-top: 4px;"></label>
+                    </div>
+                </div>
             </div>
             <div class="form-group"  ng-class="productForm.name.$invalid && productForm.name.$dirty ? 'has-error': ''">
                 <label class="control-label col-lg-3"><span class="text_red">*</span>&nbsp;商品名称:</label>

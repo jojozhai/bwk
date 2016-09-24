@@ -41,6 +41,11 @@ public class ProductWeixinController {
         return productService.query(productInfo, pageable);
     }
     
+    @RequestMapping(value = "/lesson/{id}/recommend", method = RequestMethod.GET)
+    public Page<ProductInfo> query(@PathVariable Long id, Pageable pageable) {
+        return productService.query(id, pageable);
+    }
+    
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)
     public ProductInfo getInfo(@PathVariable Long id) {
         return productService.getInfo(id);

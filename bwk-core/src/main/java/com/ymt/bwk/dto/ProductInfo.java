@@ -29,6 +29,10 @@ public class ProductInfo {
      */
     private String name;
     /**
+     * 关键商品
+     */
+    private boolean key;
+    /**
      * 上架
      */
     private Boolean enable;
@@ -179,6 +183,18 @@ public class ProductInfo {
      */
     public void setEnable(Boolean enable) {
         this.enable = enable;
+    }
+    /**
+     * @return the key
+     */
+    public boolean isKey() {
+        return key;
+    }
+    /**
+     * @param key the key to set
+     */
+    public void setKey(boolean key) {
+        this.key = key;
     }
 
 }

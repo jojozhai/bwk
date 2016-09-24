@@ -3,6 +3,7 @@
  */
 package com.ymt;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
@@ -20,7 +21,8 @@ import com.ymt.pz365.framework.core.utils.SpringBoot;
 public class BwkAdminApplication extends SpringBootServletInitializer {
 	
 	public static void main(String[] args) {
-		SpringBoot.start(BwkAdminApplication.class, args);
+//		SpringBoot.start(BwkAdminApplication.class, args);
+	    System.out.println(RandomStringUtils.randomAlphanumeric(32));
 	}
 	
 	@Override

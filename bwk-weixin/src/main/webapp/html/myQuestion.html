@@ -146,10 +146,16 @@
     });
 
     Zepto(function($) {
-        //轮播
-        BWK.api.lesson.swiper(null, function(data) {
+        //列表 finish=true/false  
+        BWK.api.user.userOrderList({'finish':false}, function(data) {
             var dealObj = data.content || [];
             _dealImgList(dealObj);
+
+            //state 有INIT(进行中) FINISH（完成） 和 CANCEL（取消）
+        });
+
+        $('.ui-list').on('click','li',function(){
+             location.href = "lessonProduct.html?id=1042";
         });
 
     });

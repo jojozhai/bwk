@@ -113,7 +113,7 @@
                 </div>
                 <span class="ui-btn-search"></span>
             </section>
-            <ul class="ui-list">
+            <ul class="ui-list ui-list-product">
                 <li>
                     <div class="ui-avatar">
                         <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
@@ -147,7 +147,17 @@
     });
 
     Zepto(function($) {
-      
+        $('.ui-list-product').on('click','li',function(){
+            location.href = "lessonProduct.html?id=1042";
+        });
+
+        var params = {'enable':true};
+        BWK.api.lesson.lessonProdectList(params,function(data){
+            var dealObj = data.content||[];
+            _dealImgList(dealObj);
+        }); 
+
+
     });
 
    

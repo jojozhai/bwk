@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>课程详情</title>
+    <title>商品详情</title>
     <link rel="stylesheet" href="../css/frozen.css">
     <link rel="stylesheet" href="../css/public.css">
     <script src="../lib/zepto.min.js"></script>
@@ -123,10 +123,10 @@
         <div class="demo-block">
             <div class="ui-tab">
                 <ul class="ui-tab-nav ui-border-b">
-                    <li class="current">课程简介</li>
-                    <li>相关推荐</li>
+                    <li class="current">商品简介</li>
+                    
                 </ul>
-                <ul class="ui-tab-content" style="width:200%">
+                <ul class="ui-tab-content" style="width:100%">
                     <li>
                         <div class="ui-course-brief">
                             <h3>做好分享的5个方法(本节课程)<a>展开<img src=""></a></h3>
@@ -177,42 +177,14 @@
                                 <div class="demo-block">
                                     <section class="ui-input-wrap ui-add-discuss">
                                         <div class="ui-input ui-border-radius">
-                                            <input type="text" name="" value="" placeholder="输入评论...">
+                                            $33
                                         </div>
-                                        <button class="ui-btn">发布</button>
+                                        <button class="ui-btn ui-btn-toBuy">立即购买</button>
                                     </section>
                                 </div>
                             </div>
                     </li>
-                    <li>
-                        <div class="demo-block ui-item-list">
-                            <p class="share-tip">分享课程还能获得收益</p>
-                            <ul class="ui-list ui-list-link ui-border-tb">
-                                <li class="ui-border-t">
-                                    <div class="ui-list-img">
-                                        <span style="background-image:url(http://placeholder.qiniudn.com/200x136)"></span>
-                                    </div>
-                                    <div class="ui-list-info">
-                                        <h4 class="ui-nowrap ui-less-title">半个小时PPT逆袭之路</h4>
-                                        <p class="ui-nowrap ui-less-desc">老师: 高兴</p>
-                                    </div>
-                                </li>
-                                <li class="ui-border-t">
-                                    <div class="ui-list-img">
-                                        <span style="background-image:url(http://placeholder.qiniudn.com/200x136)"></span>
-                                    </div>
-                                    <div class="ui-list-info">
-                                        <h4 class="ui-nowrap ui-less-title">半个小时PPT逆袭之路</h4>
-                                        <p class="ui-nowrap ui-less-desc">老师: 高兴</p>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="ui-loading-wrap">
-                                <p>加载中</p>
-                                <i class="ui-loading"></i>
-                            </div>
-                        </div>
-                    </li>
+                    
                 </ul>
                 </div>
             </div>
@@ -228,39 +200,34 @@
 
     Zepto(function($) {
 
-        var tab = new fz.Scroll('.ui-tab', {
-            role: 'tab',
-            autoplay: false,
-            interval: 3000
-        });
-        /* 滑动开始前 */
-        tab.on('beforeScrollStart', function(fromIndex, toIndex) {
-            console.log(fromIndex, toIndex); // from 为当前页，to 为下一页
-        })
-
-        //课程详情
-        BWK.api.lesson.lessonDetail(BWK.UrlParams.id,function(data){
+        //商品详情
+        BWK.api.lesson.lessonProdectDetail(BWK.UrlParams.id,function(data){
             
             //相关课  enable=true&teacherId=1023
-            var teacherId = data.teacherInfo.id;
+            var teacherId = data.lessonInfo.teacherInfo.id;
             BWK.api.lesson.lesson({'enable':true,teacherId:teacherId},function(data){
                 
             });
             
         }); 
-        //查询课程评论
-        BWK.api.lesson.lessonCommentQuery({'target':'lesson','targetId':BWK.UrlParams.id},function(data){
+
+        //查询商品评论 target=product&targetId=1042
+        BWK.api.lesson.lessonCommentQuery({'target':'product','targetId':BWK.UrlParams.id},function(data){
             var dealObj = data.content||[];
             _dealImgList(dealObj);
         });
-        //发表评论
-        var params = {"target": "lesson", "targetId": 1028, "content": "xxx"};
+
+        //发表评论 
+        var params = {"target": "product", "targetId": BWK.UrlParams.id, "content": "test"};
         BWK.api.lesson.lessonCommentSub(params,function(data){
             var dealObj = data.content||[];
             _dealImgList(dealObj);
         });
          
-        //相关商品推荐
+        $('.ui-btn-toBuy').click(function(){
+            location.href = 'lessonProdectDate.html?id='+BWK.UrlParams.id;
+        })
+
 
     });
 

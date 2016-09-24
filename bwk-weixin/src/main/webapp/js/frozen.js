@@ -5,13 +5,19 @@ if (!window.BWK) {
 }
 BWK.api = function() {	
 	var api = {};
-	var request = function(method, url, params, callback) {		
+	var request = function(method, url, params, callback) {	
+			
 		return $.ajax({
 			url : url,
 			data : params,
 			type : method,
+			headers: {'Content-Type': 'application/json'},
 			success : function(data, textStatus, jqXHR) {
-				callback(data);
+				if(data&&data.result == "fail"){
+					//TODO
+				}else{
+					callback(data);	
+				}
 			}, error : function(jqXHR, textStatus, errorThrown) {
 				 var res = jqXHR&&eval('('+jqXHR.response+')');
                  var msg = res.message?res.message.replace(/([^\u4e00-\u9fa5]+)/g,''):'未知错误';
@@ -25,10 +31,12 @@ BWK.api = function() {
 	};
 	/* 通用Post方法 */
 	api.Post = function(url, params, callback) {
+		params = JSON.stringify(params);
 		return request('POST', url, params, callback);
 	};
 	/* 通用Put方法 */
 	api.Put = function(url, params, callback) {
+		params = JSON.stringify(params);
 		return request('PUT', url, params, callback);
 	};
 	/* 通用Delete方法 */
@@ -40,7 +48,70 @@ BWK.api = function() {
 	/* 查询课程 */
 	api.lesson = {};
 	api.lesson.swiper = function(params,callback){
-		return api.Get('../swiper',params,callback);
+		return api.Get('../swiper?enable=true',params,callback);
+	}
+	api.lesson.lessonType = function(params,callback){
+		return api.Get('../tag?rootId=1',params,callback);
+	}
+	api.lesson.lesson = function(params,callback){
+		return api.Get('../lesson',params,callback);
+	}
+	api.lesson.tag = function(params,callback){
+		return api.Get('../tag?rootId=2',params,callback);
+	}
+	//课程详情
+	api.lesson.lessonDetail = function(id,callback){
+		return api.Get('../lesson/'+id,null,callback);
+	}
+	//分享文字
+	api.lesson.shareText = function(id,callback){
+		return api.Get('../param/shareTip',null,callback);
+	}
+	//报名
+	api.lesson.lessonSign = function(params,callback){
+		return api.Post('../lesson/signUp',params,callback);
+	}
+	//评论
+	api.lesson.lessonCommentQuery = function(params,callback){
+		return api.Get('../comment',params,callback);
+	}
+	//发表评论
+	api.lesson.lessonCommentSub = function(params,callback){
+		return api.Post('../comment',params,callback);
+	}
+	//商品列表
+	api.lesson.lessonProdectList = function(params,callback){
+		return api.Get('../product',params,callback);
+	} 
+	//商品详情
+	api.lesson.lessonProdectDetail = function(params,callback){
+		return api.Get('../product/'+params,null,callback);
+	}
+	//商品购买
+	api.lesson.lessonProdectBuy = function(params,callback){
+		return api.Post('../order',params,callback);
+	}
+
+	api.user = {};
+	api.user.getUser = function(params,callback){
+		return api.Get('../user/current',params,callback);
+	}
+	api.user.updateUser = function(params,callback){
+		return api.Put('../user/propertys',params,callback);
+	}
+	// 用户列表、奖学金
+	api.user.userList = function(params,callback){
+		return api.Get('../user',params,callback);
+	}
+	//我的预约
+	api.user.userOrderList = function(params,callback){
+		return api.Get('../order',params,callback);
+	}
+	///weixin/upload  上传头像  POST
+	
+	// 预约确定完成  PUT
+	api.user.orderEnd = function(params,callback){
+		return api.Put('../order/'+params,null,callback);
 	}
 
 	return api;
@@ -56,4 +127,7 @@ BWK.UrlParams = {};
     } 
   }
 })();
-
+BWK.Utils = {};
+BWK.Utils.dateformate = function(date){
+	return  date.toLocaleDateString().replace(/\//g, "-");   
+}

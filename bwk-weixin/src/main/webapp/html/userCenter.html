@@ -39,7 +39,7 @@
 <body ontouchstart>
     <section class="ui-container">
         <div class="demo-block ui-userinfo-header">
-            <img class="ui-setpic" src="../img/setting.png"/>
+            <a href="userInfo.html"><img class="ui-setpic" src="../img/setting.png"/></a>
             <img class="ui-setBg" src="http://placeholder.qiniudn.com/640x200" />
             <div class="ui-userP">
                 <span class="ui-avatar"></span>
@@ -50,7 +50,7 @@
       
         <div class="demo-item ui-teacherAd">
             <ul class="ui-list">
-                <li>
+                <li data-href="myQuestion.html">
                     <div class="ui-avatar">
                         <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
                     </div>
@@ -73,8 +73,8 @@
             </div>
         </div>
         <div class="demo-block ui-user-apply">
-            <button class="ui-btn-lg ui-btn-primary" id="btnT">申请提现</button>
-            <button class="ui-btn-lg ui-btn-fff" id="btnB">获取奖学金攻略</button>
+            <a class="ui-btn-lg ui-btn-primary" id="btnT" href="cash.html">申请提现</a>
+            <a class="ui-btn-lg ui-btn-fff" id="btnB" href="lessonMoneyTips.html">获取奖学金攻略</a>
             <p class="ui-teleph">霸王课热线</p>
             <p><a  href="tel:010-56029675">010-56029675</a></p>
         </div>
@@ -111,10 +111,13 @@
     });
 
     Zepto(function($) {
-        //轮播
-        $("#btn1").click(function(){
-            $(".ui-dialog").dialog("show");
-        })
+
+        //查询个人信息
+        BWK.api.user.getUser(null,function(data){
+            console.log(data);
+        });
+        
+
     });
 
     function _dealImgList(obj) {

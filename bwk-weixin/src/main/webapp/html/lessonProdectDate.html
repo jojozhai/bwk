@@ -46,23 +46,23 @@
                         <label class="ui-border-r">
                             姓名：
                         </label>
-                        <input type="text" placeholder="输入您的姓名" />
+                        <input type="text" id="realname" placeholder="输入您的姓名" />
                     </div>
                     <div class="ui-form-item ui-border-b">
                         <label class="ui-border-r">
                             手机号：
                         </label>
-                        <input type="text" placeholder="输入您的手机号" />
+                        <input type="text" id="mobile" placeholder="输入您的手机号" />
                     </div>
                     <div class="ui-form-item ui-border-b ui-user-city">
                         <span class="ui-border-r">
                             城市：
                         </span>
-                        <input type="text" class="ui-huWd"/>
+                        <input type="text" id="province" class="ui-huWd"/>
                          <span class="ui-border-r">
                             省：
                         </span>
-                        <input type="text" class="ui-eiWd"/>
+                        <input type="text" id="city" class="ui-eiWd"/>
                          <span class="ui-border-r">
                             市：
                         </span>
@@ -75,29 +75,7 @@
             <button class="ui-btn-lg ui-btn-primary" id="btnApply">提交</button>
         </div>
     </section>
-    <footer class="ui-footer ui-footer-btn">
-            <ul class="ui-tiled ui-border-t">
-                <li data-href="lessonTypes.html" >
-                    <div class="ui-title-img"><img src="../img/footerType.png"  /></div>
-                    <div class="ui-title-name">课程分类</div>
-                </li>
-                <li data-href="lessonQuestion.html" >
-                    <div class="ui-title-img"><img src="../img/footerTeacher.png"  /></div>
-                    <div class="ui-title-name">咨询老师</div>
-                </li>
-                <li data-href="index.html" class="ui-menu-index">
-                    <div class="ui-title-img"><img src="../img/menuIndex.png"  /></div>
-                </li>
-                <li data-href="lessonMoney.html">
-                    <div class="ui-title-img ui-img-money"><img src="../img/footerMoney.png"  /></div>
-                    <div class="ui-title-name">奖学金</div>
-                </li>
-                <li data-href="userCenter.html">
-                    <div class="ui-title-img"><img src="../img/footerUserSel.png"  /></div>
-                    <div class="ui-title-name  ui-menu-current">个人中心</div>
-                </li>
-            </ul>
-        </footer>
+    
     <!-- /.ui-container-->
     <script>
     $('.ui-list li,.ui-tiled li').click(function() {
@@ -117,6 +95,31 @@
                 $(this).html("");
             };
         })
+
+        var params = {"cartInfos":[{"productId":BWK.UrlParams.id,"count":1}],"message":$(".ui-masssage-cont").val()};
+        
+        $('#btnApply').click(function(){
+            //预约购买商品
+            BWK.api.lesson.lessonProdectBuy(params,function(data){
+
+                var usereParams = [];
+                
+                $('form input').each(function(){
+                    if($(this).val()){
+                        usereParams.push({"name":$(this).attr('id'),"value":$(this).val()});
+                    }
+                });
+
+                BWK.api.user.updateUser(usereParams,function(data){
+                    
+                    
+                
+                });
+
+            });
+        });
+        
+        
     });
 
     function _dealImgList(obj) {

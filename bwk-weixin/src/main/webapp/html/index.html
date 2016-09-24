@@ -198,17 +198,31 @@
                 var dealObj = data.content||[];
                 _dealImgList(dealObj);
             });
-
+            BWK.api.lesson.lessonType(null,function(data){
+                var dealObj = data.content||[];
+                _dealImgList(dealObj);
+            });
+			//lesson report
+			BWK.api.lesson.lesson({'enable':true,'top':true},function(data){
+                var dealObj = data.content||[];
+                _dealImgList(dealObj);
+            });
+			BWK.api.lesson.tag(null,function(data){
+                var dealObj = data.content||[];
+                _dealImgList(dealObj);
+            });
+			
+            
             $('.ui-lessonType').on('click','.ui-col',function(){
-                location.href = "lessonTypes.html";
+                location.href = "lessonTypes.html?id=1013";
             });
 
             $('.item-ad ul').on('click','li',function(){
-                location.href = "lessonSign.html";
+                location.href = "lessonSign.html?id=1028";
             });
 
             $('.item-hot ul').on('click','li',function(){
-                location.href = "lessonPackage.html";
+                location.href = "lessonPackage.html?id=1019";
             });
             
 

@@ -120,8 +120,16 @@
         Zepto(function($){
             
             $('.ui-list-link').on('click','li',function(){
-                location.href = "lessonContents.html";
+                location.href = "lessonContents.html?id=1028";
             });
+
+            var params = {'enable':true,'herald':false,'setId':BWK.UrlParams.id};
+
+            BWK.api.lesson.lesson(params,function(data){
+                var dealObj = data.content||[];
+                _dealImgList(dealObj);
+            }); 
+
 
         });
 

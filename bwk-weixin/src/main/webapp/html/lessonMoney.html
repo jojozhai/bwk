@@ -52,8 +52,8 @@
         <div class="demo-block ui-scholship-header">
             <img src="http://placeholder.qiniudn.com/640x200" />
             <div class="ui-scholship-title">
-               <a href="">获得奖学金攻略</a>
-               <a href="" class="fr">查看我的奖学金</a>
+               <a href="lessonMoneyTips.html">获得奖学金攻略</a>
+               <a href="userCenter.html" class="fr">查看我的奖学金</a>
             </div>
         </div>
         <div class="demo-item item-range">
@@ -114,6 +114,12 @@
         $("#btn1").click(function(){
             $(".ui-dialog").dialog("show");
         })
+
+        var params = {'sort':'money,desc'};
+        BWK.api.user.userList(params,function(data){
+            console.log(data);
+        });
+
     });
 
     function _dealImgList(obj) {

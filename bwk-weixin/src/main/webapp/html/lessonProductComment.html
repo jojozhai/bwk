@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>获取奖学金攻略</title>
+        <link rel="stylesheet" href="../css/frozen.css">
+        <link rel="stylesheet" href="../css/public.css">
+        <script src="../lib/zepto.min.js"></script>
+        <script src="../js/frozen.js"></script>
+        
+    </head>
+    
+    <body ontouchstart>
+        
+        <section class="ui-container">
+
+            评价页面
+
+
+        </section><!-- /.ui-container-->
+        <script>
+        
+
+        Zepto(function($){
+            
+            var params = {"target": "product", "targetId": 1042, "content": "xxx"};
+            BWK.api.lesson.lessonCommentSub(params,function(data){
+                var dealObj = data.content||[];
+                _dealImgList(dealObj);
+            });
+
+        });
+        
+       
+        </script>
+    </body>
+</html>

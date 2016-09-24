@@ -36,34 +36,9 @@
 
 <body ontouchstart>
     <section class="ui-container">
-        <div class="demo-block ui-lesson-header">
-            <img src="http://placeholder.qiniudn.com/640x200" />
-            <div class="ui-lesson-headerIntro">
-                <h3><span>——</span>两小时颠覆你的PPT视觉<span>——</span></h3>
-                <p>主讲人:雷军</p>
-                <p>时间:8月13日19:00-20:30</p>
-                <p>地点:直播间/北京</p>
-            </div>
-        </div>
-        <div class="demo-item item-details">
-            <p class="demo-desc"><span>|</span>活动详情</p>
-            <img src="../img/detail_ad0.png">
-        </div>
-        <div class="demo-item item-text">
-            <p>接触烘培已经2年多了，刚开始做戚风的时候很不顺利，内心很是抓狂，戚风作为入门级的蛋糕，能做好它以后在烘培界才有机会风生水起~慢慢地才掌握了做蛋糕的诀窍，虽然还是有很多次会败给它。</p>
-            <p>我喜欢吃盐渍橙丁，总是喜欢做蛋糕的时候撒一把进去，既香甜又有嚼劲，层次感更突出，品尝过一次，便不可忽略它的存在。</p>
-            <p>经常看到很多人有晒早餐的习惯，灰常羡慕，厌倦了每天黄豆豆浆&炸油条&肉包子，于是，某天早上，我早起了一会，做了可可戚风，榨了新鲜蔬菜汁，还P了图哈哈~想要把生活搞得活泼起来其实还是很简单的嘛~
-            </p>
-            <button class="ui-btn-lg ui-btn-primary" id="btn1">立即参加</button>
-        </div>
-
+       
         <div class="demo-block ui-sign-lesson">
-            <div class="ui-dialog">
-                <div class="ui-dialog-cnt">
-                    <header class="ui-dialog-hd">
-                        <h3>完善您的报名信息</h3>
-                        <i class="ui-dialog-close" data-role="button"></i>
-                    </header>
+            
                     <div class="demo-block">
                         <div class="ui-form ui-border-t">
                             <form action="#">
@@ -119,40 +94,19 @@
                         </div>
                     </div>
                     <div class="but-wrap">
-                        <div class="ui-btn-small">
-                           <label class="ui-checkbox-s">
-                                <input type="checkbox" name="checkbox" checked="">线上
-                            </label>
-                            <label class="ui-checkbox-s">
-                                <input type="checkbox" name="checkbox" checked="">线上
-                            </label>
-                        </div>
+                        
                         <button class="ui-btn-lg ui-btn-primary" id="btn-submit">提交</button>
                     </div>
-                </div>
-            </div>
+                
+            
         </div>
     </section>
     <!-- /.ui-container-->
     <script>
-    $('.ui-list li,.ui-tiled li').click(function() {
-        if ($(this).data('href')) {
-            location.href = $(this).data('href');
-        }
-    });
-
+    
     Zepto(function($) {
     	
-    	BWK.api.lesson.lessonDetail(BWK.UrlParams.id,function(data){
-            var dealObj = data.content||[];
-            _dealImgList(dealObj);
-        }); 
-    	//分享文字
     	
-    	BWK.api.lesson.shareText(null,function(data){
-            var dealObj = data.content||[];
-            _dealImgList(dealObj);
-        }); 
         $("#btn1").click(function(){
             $(".ui-dialog").dialog("show");
         })
@@ -168,10 +122,7 @@
 
             BWK.api.user.updateUser(params,function(data){
 
-                BWK.api.lesson.lessonSign({"lessonId":1028,"online":true},function(data){
-                    $(".ui-dialog").dialog("hide"); 
-                    //TODO
-                });
+                
             });
 
         })

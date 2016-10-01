@@ -11,10 +11,13 @@
  */
 package com.ymt.bwk.listener;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
+import com.ymt.mirage.clearing.service.ClearingService;
 import com.ymt.mirage.order.domain.Order;
 import com.ymt.mirage.order.domain.OrderState;
 import com.ymt.mirage.order.repository.OrderRepository;
@@ -27,15 +30,21 @@ import com.ymt.pz365.framework.weixin.event.PaymentCallbackEvent;
  * @version 1.0.0
  */
 @Component
+@Transactional
 public class PaymentCallbackEventListener implements ApplicationListener<PaymentCallbackEvent> {
     
     @Autowired
     private OrderRepository orderRepository;
+    
+    @Autowired
+    private ClearingService clearingService;
 
     @Override
     public void onApplicationEvent(PaymentCallbackEvent event) {
         Order order = orderRepository.findOne(new Long(event.getInfo().getOut_trade_no()));
         order.setState(OrderState.PAYED);
+        clearingService.addUser(order.getProducts().get(0).getId().toString(), order.getUser().getId(), order.getSharer().getId());
+        clearingService.clearing(order);
     }
 
 }

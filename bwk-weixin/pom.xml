@@ -47,6 +47,6 @@
 				</executions>
 			</plugin>
 		</plugins>
-		<finalName>poster-weixin</finalName>
+		<finalName>weixin</finalName>
 	</build>
 </project>

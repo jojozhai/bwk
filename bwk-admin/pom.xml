@@ -43,6 +43,6 @@
 				</executions>
 			</plugin>
 		</plugins>
-		<finalName>poster-admin</finalName>
+		<finalName>admin</finalName>
 	</build>
 </project>

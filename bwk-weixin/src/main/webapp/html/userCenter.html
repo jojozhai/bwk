@@ -25,21 +25,21 @@
     }
     .ystars{background-image:url(../img/ystar.png);}
     .gstars{background-image:url(../img/gstar.png);}
+    .ui-user-apply p a{color:#999;}
     .ui-scholarNumb{color:#fd8834;text-align: center;position: relative;}
     .ui-scholarNumb img{display: block;width: 100%;}
     .ui-scholarNumb .ui-scholarmb-txt{position: absolute;top:50%;margin-top:-33px;margin-left: -120px;left: 50%;display: inline-block;}
     .ui-scholarNumb .ui-scholarmb-txt h2{font-size: 30px}
     .ui-scholarNumb .ui-scholarmb-txt p{font-size: 14px;}
     .ui-user-apply{margin:10px 0 50px;padding:30px 10px;color:#999;font-size: 12px;text-align: center;}
-    .ui-user-apply .ui-btn-fff{border:1px solid #00a5e0;margin:10px 0 20px;}
-    .ui-user-apply a{color: #999;}
+    .ui-user-apply .ui-btn-fff{border:1px solid #00a5e0;margin:10px 0 20px;color: #999;}
     </style>
 </head>
 
 <body ontouchstart>
     <section class="ui-container">
         <div class="demo-block ui-userinfo-header">
-            <img class="ui-setpic" src="../img/setting.png"/>
+            <a href="userInfo.html"><img class="ui-setpic" src="../img/setting.png"/></a>
             <img class="ui-setBg" src="http://placeholder.qiniudn.com/640x200" />
             <div class="ui-userP">
                 <span class="ui-avatar"></span>
@@ -50,7 +50,7 @@
       
         <div class="demo-item ui-teacherAd">
             <ul class="ui-list">
-                <li>
+                <li data-href="myQuestion.html">
                     <div class="ui-avatar">
                         <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
                     </div>
@@ -73,10 +73,11 @@
             </div>
         </div>
         <div class="demo-block ui-user-apply">
-            <button class="ui-btn-lg ui-btn-primary" id="btnT">申请提现</button>
-            <button class="ui-btn-lg ui-btn-fff" id="btnB">获取奖学金攻略</button>
+            <a class="ui-btn-lg ui-btn-primary" id="btnT" href="cash.html">申请提现</a>
+            <a class="ui-btn-lg ui-btn-fff" id="btnB" href="lessonMoneyTips.html">获取奖学金攻略</a>
             <p class="ui-teleph">霸王课热线</p>
             <p><a  href="tel:010-56029675">010-56029675</a></p>
+            <button id="testtip">test</button>
         </div>
     </section>
     <footer class="ui-footer ui-footer-btn">
@@ -111,12 +112,16 @@
     });
 
     Zepto(function($) {
-        //轮播
-        $("#btn1").click(function(){
-            $(".ui-dialog").dialog("show");
-        })
-    });
 
+        //查询个人信息
+        BWK.api.user.getUser(null,function(data){
+            console.log(data);
+        });
+        $('#testtip').click(function(){
+        	BWK.Utils.Tips("test");
+        });
+        
+    })  
     function _dealImgList(obj) {
 
 

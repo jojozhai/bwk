@@ -83,7 +83,7 @@
             <div class="demo-block ui-item-list">
                 
                 <ul class="ui-list ui-list-link ui-border-tb">
-                    <li class="ui-border-t">
+                    <!-- <li class="ui-border-t">
                         <div class="ui-list-img">
                             <span style="background-image:url(http://placeholder.qiniudn.com/200x136)"></span>
                         </div>
@@ -91,16 +91,7 @@
                             <h4 class="ui-nowrap ui-less-title">半个小时PPT逆袭之路</h4>
                             <p class="ui-nowrap ui-less-desc">老师:  高兴</p>
                         </div>
-                    </li>
-                    <li class="ui-border-t">
-                        <div class="ui-list-img">
-                            <span style="background-image:url(http://placeholder.qiniudn.com/200x136)"></span>
-                        </div>
-                        <div class="ui-list-info">
-                            <h4 class="ui-nowrap ui-less-title">半个小时PPT逆袭之路</h4>
-                            <p class="ui-nowrap ui-less-desc">老师:  高兴</p>
-                        </div>
-                    </li>
+                    </li> -->
                 </ul>
                 <div class="ui-loading-wrap">
                     <p>加载中</p>
@@ -111,20 +102,36 @@
 
         </section><!-- /.ui-container-->
         <script>
-        $('.ui-list li,.ui-tiled li').click(function(){
-            if($(this).data('href')){
-                location.href= $(this).data('href');
-            }
-        });
+       
 
         Zepto(function($){
-            
-            $('.ui-list-link').on('click','li',function(){
-                location.href = "lessonContents.html";
-            });
+        	 $('.ui-list li,.ui-tiled li').click(function(){
+                 if($(this).data('href')){
+                     location.href= $(this).data('href');
+                 }
+             });
 
+            var params = {'enable':true,'herald':false,'setId':BWK.UrlParams.id};
+
+            BWK.api.lesson.lesson(params,function(data){
+                var dealObj = data.content||[];
+                _dealPackage(dealObj);
+            }); 
         });
-
+        function _dealPackage(obj){
+             var str = "";
+        	 if(obj&&obj.length>0){
+        	     for(var i=0;i<obj.length;i++){
+        	        str += '<li class="ui-border-t"><div class="ui-list-img"><span style="background-image:url('+obj[i].image+')"></span>';
+        	        str += '</div><div class="ui-list-info"><h4 class="ui-nowrap ui-less-title">'+obj[i].lessonInfo.name+'</h4>';
+        	        str += '<p class="ui-nowrap ui-less-desc">老师:'+obj[i].teacherInfo.name+'</p></div></li>';
+        	      }
+        	      $('.ui-list-link').append(str);
+        	  }
+        	  $('.ui-list-link').on('click','li',function(){
+        	      location.href = "lessonPackage.html?id="+$(this).attr('id');
+        	  });    	
+        };
         
         </script>
     </body>

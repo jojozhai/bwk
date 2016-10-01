@@ -109,12 +109,12 @@
         <div class="demo-block ui-myadvice">
             <section class="ui-input-wrap">
                 <div class="ui-input ui-border-radius">
-                    <input type="text" name="" value="" placeholder="">
+                    <input type="text" name="" value="" placeholder="" onkeyup="_searchLesson(this.value)">
                 </div>
                 <span class="ui-btn-search"></span>
             </section>
-            <ul class="ui-list">
-                <li>
+            <ul class="ui-list ui-list-product">
+                <!-- <li>
                     <div class="ui-avatar">
                         <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
                     </div>
@@ -123,33 +123,51 @@
                         <p class="ui-nowrap ui-teacher-name"><span>OIHIOD</span><span class="teacher-honour">北京大学博士</span></p>
                         <p class="ui-nowrap">652484约见<span class="ystars"></span><span class="ystars"></span><span class="ystars"></span><span class="ystars"></span><span class="ystars"></span></p>
                     </div>
-                </li>
-                <li>
-                    <div class="ui-avatar">
-                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
-                    </div>
-                    <div class="ui-list-info">
-                        <h4 class="ui-nowrap">远程：高数老不回怎么办，点击看看</h4>
-                        <p class="ui-nowrap ui-teacher-name"><span>马云</span><span class="teacher-honour">北京大学博士</span></p>
-                        <p class="ui-nowrap">634734约见<span class="gstars"></span><span class="ystars"></span><span class="ystars"></span><span class="ystars"></span><span class="ystars"></span></p>
-                    </div>
-                </li>
+                </li> -->
             </ul>
         </div>
     </section>
     <!-- /.ui-container-->
     <script>
-   
-    $('.ui-list li,.ui-tiled li').click(function() {
-        if ($(this).data('href')) {
-            location.href = $(this).data('href');
-        }
-    });
-
     Zepto(function($) {
-      
-    });
+    	 $('.ui-list li,.ui-tiled li').click(function() {
+    	        if ($(this).data('href')) {
+    	            location.href = $(this).data('href');
+    	        }
+    	 });
+    	
+        var params = {'enable':true};
+        BWK.api.lesson.lessonProdectList(params,function(data){
+            var dealObj = data.content||[];
+            _dealQuestions(dealObj);
+        }); 
 
+
+    });
+    //搜索
+    function _searchLesson(obj){
+    	if(obj==""){
+    		_dealQuestions(dealObj);
+    	}else{
+    		
+    	}
+    }
+    function _dealQuestions(obj){
+    	var str = "";
+        if(obj&&obj.length>0){
+            for(var i=0;i<obj.length;i++){
+            	str += '<li id="'+obj[i].id+'"><div class="ui-avatar"><span style="background-image:url('+obj[i].image+')"></span></div><div class="ui-list-info">';
+            	str += '<h4 class="ui-nowrap">'+obj[i].desc+'</h4><p class="ui-nowrap ui-teacher-name"><span>'+obj[i].name+'</span><span class="teacher-honour">北京大学博士</span></p>';
+            	str += '<p class="ui-nowrap">'+obj[i].saleCountPlus+'约见<span class="ystars"></span><span class="ystars"></span><span class="ystars"></span>';
+            	str += '<span class="ystars"></span><span class="ystars"></span></p></div></li>';
+            }
+            $('.ui-list-product').append(str);
+        }
+        
+        $('.ui-list-product').on('click','li',function(){
+            location.href = "lessonProduct.html?id="+$(this).attr('id');
+        });
+    }
    
     </script>
 </body>

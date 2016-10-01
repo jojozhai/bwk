@@ -2,11 +2,12 @@ body{
   -webkit-user-select:initial;
   background-color: #f6f6f6;
 }
+html,body{height:100%;}
 body>a{display: none;}
 .demo-desc{
     padding: 10px;
     font-size: 16px;
-    color: #7CAE23;
+    color: #949494;
 }
 .demo-block,.demo-item{
     position: relative;
@@ -118,19 +119,19 @@ body>a{display: none;}
 .lessonType5{
     background-position: -240px -75px;
 }
-.lessonTypeCurr1{
+.active .lessonType1{
     background-position: -3px -3px;
 }
-.lessonTypeCurr2{
+.active .lessonType2{
     background-position: -63px -3px;
 }
-.lessonTypeCurr3{
+.active .lessonType3{
     background-position: -123px -3px;
 }
-.lessonTypeCurr4{
+.active .lessonType4{
     background-position: -183px -3px;
 }
-.lessonTypeCurr5{
+.active .lessonType5{
     background-position: -243px -3px;
 }
 /* 公共底部 */

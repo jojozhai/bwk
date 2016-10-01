@@ -52,13 +52,13 @@
         <div class="demo-block ui-scholship-header">
             <img src="http://placeholder.qiniudn.com/640x200" />
             <div class="ui-scholship-title">
-               <a href="">获得奖学金攻略</a>
-               <a href="" class="fr">查看我的奖学金</a>
+               <a href="lessonMoneyTips.html">获得奖学金攻略</a>
+               <a href="userCenter.html" class="fr">查看我的奖学金</a>
             </div>
         </div>
         <div class="demo-item item-range">
              <ul class="ui-list ui-border-tb">
-                <li class="ui-border-t">
+                <!-- <li class="ui-border-t">
                     <span class="ui-numList">1</span>
                     <div class="ui-avatar">
                         <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
@@ -97,29 +97,51 @@
                         <span>远程高数老</span>
                         <div class="ui-range-score"><span class="ui-lineG"></span><span>￥547</span></div>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </div>
     </section>
     <!-- /.ui-container-->
     <script>
-    $('.ui-list li,.ui-tiled li').click(function() {
-        if ($(this).data('href')) {
-            location.href = $(this).data('href');
-        }
-    });
-
     Zepto(function($) {
+    	$('.ui-tiled li').click(function() {
+            if ($(this).data('href')) {
+                location.href = $(this).data('href');
+            }
+        });
         //轮播
         $("#btn1").click(function(){
             $(".ui-dialog").dialog("show");
         })
+
+        var params = {'sort':'money,desc'};
+        BWK.api.user.userList(params,function(data){
+           /*  console.log(data); */
+            var dealObj = data.content||[];
+            _dealImgList(dealObj);
+        });
     });
-
+    
     function _dealImgList(obj) {
-
-
-
+    	var str = "";
+	   	 if(obj&&obj.length>0){
+	   	     for(var i=0;i<obj.length;i++){
+	   	    	if(i<3){
+	   	    		str += '<li class="ui-border-t" id="'+obj[i].id+'"><span class="ui-numList">'+(i+1)+'</span><div class="ui-avatar"><span style="background-image:url('+obj[i].image+')"></span>';
+			   	    str += '</div><div class="ui-list-info"><span>'+obj[i].name+'</span><div class="ui-range-score"><span class="ui-lineG"></span><span>￥'+obj[i].money+'</span>';
+			   	    str += '<img class="ui-range-pic" src="../img/jiang'+i+'.png"/></div></div></li>';
+	   	    	}else{
+	   	    		str += '<li class="ui-border-t" id="'+obj[i].id+'"><span class="ui-numList">1</span><div class="ui-avatar"><span style="background-image:url('+obj[i].image+')"></span>';
+			   	    str += '</div><div class="ui-list-info"><span>'+obj[i].name+'</span><div class="ui-range-score"><span class="ui-lineG"></span><span>￥'+obj[i].money+'</span>';
+			   	    str += '</div></div></li>';
+	   	    	}
+	   	      }
+	   	      $('.ui-list').append(str);
+	   	  }
+	   	  $('.ui-list').on('click','li',function(){
+	   		  //TODO 跳转
+	   	      location.href = "lessonPackage.html?id="+$(this).attr('id');
+	   	  });    	
     }
     </script>
 </body>

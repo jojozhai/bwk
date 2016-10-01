@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>提现</title>
+        <link rel="stylesheet" href="../css/frozen.css">
+        <link rel="stylesheet" href="../css/public.css">
+        <script src="../lib/zepto.min.js"></script>
+        <script src="../js/frozen.js"></script>
+        <style>
+           .ui-user-cash{
+              margin: 20px 10px;
+              background: #fff;
+           }
+           .ui-user-cash h3{
+             color:#4cbdff;
+             height: 60px;
+		    line-height: 60px;
+		    text-align: center;
+		    border-bottom: 1px solid #eee;
+           }
+           .ui-user-cash .demo-block{
+              padding: 0 20px;
+           }
+           .cash-title,.cash-numb{
+			    height: 60px;
+			    line-height: 60px;
+           }
+           .cash-numb{
+              text-align:center;
+           }
+           .cash-numb span{
+             float:left;
+           }
+           .cash-numb strong {
+              font-size:30px;
+              font-weight:normal;
+           }
+           .cash-title{
+               color: #b2b2b2;
+           }
+           .cash-tip{
+              color: #c6c6c6;
+			    text-align: center;
+			    font-size: 12px;
+           }
+           .cash-btn{
+                 position: absolute;
+			    bottom: 100px;
+			    width: 100%;
+           }
+            .cash-btn .ui-btn-lg{
+              width:auto;
+              margin:0 10px;
+            }
+        </style>
+    </head>
+    
+    <body ontouchstart>
+        
+        <section class="ui-container">
+            <div class="ui-user-cash">
+			<h3>奖学金提现</h3>
+            <div class="demo-block">
+               <p class="cash-title">提现金额</p>
+               <p class="cash-numb"><span>￥</span><strong>200</strong></p>
+            </div> 
+         </div>
+            <p class="cash-tip">温馨提示：微信红包一次只可以提现200元哦</p> 
+           <div class="demo-block cash-btn">
+            <a class="ui-btn-lg ui-btn-primary" id="btnT" href="cash.html">确认提现</a>
+           </div>
+        </section><!-- /.ui-container-->
+        <script>
+        
+
+        Zepto(function($){
+            
+            
+
+        });
+        
+       
+        </script>
+    </body>
+</html>

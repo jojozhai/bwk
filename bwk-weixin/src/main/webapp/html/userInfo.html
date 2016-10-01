@@ -11,22 +11,14 @@
     <script src="../lib/zepto.min.js"></script>
     <script src="../js/frozen.js"></script>
     <style type="text/css">
-    .ui-lesson-header img {display: block;height: 200px;width: 100%;}
-    .ui-lesson-header .ui-lesson-headerIntro {text-align: center;background-color: #fff;padding: 10px 0;}
-    .ui-lesson-header h3 {font-size: 14px;margin: 10px 0;}
-    .ui-lesson-header h3 span {margin: 0 5px;}
-    .demo-item #desc{color: #a2a2a2;font-size: 12px;margin: 10px;}
-    .item-details {background: #fff;margin: 10px 0;padding-bottom: 10px;}
-    .item-details img {width: 96%;margin: 10px auto;display: block;}
-    .item-details .demo-desc {color: #555;font-size: 14px;}
-    .item-details .demo-desc span {margin-right: 10px;color: #000;font-weight: bold;font-size: 14px;}
-    .item-text {background-color: #fff;padding-bottom: 40px;overflow:hidden;}
-   
-    .item-text .ui-btn-lg {width: 100px;margin: 20px auto 0;}
+    .ui-userinfo-header{position: relative;font-size: 16px;color: #fff}
+    .ui-userinfo-header .ui-setBg{display: block;height: 200px;width: 100%;}
+    .ui-userinfo-header .ui-userP{position: absolute;text-align: center;top: 50%;margin-top: -40px;left: 50%;margin-left: -47px;}
+    .ui-userP .ui-avatar{display: block;height:80px;width: 80px;}
     .ui-form-item label:not(.ui-switch):not(.ui-checkbox):not(.ui-checkbox-s):not(.ui-radio){width: 80px;}
     .ui-sign-lesson .ui-dialog-cnt{width: 80%;}
-    .ui-sign-lesson .ui-dialog-hd{background-color: #fff; margin-bottom: 10px;border-radius:5px;-webkit-border-radius:5px;}
-    .ui-sign-lesson .ui-dialog-hd h3{font-weight: 600;font-size: 14px;color: #3d3d3d;background-color:#fff;border-radius:5px;-webkit-border-radius:5px;}
+    .ui-sign-lesson .ui-dialog-hd{background-color: #fff; margin-bottom: 10px;}
+    .ui-sign-lesson .ui-dialog-hd h3{font-weight: 600;font-size: 14px;color: #3d3d3d;background-color:#fff;}
     .ui-sign-lesson .ui-form label{color: #424242;}
     .ui-sign-lesson .but-wrap {text-align: center;background-color: #fff;padding: 20px 0;}
     .ui-sign-lesson .but-wrap label{color: #7e7e7e;}
@@ -36,31 +28,14 @@
 
 <body ontouchstart>
     <section class="ui-container">
-        <div class="demo-block ui-lesson-header">
-            <img id="image" src="http://placeholder.qiniudn.com/640x200" />
-            <div class="ui-lesson-headerIntro">
-                <h3><span>——</span><span id="name"></span><span>——</span></h3>
-                <p >主讲人:<span id="teacher"></span></p>
-                <p>时间:<span id="startTime"></span>-<span id="endTime"></span></p>
-                <p>地点:<span id="address"></span></p>
+        <div class="demo-block ui-userinfo-header">
+            <img class="ui-setBg" src="http://placeholder.qiniudn.com/640x200" />
+            <div class="ui-userP">
+                <span class="ui-avatar"></span>
             </div>
         </div>
-        <div class="demo-item item-details">
-            <p class="demo-desc"><span>|</span>活动详情</p>
-            <img id="thumbnail" src="../img/detail_ad0.png">
-        </div>
-        <div class="demo-item item-text">
-            <div id="desc"></div>
-            <button class="ui-btn-lg ui-btn-primary" id="btn1">立即参加</button>
-        </div>
-
         <div class="demo-block ui-sign-lesson">
-            <div class="ui-dialog">
-                <div class="ui-dialog-cnt">
-                    <header class="ui-dialog-hd">
-                        <h3>完善您的报名信息</h3>
-                        <i class="ui-dialog-close" data-role="button"></i>
-                    </header>
+            
                     <div class="demo-block">
                         <div class="ui-form ui-border-t">
                             <form action="#">
@@ -116,50 +91,19 @@
                         </div>
                     </div>
                     <div class="but-wrap">
-                        <div class="ui-btn-small">
-                           <label class="ui-checkbox-s">
-                                <input type="checkbox" name="checkbox" checked="">线上
-                            </label>
-                            <label class="ui-checkbox-s">
-                                <input type="checkbox" name="checkbox" checked="">线上
-                            </label>
-                        </div>
+                        
                         <button class="ui-btn-lg ui-btn-primary" id="btn-submit">提交</button>
                     </div>
-                </div>
-            </div>
+                
+            
         </div>
     </section>
     <!-- /.ui-container-->
     <script>
-    $('.ui-list li,.ui-tiled li').click(function() {
-        if ($(this).data('href')) {
-            location.href = $(this).data('href');
-        }
-    });
-	//TODO 
+    
     Zepto(function($) {
     	
-    	BWK.api.lesson.lessonDetail(BWK.UrlParams.id,function(data){
-            var dealObj = data||{};
-            $('#name').text(dealObj.name);
-            $('#teacher').text(dealObj.teacher);
-            $('#startTime').text(BWK.Utils.dateformateLocal(new Date(dealObj.startTime),"yyyy-MM-dd hh:mm"));
-            $('#endTime').text(BWK.Utils.dateformateLocal(new Date(dealObj.endTime),"yyyy-MM-dd hh:mm"));
-            $('#address').text(dealObj.address);
-            $('#image').attr('src',dealObj.image);
-            $('#thumbnail').attr('src',dealObj.thumbnail);
-            $('#desc').html(dealObj.desc);
-           
-        }); 
-    	//分享文字
-    	BWK.api.lesson.shareText(null,function(data){
-           //TODO
-        }); 
-        
-    	$("#btn1").click(function(){
-            $(".ui-dialog").dialog("show");
-        })
+    	
         $('#btn-submit').click(function(){
             
             //报名
@@ -172,26 +116,29 @@
 
             BWK.api.user.updateUser(params,function(data){
 
-                BWK.api.lesson.lessonSign({"lessonId":BWK.UrlParams.id,"online":true},function(data){
-                    $(".ui-dialog").dialog("hide"); 
-                    //TODO
-                });
+                
             });
 
         })
         //查询个人信息
         BWK.api.user.getUser(null,function(data){
-        	for(var i in data){
-        		$('#'+i).val(data[i]);
-        	}
+            console.log(data);
+            _dealInfo(data);
         });
         
 
 
     });
-
-    function _dealImgList(obj) {
-
+  
+    function _dealInfo(obj) {
+        $("#realname").val(obj.username);
+        $("#sex").val(obj.sex);
+        $("#participationCount").val(obj.participationCount);
+        $("#birthday").val(obj.birthday);
+        $("#mobile").val(obj.mobile);
+        $("#weixin").val(obj.weixin);
+        $("#nickname").val(obj.nickname);
+        $("#city").val(obj.city);
 
 
     }

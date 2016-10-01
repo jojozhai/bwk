@@ -118,9 +118,15 @@
         });
 
         Zepto(function($){
-            
+        	
+        	var params = {'enable':true,'herald':true,'startTime':BWK.Utils.dateformate(new Date()),'startTimeTo':BWK.Utils.dateformate(new Date())};
+        	BWK.api.lesson.lesson(params,function(data){
+                var dealObj = data.content||[];
+                _dealImgList(dealObj);
+            });      	
+        	
             $('.ui-list-link').on('click','li',function(){
-                location.href = "lessonContents.html";
+                location.href = "lessonSign.html?id=1028";
             });
 
         });

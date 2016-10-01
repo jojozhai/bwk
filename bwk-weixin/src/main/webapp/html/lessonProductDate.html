@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/public.css">
     <script src="../lib/zepto.min.js"></script>
     <script src="../js/frozen.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <style type="text/css">
     .ui-list-info .ui-teacher-name{color: #333;}
     .ui-teacherAd .ui-avatar{width:60px;height:60px;}
@@ -99,8 +100,22 @@
         var params = {"cartInfos":[{"productId":BWK.UrlParams.id,"count":1}],"message":$(".ui-masssage-cont").val()};
         
         $('#btnApply').click(function(){
+            
             //预约购买商品
             BWK.api.lesson.lessonProdectBuy(params,function(data){
+                var payObj = data;
+                BWK.Weixin({},function(payObj){
+                    wx.chooseWXPay({
+                        timestamp: payObj.timestamp, 
+                        nonceStr: payObj.nonceStr, 
+                        package: payObj.package, 
+                        signType: payObj.signType,
+                        paySign: paySign, 
+                        success: function (res) {
+                            // 支付成功后的回调函数
+                        }
+                    });
+                });
 
                 var usereParams = [];
                 
@@ -109,10 +124,7 @@
                         usereParams.push({"name":$(this).attr('id'),"value":$(this).val()});
                     }
                 });
-
                 BWK.api.user.updateUser(usereParams,function(data){
-                    
-                    
                 
                 });
 

@@ -208,6 +208,7 @@ BWK.Utils.loading = {
 BWK.Page = function(){
 
 }
+//图片上传、微信支付
 BWK.Weixin = function(params,callback){
 
 	var defaultParams = {url:location.href};
@@ -220,7 +221,8 @@ BWK.Weixin = function(params,callback){
 	            'chooseImage',
 	            'previewImage',
 	            'uploadImage',
-	            'downloadImage'
+	            'downloadImage',
+	            'chooseWXPay' //微信支付
 			]
 		};	
 		$.extend(defaultConfig,data);
@@ -237,8 +239,7 @@ BWK.Weixin = function(params,callback){
 	});
 
 }
-
-
+//微信分享
 BWK.WeixinShare = function(params,callback){
 
 	var defaultParams = {url:location.href};

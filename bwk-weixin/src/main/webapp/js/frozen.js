@@ -198,7 +198,7 @@ BWK.Weixin = function(params,callback){
 	$.extend(defaultParams,params);
 	BWK.api.weixin.getJsApiTicket(defaultParams,function(data){
 		var defaultConfig = {
-			debug: false,
+			debug: true,
 			appId: 'wx0297724b372447e3',
 			jsApiList: [
 	            'chooseImage',
@@ -226,7 +226,7 @@ BWK.WeixinShare = function(params,callback){
 	$.extend(defaultParams,params);
 	BWK.api.weixin.getJsApiTicket(defaultParams,function(data){
 		var defaultConfig = {
-			debug: false,
+			debug: true,
 			appId: 'wx0297724b372447e3',
 			jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone']
 		};	

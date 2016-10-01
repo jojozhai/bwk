@@ -222,12 +222,13 @@ BWK.Weixin = function(params,callback){
 		$.extend(defaultConfig,data);
 		delete defaultConfig.jsapi_ticket;
 		delete defaultConfig.url;
+		defaultConfig.debug=BWK.globalConfig.DEBUG;
 		wx.config(defaultConfig);
 		wx.ready(function(){
 			callback && callback();	
 		});
 		wx.error(function(res){
-			alert('错误信息：'+res);
+			alert('错误信息：'+JSON.stringify(res));
 		});
 	});
 
@@ -247,7 +248,7 @@ BWK.WeixinShare = function(params,callback){
 		$.extend(defaultConfig,data);
 		delete defaultConfig.jsapi_ticket;
 		delete defaultConfig.url;
-		
+		defaultConfig.debug=BWK.globalConfig.DEBUG;
 		wx.config(defaultConfig);
 
 		setTimeout(function(params){

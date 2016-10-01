@@ -209,10 +209,13 @@
             });
             
             BWK.api.user.getUser(null,function(data){
-                var paramsObj = {'lessonName':'test','shareUrl':location.href+'&sharerId='+data.id};
+                var paramsObj = {'lessonName':'test','shareUrl':location.href+'&shareId='+data.id};
                 if(productObj.key){
                     BWK.WeixinShare(paramsObj,function(){
-                        var shareObj = {'goodsId':BWK.UrlParams.id,'shareId':currentUserId};
+                        var shareObj = {'goodsId':BWK.UrlParams.id};
+                        if(BWK.UrlParams.shareId){
+                            shareObj.shareId = BWK.UrlParams.shareId;
+                        }
                         BWK.api.weixin.dealShare(shareObj,function(){
                             //TODO
                         });

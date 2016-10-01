@@ -131,7 +131,11 @@ BWK.api = function() {
 		return api.Post('../weixin/upload',params,callback);
 	}
 	api.weixin.dealShare = function(params,callback){
-		return api.Post('../clearing/user',params,callback);
+		if(params&&params.goodsId){
+			return api.Post('../clearing/user?goodsId='+params.goodsId+(params.shareId?'&sharerId='+params.shareId:''),null,callback);	
+		}else{
+			console.log('没有goodsid');
+		}		
 	}
 	return api;
 

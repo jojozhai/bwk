@@ -9,14 +9,34 @@
         <link rel="stylesheet" href="../css/public.css">
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
-        
+        <style>
+             .ui-course-apprise{text-align: center;background: #fff;margin: 10px 10px 0;border-radius: 4px;padding:10px; }
+             .ui-course-apprise h3{color: #999;height: 60px;line-height: 60px;}
+             textarea{padding-top: 10px;}
+             .line_fl{margin-right: 8px;}
+		    .line_fr {margin-left: 8px;}
+		    #ui-apprise-note{width: 100%;height: 200px;resize: none;border: none;}
+		    .apprise-example{border-bottom: 1px solid #eee;color: #999;}
+		    .ystars,.gstars{width: 20px;height:20px;margin:0 8px;display: inline-block;background-size: cover;background-repeat: no-repeat;background-position: center center; }
+		    .ystars{background-image:url(../img/ystar.png);}
+		    .gstars{background-image:url(../img/gstar.png);}
+        </style>
     </head>
     
     <body ontouchstart>
         
         <section class="ui-container">
-
-            评价页面
+            <div class="ui-course-apprise">
+	            <h3 class="ui-border-b"><span class="line_fl">——</span>公开评价<span class="line_fr">——</span></h3>
+	            <textarea name="textarea" id="ui-apprise-note" placeholder="请输入您的公开评价..."></textarea>
+	        </div>
+	        <div class="ui-course-apprise">
+	            <textarea name="textarea" id="ui-apprise-note" placeholder="介绍下自己的身份"></textarea>
+	            <p class="apprise-example">如：“经济学专业，校园创业青年一枚”<span>20字以内</span></p>
+	            <h3><span class="line_fl">——</span>匿名评分<span class="line_fr">——</span></h3>
+	            <div class="starRange"><span class="ystars"></span><span class="gstars"></span><span class="gstars"></span><span class="gstars"></span><span class="gstars"></span></div>
+	        </div>
+            
 
 
         </section><!-- /.ui-container-->
@@ -25,11 +45,18 @@
 
         Zepto(function($){
             
-            var params = {"target": "product", "targetId": 1042, "content": "xxx"};
+           /*  var params = {"target": "product", "targetId": 1042, "content": "xxx"};
             BWK.api.lesson.lessonCommentSub(params,function(data){
                 var dealObj = data.content||[];
                 _dealImgList(dealObj);
-            });
+            }); */
+            $(".starRange span").click(function(){
+            	if($(this).attr("class")=="ystars"){
+            		$(this).attr("class","gstars");
+            	}else{
+            		$(this).attr("class","ystars");
+            	}
+            })
 
         });
         

@@ -14,19 +14,19 @@
     .ui-lesson-header img {display: block;height: 200px;width: 100%;}
     .ui-lesson-header .ui-lesson-headerIntro {text-align: center;background-color: #fff;padding: 10px 0;}
     .ui-lesson-header h3 {font-size: 14px;margin: 10px 0;}
-    .ui-lesson-header h3 span {margin: 0 10px;}
-    .ui-lesson-header .ui-lesson-headerIntro p {color: #a2a2a2;font-size: 12px;margin: 10px 0;}
+    .ui-lesson-header h3 span {margin: 0 5px;}
+    .demo-item #desc{color: #a2a2a2;font-size: 12px;margin: 10px;}
     .item-details {background: #fff;margin: 10px 0;padding-bottom: 10px;}
     .item-details img {width: 96%;margin: 10px auto;display: block;}
     .item-details .demo-desc {color: #555;font-size: 14px;}
     .item-details .demo-desc span {margin-right: 10px;color: #000;font-weight: bold;font-size: 14px;}
-    .item-text {background-color: #fff;padding-bottom: 40px;}
-    .item-text p {color: #acacac;margin-bottom: 10px;padding: 20px 10px 0;font-size: 14px;}
+    .item-text {background-color: #fff;padding-bottom: 40px;overflow:hidden;}
+   
     .item-text .ui-btn-lg {width: 100px;margin: 20px auto 0;}
     .ui-form-item label:not(.ui-switch):not(.ui-checkbox):not(.ui-checkbox-s):not(.ui-radio){width: 80px;}
     .ui-sign-lesson .ui-dialog-cnt{width: 80%;}
-    .ui-sign-lesson .ui-dialog-hd{background-color: #fff; margin-bottom: 10px;}
-    .ui-sign-lesson .ui-dialog-hd h3{font-weight: 600;font-size: 14px;color: #3d3d3d;background-color:#fff;}
+    .ui-sign-lesson .ui-dialog-hd{background-color: #fff; margin-bottom: 10px;border-radius:5px;-webkit-border-radius:5px;}
+    .ui-sign-lesson .ui-dialog-hd h3{font-weight: 600;font-size: 14px;color: #3d3d3d;background-color:#fff;border-radius:5px;-webkit-border-radius:5px;}
     .ui-sign-lesson .ui-form label{color: #424242;}
     .ui-sign-lesson .but-wrap {text-align: center;background-color: #fff;padding: 20px 0;}
     .ui-sign-lesson .but-wrap label{color: #7e7e7e;}
@@ -37,23 +37,20 @@
 <body ontouchstart>
     <section class="ui-container">
         <div class="demo-block ui-lesson-header">
-            <img src="http://placeholder.qiniudn.com/640x200" />
+            <img id="image" src="http://placeholder.qiniudn.com/640x200" />
             <div class="ui-lesson-headerIntro">
-                <h3><span>——</span>两小时颠覆你的PPT视觉<span>——</span></h3>
-                <p>主讲人:雷军</p>
-                <p>时间:8月13日19:00-20:30</p>
-                <p>地点:直播间/北京</p>
+                <h3><span>——</span><span id="name"></span><span>——</span></h3>
+                <p >主讲人:<span id="teacher"></span></p>
+                <p>时间:<span id="startTime"></span>-<span id="endTime"></span></p>
+                <p>地点:<span id="address"></span></p>
             </div>
         </div>
         <div class="demo-item item-details">
             <p class="demo-desc"><span>|</span>活动详情</p>
-            <img src="../img/detail_ad0.png">
+            <img id="thumbnail" src="../img/detail_ad0.png">
         </div>
         <div class="demo-item item-text">
-            <p>接触烘培已经2年多了，刚开始做戚风的时候很不顺利，内心很是抓狂，戚风作为入门级的蛋糕，能做好它以后在烘培界才有机会风生水起~慢慢地才掌握了做蛋糕的诀窍，虽然还是有很多次会败给它。</p>
-            <p>我喜欢吃盐渍橙丁，总是喜欢做蛋糕的时候撒一把进去，既香甜又有嚼劲，层次感更突出，品尝过一次，便不可忽略它的存在。</p>
-            <p>经常看到很多人有晒早餐的习惯，灰常羡慕，厌倦了每天黄豆豆浆&炸油条&肉包子，于是，某天早上，我早起了一会，做了可可戚风，榨了新鲜蔬菜汁，还P了图哈哈~想要把生活搞得活泼起来其实还是很简单的嘛~
-            </p>
+            <div id="desc"></div>
             <button class="ui-btn-lg ui-btn-primary" id="btn1">立即参加</button>
         </div>
 
@@ -140,20 +137,27 @@
             location.href = $(this).data('href');
         }
     });
-
+	//TODO 
     Zepto(function($) {
     	
     	BWK.api.lesson.lessonDetail(BWK.UrlParams.id,function(data){
-            var dealObj = data.content||[];
-            _dealImgList(dealObj);
+            var dealObj = data||{};
+            $('#name').text(dealObj.name);
+            $('#teacher').text(dealObj.teacher);
+            $('#startTime').text(BWK.Utils.dateformateLocal(new Date(dealObj.startTime),"yyyy-MM-dd hh:mm"));
+            $('#endTime').text(BWK.Utils.dateformateLocal(new Date(dealObj.endTime),"yyyy-MM-dd hh:mm"));
+            $('#address').text(dealObj.address);
+            $('#image').attr('src',dealObj.image);
+            $('#thumbnail').attr('src',dealObj.thumbnail);
+            $('#desc').html(dealObj.desc);
+           
         }); 
     	//分享文字
-    	
     	BWK.api.lesson.shareText(null,function(data){
-            var dealObj = data.content||[];
-            _dealImgList(dealObj);
+           //TODO
         }); 
-        $("#btn1").click(function(){
+        
+    	$("#btn1").click(function(){
             $(".ui-dialog").dialog("show");
         })
         $('#btn-submit').click(function(){
@@ -168,7 +172,7 @@
 
             BWK.api.user.updateUser(params,function(data){
 
-                BWK.api.lesson.lessonSign({"lessonId":1028,"online":true},function(data){
+                BWK.api.lesson.lessonSign({"lessonId":BWK.UrlParams.id,"online":true},function(data){
                     $(".ui-dialog").dialog("hide"); 
                     //TODO
                 });
@@ -177,7 +181,9 @@
         })
         //查询个人信息
         BWK.api.user.getUser(null,function(data){
-            console.log(data);
+        	for(var i in data){
+        		$('#'+i).val(data[i]);
+        	}
         });
         
 

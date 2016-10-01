@@ -11,18 +11,10 @@
     <script src="../lib/zepto.min.js"></script>
     <script src="../js/frozen.js"></script>
     <style type="text/css">
-    .ui-lesson-header img {display: block;height: 200px;width: 100%;}
-    .ui-lesson-header .ui-lesson-headerIntro {text-align: center;background-color: #fff;padding: 10px 0;}
-    .ui-lesson-header h3 {font-size: 14px;margin: 10px 0;}
-    .ui-lesson-header h3 span {margin: 0 10px;}
-    .ui-lesson-header .ui-lesson-headerIntro p {color: #a2a2a2;font-size: 12px;margin: 10px 0;}
-    .item-details {background: #fff;margin: 10px 0;padding-bottom: 10px;}
-    .item-details img {width: 96%;margin: 10px auto;display: block;}
-    .item-details .demo-desc {color: #555;font-size: 14px;}
-    .item-details .demo-desc span {margin-right: 10px;color: #000;font-weight: bold;font-size: 14px;}
-    .item-text {background-color: #fff;padding-bottom: 40px;}
-    .item-text p {color: #acacac;margin-bottom: 10px;padding: 20px 10px 0;font-size: 14px;}
-    .item-text .ui-btn-lg {width: 100px;margin: 20px auto 0;}
+    .ui-userinfo-header{position: relative;font-size: 16px;color: #fff}
+    .ui-userinfo-header .ui-setBg{display: block;height: 200px;width: 100%;}
+    .ui-userinfo-header .ui-userP{position: absolute;text-align: center;top: 50%;margin-top: -40px;left: 50%;margin-left: -47px;}
+    .ui-userP .ui-avatar{display: block;height:80px;width: 80px;}
     .ui-form-item label:not(.ui-switch):not(.ui-checkbox):not(.ui-checkbox-s):not(.ui-radio){width: 80px;}
     .ui-sign-lesson .ui-dialog-cnt{width: 80%;}
     .ui-sign-lesson .ui-dialog-hd{background-color: #fff; margin-bottom: 10px;}
@@ -36,7 +28,12 @@
 
 <body ontouchstart>
     <section class="ui-container">
-       
+        <div class="demo-block ui-userinfo-header">
+            <img class="ui-setBg" src="http://placeholder.qiniudn.com/640x200" />
+            <div class="ui-userP">
+                <span class="ui-avatar"></span>
+            </div>
+        </div>
         <div class="demo-block ui-sign-lesson">
             
                     <div class="demo-block">
@@ -107,9 +104,6 @@
     Zepto(function($) {
     	
     	
-        $("#btn1").click(function(){
-            $(".ui-dialog").dialog("show");
-        })
         $('#btn-submit').click(function(){
             
             //报名
@@ -129,14 +123,22 @@
         //查询个人信息
         BWK.api.user.getUser(null,function(data){
             console.log(data);
+            _dealInfo(data);
         });
         
 
 
     });
-
-    function _dealImgList(obj) {
-
+  
+    function _dealInfo(obj) {
+        $("#realname").val(obj.username);
+        $("#sex").val(obj.sex);
+        $("#participationCount").val(obj.participationCount);
+        $("#birthday").val(obj.birthday);
+        $("#mobile").val(obj.mobile);
+        $("#weixin").val(obj.weixin);
+        $("#nickname").val(obj.nickname);
+        $("#city").val(obj.city);
 
 
     }

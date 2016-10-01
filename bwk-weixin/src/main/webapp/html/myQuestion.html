@@ -11,40 +11,22 @@
     <script src="../lib/zepto.min.js"></script>
     <script src="../js/frozen.js"></script>
     <style type="text/css">
-    .ui-tab-content {
-        margin-top: 0;
-    }
-    
-    .demo-block.ui-myteacher {
-        margin: 10px;
-    }
-    .ui-myteacher  .ui-list>li {
-        margin-left: 0;
-        padding: 15px;
-    }
-   
-    .demo-block.ui-myteacher .ui-list{
-       background: #f6f6f6;
-    }
-    .demo-block.ui-myteacher .ui-list li{
-        margin-bottom: 20px;
-        background: #fff;
-    }
-    .ui-list-info .ui-teacher-name{
-        color:#333;
-    }
-    .ui-btn-sure{
-        margin-top:80px;
-        color:#999;
-        font-size: 12px;
-        text-align: center;
-    }
-    .ui-btn-sure a{
-        color: #999;
-    }
-    .ui-btn-sure .ui-teleph{
-        margin-top:40px;
-    }
+    .ui-tab-content {margin-top: 0;}
+    .demo-block.ui-myteacher {margin: 10px;}
+    .ui-myteacher  .ui-list>li {margin-left: 0;padding: 15px;}
+    .demo-block.ui-myteacher .ui-list{background: #f6f6f6;}
+    .demo-block.ui-myteacher .ui-list li{margin-bottom: 20px;background: #fff;}
+    .ui-list-info .ui-teacher-name{color:#333;}
+    .ui-list-info .ui-nowrap{line--height:24px;}
+    .ui-btn-sure{margin-top:80px;color:#999;font-size: 12px;text-align: center;}
+    .ui-btn-sure a{color: #999;}
+    .ui-btn-sure .ui-teleph{margin-top:40px;}
+    .item-passed .ui-list li{margin-left:0;}
+    .item-passed .ui-avatar{margin: 20px 10px 20px 10px;height: 60px;width: 60px;}
+    .item-passed h4{height:30px;color:#585858;}
+    .pad16{padding-left:16px;}
+    .btn-r{color: #fff;border-radius: 11px;padding: 4px 10px;float: right;background-color:#f66161;}
+    .btn-r.btn-rb{background-color:#18b4ed;margin-right: 8px;}
     </style>
 </head>
 
@@ -70,7 +52,7 @@
                                     <div class="ui-list-info">
                                         <h4 class="ui-nowrap">远程：高数老不回怎么办，点击看看</h4>
                                         <p class="ui-nowrap ui-teacher-name">OIHIOD</p>
-                                        <p class="ui-nowrap">北京大学博士</p>
+                                        <p class="ui-nowrap"><span>北京大学博士</span><button class="btn-r">取消</button><button class="btn-r btn-rb">确定</button></p>
                                     </div>
                                 </li>
                                 <li>
@@ -80,39 +62,36 @@
                                     <div class="ui-list-info">
                                         <h4 class="ui-nowrap">远程：高数老不回怎么办，点击看看</h4>
                                         <p class="ui-nowrap ui-teacher-name">马云</p>
-                                        <p class="ui-nowrap">这是内容，加ui-nowrap可以超出长度截断</p>
+                                        <p class="ui-nowrap"><span>这是内容</span><button class="btn-r">取消</button><button class="btn-r btn-rb">确定</button></p>
                                     </div>
                                 </li>
                             </ul>
                             <div class="ui-btn-sure">
-                                <button class="ui-btn-lg ui-btn-primary">
-                                    确定
-                                </button>
+                                <button class="ui-btn-lg ui-btn-primary">确定</button>
                                 <p class="ui-teleph">霸王课热线</p>
                                 <p><a  href="tel:010-56029675">010-56029675</a></p>
                             </div>
                         </div>
                     </li>
-                    <li>
+                    <li class="item-passed">
                         <div class="demo-block ui-item-list">
-                            <p class="share-tip">分享课程还能获得收益</p>
-                            <ul class="ui-list ui-list-link ui-border-tb">
-                                <li class="ui-border-t">
-                                    <div class="ui-list-img">
-                                        <span style="background-image:url(http://placeholder.qiniudn.com/200x136)"></span>
+                            <ul class="ui-list">
+                                <li class="ui-border-b">
+                                    <div class="ui-avatar">
+                                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
                                     </div>
                                     <div class="ui-list-info">
-                                        <h4 class="ui-nowrap ui-less-title">半个小时PPT逆袭之路</h4>
-                                        <p class="ui-nowrap ui-less-desc">老师: 高兴</p>
+                                        <h4 class="ui-nowrap">职业规划</h4>
+                                        <p class="ui-nowrap"><span>李季</span><span class="pad16">北京大学博士</span><button class="btn-r">已取消</button></p>
                                     </div>
                                 </li>
-                                <li class="ui-border-t">
-                                    <div class="ui-list-img">
-                                        <span style="background-image:url(http://placeholder.qiniudn.com/200x136)"></span>
+                                <li class="ui-border-b">
+                                    <div class="ui-avatar">
+                                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
                                     </div>
                                     <div class="ui-list-info">
-                                        <h4 class="ui-nowrap ui-less-title">半个小时PPT逆袭之路</h4>
-                                        <p class="ui-nowrap ui-less-desc">老师: 高兴</p>
+                                        <h4 class="ui-nowrap">职业规划</h4>
+                                        <p class="ui-nowrap"><span>李季</span><span class="pad16">北京大学博士</span><button class="btn-r btn-rb">已完成</button></p>
                                     </div>
                                 </li>
                             </ul>

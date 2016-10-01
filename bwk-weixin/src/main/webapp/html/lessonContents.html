@@ -11,28 +11,19 @@
     <script src="../lib/zepto.min.js"></script>
     <script src="../js/frozen.js"></script>
     <style type="text/css">
-    .ui-video img {
-        display: block;
-        width: 100%;
-    }
-    
-    .ui-tab-content {
-        margin-top: 0;
-    }
-    
-    .ui-course-brief {
-        padding: 10px;
-        background: #fff;
-    }
-    
-    .ui-course-brief h3 {
-        border-bottom: 1px solid #e0e0e0;
-    }
+    .ui-video img {display: block;width: 100%;}
+    .ui-tab-content {margin-top: 0;}
+    .ui-course-brief {padding:0 10px;background: #fff;}
+    .ui-course-brief h3 {border-bottom: 1px solid #e0e0e0;height: 50px;line-height: 50px;}
     
     .ui-course-brief h3 a {
         float: right;
+         color:#afafaf;
     }
-    
+    .ui-course-brief h3 a img{
+      width: 18px;
+      padding-left: 4px;
+    }
     .ui-brief-cont,
     .item-discuss {
         background: #fff;
@@ -42,12 +33,14 @@
     .ui-course-lists p {
         padding: 10px;
         font-size: 14px;
+         color:#afafaf;
     }
     
     .ui-course-lists p img {
         display: block;
         margin-right: 10px;
         float: left;
+        width:16px;
     }
     
     .ui-about-teacher {
@@ -56,6 +49,11 @@
     
     .ui-teacher-pic {
         text-align: center;
+        font-size:18px;
+    }
+    .ui-teacher-pic p{
+         color:#010101;
+         margin:8px 0 16px;
     }
     
     .ui-teacher-pic img {
@@ -70,14 +68,19 @@
     .teacher-brief p {
         padding: 0 10px;
         text-indent: 2em;
+        color:#b0b0b0;
     }
     
     .teacher-brief .view-more {
-        text-align: center;
         display: block;
         padding: 20px;
+        width: 120px;
+        margin: 0 auto;
     }
-    
+    .teacher-brief .view-more  img{
+        float:right;
+        width: 9px;
+    }
     .ui-list>li {
         margin-left: 0;
         padding-left: 15px;
@@ -129,7 +132,7 @@
                 <ul class="ui-tab-content" style="width:200%">
                     <li>
                         <div class="ui-course-brief">
-                            <h3>做好分享的5个方法(本节课程)<a>展开<img src=""></a></h3>
+                            <h3>做好分享的5个方法(本节课程)<a>展开<img src="../img/slidopen.png"></a></h3>
                             <div class="ui-course-lists">
                                 <p><img src="../img/trangle0.png">如何让你的PPT瞬间高大上</p>
                                 <p><img src="../img/trangle0.png">职场小白最应该学的3种方法</p>
@@ -139,14 +142,14 @@
                             <p class="ui-about-teacher">关于老师：</p>
                             <div class="ui-teacher-pic">
                                 <img src="http://placeholder.qiniudn.com/100x100">
-                                <span>何阳</span>
+                                <p>何阳</p>
                             </div>
                             <div class="teacher-brief">
                                 <p>何阳，国内知名快速记忆讲师，高效学习专家，世界记忆大师教练快速记忆课程演讲百场以上。</p>
                                 <p>
                                     拓普教育忆如反掌课程华东区首席讲师，快速记忆专业授课讲师思维导图专业授课讲师。刘雨，国内知名快速记忆讲师，高效学习专家世界记擅长快速记忆和思维导图课程。技术精湛，授课由浅入深条理清晰，语言深刻；启发式教学，课堂氛围好，活泼而不失条理......
                                 </p>
-                                <a class="view-more">展开显示更多 ></a>
+                                <a class="view-more">展开显示更多<img src="../img/arrowb.png"/></a>
                             </div>
                             <div class="demo-item item-discuss">
                                 <p class="demo-desc">评论&nbsp;&nbsp;(<span>3</span>)</p>
@@ -214,8 +217,8 @@
                         </div>
                     </li>
                 </ul>
-                </div>
             </div>
+         </div>
     </section>
     <!-- /.ui-container-->
     <script>

@@ -3,6 +3,11 @@
 if (!window.BWK) {
 	window.BWK = {};
 }
+BWK.globalConfig = {
+	appId:'wx0297724b372447e3',
+	redirect_uri:'http://wx.51bwk.com/weixin/weixin/oauth',
+	DEBUG:true
+}
 BWK.api = function() {	
 	var api = {};
 	var request = function(method, url, params, callback) {	
@@ -19,9 +24,15 @@ BWK.api = function() {
 					callback(data);	
 				}
 			}, error : function(jqXHR, textStatus, errorThrown) {
-				 var res = jqXHR&&eval('('+jqXHR.response+')');
-                 var msg = res.message?res.message.replace(/([^\u4e00-\u9fa5]+)/g,''):'未知错误';
-                 alert(msg);
+				if(jqXHR&&jqXHR.status=='403'||jqXHR.status=="401"){
+					var uri = encodeURIComponent(BWK.globalConfig.redirect_uri);
+					var state = encodeURIComponent(location.href);
+					var redirect_uri = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+BWK.globalConfig.appId+'&redirect_uri='+uri+'&response_type=code&scope=snsapi_userinfo&state='+state+'#wechat_redirect'
+				}else{
+					var res = jqXHR&&eval('('+jqXHR.response+')');
+	                var msg = res.message?res.message.replace(/([^\u4e00-\u9fa5]+)/g,''):'未知错误';
+	                alert(msg);
+				}
 			}
 		});
 	};
@@ -198,8 +209,8 @@ BWK.Weixin = function(params,callback){
 	$.extend(defaultParams,params);
 	BWK.api.weixin.getJsApiTicket(defaultParams,function(data){
 		var defaultConfig = {
-			debug: true,
-			appId: 'wx0297724b372447e3',
+			debug: BWK.globalConfig.DEBUG,
+			appId: BWK.globalConfig.appId,
 			jsApiList: [
 	            'chooseImage',
 	            'previewImage',
@@ -220,14 +231,16 @@ BWK.Weixin = function(params,callback){
 	});
 
 }
+
+
 BWK.WeixinShare = function(params,callback){
 
 	var defaultParams = {url:location.href};
 	$.extend(defaultParams,params);
 	BWK.api.weixin.getJsApiTicket(defaultParams,function(data){
 		var defaultConfig = {
-			debug: true,
-			appId: 'wx0297724b372447e3',
+			debug: BWK.globalConfig.DEBUG,
+			appId: BWK.globalConfig.appId,
 			jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone']
 		};	
 		$.extend(defaultConfig,data);

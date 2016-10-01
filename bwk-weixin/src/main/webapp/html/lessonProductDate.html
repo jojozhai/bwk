@@ -84,7 +84,7 @@
             location.href = $(this).data('href');
         }
     });
-
+    var shareId;
     Zepto(function($) {
         //轮播
         $("#btn1").click(function(){
@@ -97,10 +97,14 @@
             };
         })
 
-        var params = {"cartInfos":[{"productId":BWK.UrlParams.id,"count":1}],"message":$(".ui-masssage-cont").val()};
-        
+        var params = {"cartInfos":[{"productId":BWK.UrlParams.id,"count":1}],,"message":$(".ui-masssage-cont").val()};
+        if(window.localStorage){
+            shareId = window.localStorage.getItem('shareId');
+            if(shareId){
+                params.shareId = shareId;
+            }
+        } 
         $('#btnApply').click(function(){
-            
             //预约购买商品
             BWK.api.lesson.lessonProdectBuy(params,function(data){
                 var payObj = data;

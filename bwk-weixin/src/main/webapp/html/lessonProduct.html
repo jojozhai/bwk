@@ -102,7 +102,7 @@
     <footer class="ui-footer ui-footer-btn ui-border-t">
         <div class="demo-block ui-course-pay">
              <span class="ui-course-rmb">￥15.9</span>
-             <button class="ui-btn" id="paysure">立即购买</button>
+             <button class="ui-btn ui-btn-toBuy" id="paysure">立即购买</button>
         </div>
     </footer>
     <section class="ui-container">
@@ -235,7 +235,7 @@
 
         
 
-                //发表评论 
+        //发表评论 
         // var params = {"target": "product", "targetId": BWK.UrlParams.id, "content": "test"};
         // BWK.api.lesson.lessonCommentSub(params,function(data){
         //     var dealObj = data.content||[];
@@ -243,7 +243,7 @@
         // });
          
         $('.ui-btn-toBuy').click(function(){
-            location.href = 'lessonProdectDate.html?id='+BWK.UrlParams.id;
+            location.href = 'lessonProductDate.html?id='+BWK.UrlParams.id;
         })
         //展开列表
        $(".ui-course-brief h3 a").click(function(){

@@ -149,6 +149,11 @@ BWK.UrlParams = {};
       BWK.UrlParams[aParam[0]] = decodeURIComponent(aParam[1]);
     } 
   }
+  if(window.localStorage){
+  	if(BWK.UrlParams.shareId){
+  		window.localStorage.setItem('shareId',BWK.UrlParams.shareId);
+  	}
+  }	
 })();
 BWK.Utils = {};
 BWK.Utils.dateformate = function(date){

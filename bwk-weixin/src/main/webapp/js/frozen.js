@@ -4,7 +4,7 @@ if (!window.BWK) {
 	window.BWK = {};
 }
 BWK.globalConfig = {
-	appId:'wx0297724b372447e3',
+	appId:'wx016ebcb63afc3dc1',
 	redirect_uri:'http://wx.51bwk.com/weixin/weixin/oauth',
 	DEBUG:true
 }

@@ -84,7 +84,7 @@
             location.href = $(this).data('href');
         }
     });
-    var shareId;
+    var shareId,payObj;
     Zepto(function($) {
         //轮播
         $("#btn1").click(function(){
@@ -107,7 +107,7 @@
         $('#btnApply').click(function(){
             //预约购买商品
             BWK.api.lesson.lessonProdectBuy(params,function(data){
-                var payObj = data['data'];
+                payObj = data['data'];
                 BWK.Weixin({},function(payObj){
                     wx.chooseWXPay({
                         timestamp: payObj.timestamp, 

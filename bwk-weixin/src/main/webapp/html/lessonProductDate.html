@@ -108,7 +108,7 @@
             //预约购买商品
             BWK.api.lesson.lessonProdectBuy(params,function(data){
                 payObj = data['data'];
-                BWK.Weixin({},function(payObj){
+                BWK.Weixin({},function(){
                     wx.chooseWXPay({
                         timestamp: payObj.timestamp, 
                         nonceStr: payObj.nonceStr, 

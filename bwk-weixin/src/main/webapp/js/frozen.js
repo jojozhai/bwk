@@ -24,10 +24,11 @@ BWK.api = function() {
 					callback(data);	
 				}
 			}, error : function(jqXHR, textStatus, errorThrown) {
-				if(jqXHR&&jqXHR.status=='403'||jqXHR.status=="401"){
+				if(jqXHR&&(jqXHR.status=='403'||jqXHR.status=="401")){
 					var uri = encodeURIComponent(BWK.globalConfig.redirect_uri);
 					var state = encodeURIComponent(location.href);
 					var redirect_uri = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+BWK.globalConfig.appId+'&redirect_uri='+uri+'&response_type=code&scope=snsapi_userinfo&state='+state+'#wechat_redirect'
+					location.href = redirect_uri;
 				}else{
 					var res = jqXHR&&eval('('+jqXHR.response+')');
 	                var msg = res.message?res.message.replace(/([^\u4e00-\u9fa5]+)/g,''):'未知错误';

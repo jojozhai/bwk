@@ -197,16 +197,31 @@
     });
 
     Zepto(function($) {
-
+        var productObj;
         //商品详情
         BWK.api.lesson.lessonProdectDetail(BWK.UrlParams.id,function(data){
             
+            productObj = data;
             //相关课  enable=true&teacherId=1023
             var teacherId = data.lessonInfo.teacherInfo.id;
             BWK.api.lesson.lesson({'enable':true,teacherId:teacherId},function(data){
             	_dealLesson(data);
             });
             
+            BWK.api.user.getUser(null,function(data){
+                var paramsObj = {'lessonName':'test','shareUrl':location.href+'&sharerId='+data.id};
+                if(productObj.key){
+                    BWK.WeixinShare(paramsObj,function(){
+                        var shareObj = {'goodsId':BWK.UrlParams.id,'shareId':BWK.UrlParams.shareId};
+                        BWK.api.weixin.dealShare(shareObj,function(){
+                            //TODO
+                        });
+                    });    
+                }else{
+                   BWK.WeixinShare(paramsObj);    
+                }
+                
+            });
         }); 
 
         //查询商品评论 target=product&targetId=1042
@@ -215,15 +230,7 @@
             //_dealImgList(dealObj);
         });
 
-        BWK.api.user.getUser(null,function(data){
-            var paramsObj = {'lessonName':'test','shareUrl':location.href+'&sharerId='+data.id};
-            BWK.WeixinShare(paramsObj,function(){
-                var shareObj = {'goodsId':BWK.UrlParams.id,'shareId':BWK.UrlParams.shareId};
-                BWK.api.weixin.dealShare(shareObj,function(){
-                    //TODO
-                });
-            });
-        });
+        
 
                 //发表评论 
         // var params = {"target": "product", "targetId": BWK.UrlParams.id, "content": "test"};

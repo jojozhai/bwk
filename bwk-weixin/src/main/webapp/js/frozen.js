@@ -251,7 +251,7 @@ BWK.WeixinShare = function(params,callback){
 		defaultConfig.debug=BWK.globalConfig.DEBUG;
 		wx.config(defaultConfig);
 
-		setTimeout(function(params){
+		setTimeout((function(params){
 			wx.ready(function(){
 				//分享给朋友
 				wx.onMenuShareAppMessage({
@@ -363,7 +363,7 @@ BWK.WeixinShare = function(params,callback){
 				alert('初始化错误信息：'+JSON.stringify(res));
 			});
 
-		},'2000');
+		})(params),'2000');
 	});
 
 }

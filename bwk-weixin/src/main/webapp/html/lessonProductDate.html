@@ -110,7 +110,7 @@
                 payObj = data['data'];
                 BWK.Weixin({},function(){
                     wx.chooseWXPay({
-                        timestamp: payObj.timestamp, 
+                        timestamp: payObj.timeStamp, 
                         nonceStr: payObj.nonceStr, 
                         package: payObj.package, 
                         signType: payObj.signType,

@@ -107,14 +107,14 @@
         $('#btnApply').click(function(){
             //预约购买商品
             BWK.api.lesson.lessonProdectBuy(params,function(data){
-                var payObj = data;
+                var payObj = data['data'];
                 BWK.Weixin({},function(payObj){
                     wx.chooseWXPay({
                         timestamp: payObj.timestamp, 
                         nonceStr: payObj.nonceStr, 
                         package: payObj.package, 
                         signType: payObj.signType,
-                        paySign: paySign, 
+                        paySign: payObj.paySign, 
                         success: function (res) {
                             // 支付成功后的回调函数
                         }

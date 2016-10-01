@@ -111,6 +111,10 @@
                  }
              });
 
+             BWK.WeixinShare(function(){
+                console.log('...key');
+             });
+
             var params = {'enable':true,'herald':false,'setId':BWK.UrlParams.id};
 
             BWK.api.lesson.lesson(params,function(data){

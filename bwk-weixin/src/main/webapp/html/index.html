@@ -149,6 +149,7 @@
             </div>
 
         </section><!-- /.ui-container-->
+        
         <script>
         $('.ui-list li,.ui-tiled li').click(function(){
             if($(this).data('href')){
@@ -157,6 +158,9 @@
         });
 
         Zepto(function($){
+            BWK.Utils.loading.show();
+
+            BWK.Utils.dialogAlert('test');
             //轮播
             BWK.api.lesson.swiper(null,function(data){
                 var dealObj = data.content||[];
@@ -178,10 +182,12 @@
 			BWK.api.lesson.lesson({'enable':true,'top':true},function(data){
                 var dealObj = data.content||[];
                 _dealLessonPre(dealObj);
+                BWK.Utils.loading.hide();
             });
 			BWK.api.lesson.tag(null,function(data){
                 var dealObj = data.children||[];
                 _dealSurprise(dealObj);
+
             }); 
 			
         });

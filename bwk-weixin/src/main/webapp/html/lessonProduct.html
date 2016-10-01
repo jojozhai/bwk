@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/public.css">
     <script src="../lib/zepto.min.js"></script>
     <script src="../js/frozen.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <style type="text/css">
     .ui-video img {display: block;width: 100%;}
     .ui-tab-content {margin-top: 0;}
@@ -211,15 +212,25 @@
         //查询商品评论 target=product&targetId=1042
         BWK.api.lesson.lessonCommentQuery({'target':'product','targetId':BWK.UrlParams.id},function(data){
             var dealObj = data.content||[];
-            _dealImgList(dealObj);
+            //_dealImgList(dealObj);
         });
 
-        //发表评论 
-        var params = {"target": "product", "targetId": BWK.UrlParams.id, "content": "test"};
-        BWK.api.lesson.lessonCommentSub(params,function(data){
-            var dealObj = data.content||[];
-            _dealImgList(dealObj);
+        BWK.api.user.getUser(null,function(data){
+            var paramsObj = {'lessonName':'test','shareUrl':location.href+'&sharerId='+data.id};
+            BWK.WeixinShare(paramsObj,function(){
+                var shareObj = {'goodsId':BWK.UrlParams.id,'shareId':BWK.UrlParams.shareId};
+                BWK.api.weixin.dealShare(shareObj,function(){
+                    //TODO
+                });
+            });
         });
+
+                //发表评论 
+        // var params = {"target": "product", "targetId": BWK.UrlParams.id, "content": "test"};
+        // BWK.api.lesson.lessonCommentSub(params,function(data){
+        //     var dealObj = data.content||[];
+        //     _dealImgList(dealObj);
+        // });
          
         $('.ui-btn-toBuy').click(function(){
             location.href = 'lessonProdectDate.html?id='+BWK.UrlParams.id;

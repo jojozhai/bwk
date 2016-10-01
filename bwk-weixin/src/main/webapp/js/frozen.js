@@ -107,13 +107,20 @@ BWK.api = function() {
 	api.user.userOrderList = function(params,callback){
 		return api.Get('../order',params,callback);
 	}
-	///weixin/upload  上传头像  POST
-	
 	// 预约确定完成  PUT
 	api.user.orderEnd = function(params,callback){
 		return api.Put('../order/'+params,null,callback);
 	}
-
+	api.weixin = {};
+	api.weixin.getJsApiTicket = function(params,callback){
+		return api.Get('../weixin/jsapiTicket',params,callback);
+	}
+	api.weixin.uploadImage = function(params,callback){
+		return api.Post('../weixin/upload',params,callback);
+	}
+	api.weixin.dealShare = function(params,callback){
+		return api.Post('../clearing/user',params,callback);
+	}
 	return api;
 
 }();
@@ -159,12 +166,189 @@ BWK.Utils.Tips = function(content){
 	$('body').append(str);
 	setTimeout(function(){$(".ui-poptips .ui-poptips-cnt").height(0);$(".ui-poptips").remove();},3000);
 }
-BWK.Utils.dialog = function(){
-	
+BWK.Utils.dialogAlert = function(content){
+	var str = '<div class="ui-dialog ui-msgAlertDialog"><div class="ui-dialog-cnt">\
+        		<header class="ui-dialog-hd ui-border-b"><h3>消息提示</h3>\
+            	<i class="ui-dialog-close" data-role="button"></i></header>\
+        		<div class="ui-dialog-bd"><div id="msg" style="text-align:center;">'+content+'</div></div>\
+				<div class="ui-dialog-ft ui-btn-group"><button type="button" data-role="button" class="select">关闭</button></div></div></div>';
+        		
+     $('body').append(str);
+     $(".ui-msgAlertDialog").dialog("show");
 }
+BWK.Utils.dialogConfirm = function(){
+
+}
+
+BWK.Utils.loading = {
+	el:null,
+	show:function(){
+		this.el = $.loading({content:'加载中...'});
+	},
+	hide:function(){
+		this.el.loading("hide");
+	}
+};
 BWK.Page = function(){
-	
+
 }
-BWK.Weixin = function(){
-	
+BWK.Weixin = function(params,callback){
+
+	var defaultParams = {url:location.href};
+	$.extend(defaultParams,params);
+	BWK.api.weixin.getJsApiTicket(defaultParams,function(data){
+		var defaultConfig = {
+			debug: false,
+			appId: 'wx0297724b372447e3',
+			jsApiList: [
+	            'chooseImage',
+	            'previewImage',
+	            'uploadImage',
+	            'downloadImage'
+			]
+		};	
+		$.extend(defaultConfig,data);
+		delete defaultConfig.jsapi_ticket;
+		delete defaultConfig.url;
+		wx.config(defaultConfig);
+		wx.ready(function(){
+			callback && callback();	
+		});
+		wx.error(function(res){
+			alert('错误信息：'+res);
+		});
+	});
+
+}
+BWK.WeixinShare = function(params,callback){
+
+	var defaultParams = {url:location.href};
+	$.extend(defaultParams,params);
+	BWK.api.weixin.getJsApiTicket(defaultParams,function(data){
+		var defaultConfig = {
+			debug: false,
+			appId: 'wx0297724b372447e3',
+			jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone']
+		};	
+		$.extend(defaultConfig,data);
+		delete defaultConfig.jsapi_ticket;
+		delete defaultConfig.url;
+		
+		wx.config(defaultConfig);
+
+		setTimeout(function(params){
+			wx.ready(function(){
+				//分享给朋友
+				wx.onMenuShareAppMessage({
+			      title: params.lessonName,
+			      desc: '天下尽是免费的好课',
+			      link: params.shareUrl,
+			      imgUrl: 'http://www.51bwk.com/bwk/images/logo.jpg',
+			      trigger: function (res) {
+			        // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+			        //alert('用户点击发送给朋友');
+			      },
+			      success: function (res) {
+			        //alert('已分享');
+			        callback && callback();
+			      },
+			      cancel: function (res) {
+			        //alert('已取消');
+			      },
+			      fail: function (res) {
+			        //alert(JSON.stringify(res));
+			      }
+			    });
+				//分享到朋友圈
+				wx.onMenuShareTimeline({
+			      title: params.lessonName,
+			      desc: '天下尽是免费的好课',
+			      link: params.shareUrl,
+			      imgUrl: 'http://www.51bwk.com/bwk/images/logo.jpg',
+			      trigger: function (res) {
+			        // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+			        //alert('用户点击发送给朋友');
+			      },
+			      success: function (res) {
+			        //alert('已分享');
+			        callback && callback();
+			      },
+			      cancel: function (res) {
+			        //alert('已取消');
+			      },
+			      fail: function (res) {
+			        //alert(JSON.stringify(res));
+			      }
+			    }); 
+				//分享到QQ
+				wx.onMenuShareQQ({
+			      title: params.lessonName,
+			      desc: '天下尽是免费的好课',
+			      link: params.shareUrl,
+			      imgUrl: 'http://www.51bwk.com/bwk/images/logo.jpg',
+			      trigger: function (res) {
+			        // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+			        //alert('用户点击发送给朋友');
+			      },
+			      success: function (res) {
+			        //alert('已分享');
+			        callback && callback();
+			      },
+			      cancel: function (res) {
+			        //alert('已取消');
+			      },
+			      fail: function (res) {
+			        //alert(JSON.stringify(res));
+			      }
+			    });
+				//分享到微博
+				wx.onMenuShareWeibo({
+			      title: params.lessonName,
+			      desc: '天下尽是免费的好课',
+			      link: params.shareUrl,
+			      imgUrl: 'http://www.51bwk.com/bwk/images/logo.jpg',
+			      trigger: function (res) {
+			        // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+			        //alert('用户点击发送给朋友');
+			      },
+			      success: function (res) {
+			        //alert('已分享');
+			        callback && callback();
+			      },
+			      cancel: function (res) {
+			        //alert('已取消');
+			      },
+			      fail: function (res) {
+			        //alert(JSON.stringify(res));
+			      }
+			    });
+				//分享到QZone
+				wx.onMenuShareQZone({
+			      title: params.lessonName,
+			      desc: '天下尽是免费的好课',
+			      link: params.shareUrl,
+			      imgUrl: 'http://www.51bwk.com/bwk/images/logo.jpg',
+			      trigger: function (res) {
+			        // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+			        //alert('用户点击发送给朋友');
+			      },
+			      success: function (res) {
+			        //alert('已分享');
+			        callback && callback();
+			      },
+			      cancel: function (res) {
+			        //alert('已取消');
+			      },
+			      fail: function (res) {
+			        //alert(JSON.stringify(res));
+			      }
+			    });
+			});
+			wx.error(function(res){
+				alert('初始化错误信息：'+JSON.stringify(res));
+			});
+
+		},'2000');
+	});
+
 }

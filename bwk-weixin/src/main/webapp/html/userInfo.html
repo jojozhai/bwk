@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/public.css">
     <script src="../lib/zepto.min.js"></script>
     <script src="../js/frozen.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <style type="text/css">
     .ui-userinfo-header{position: relative;font-size: 16px;color: #fff}
     .ui-userinfo-header .ui-setBg{display: block;height: 200px;width: 100%;}
@@ -31,7 +32,7 @@
         <div class="demo-block ui-userinfo-header">
             <img class="ui-setBg" src="http://placeholder.qiniudn.com/640x200" />
             <div class="ui-userP">
-                <span class="ui-avatar"></span>
+                <span class="ui-avatar ui-userImg"></span>
             </div>
         </div>
         <div class="demo-block ui-sign-lesson">
@@ -102,10 +103,36 @@
     <script>
     
     Zepto(function($) {
-    	
-    	
+        
+        BWK.Weixin(function(){
+             $('.ui-userinfo-header').on('tap',function(){
+                 wx.chooseImage({
+                     count: 1, // 默认9
+                     sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                     success: function (res) {
+                         var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                         if (localIds) {
+                              wx.uploadImage({
+                                 localId: localIds[0],
+                                 success: function (res) {
+                                     //alert(localIds);
+                                     dealImg = res.serverId;
+                                     _uploadServer(dealImg); 
+                                     $('.ui-userImg').css({'background-image':'url('+localIds[0]+')'});   
+                                 },
+                                 fail: function (res) {
+                                   alert(JSON.stringify(res));
+                                 }
+                              });   
+                         }  
+                     }
+                 });
+                 return false;
+            });
+        });
+
         $('#btn-submit').click(function(){
-            
             //报名
             var params  = [];
             $('form input').each(function(){
@@ -125,11 +152,14 @@
             console.log(data);
             _dealInfo(data);
         });
-        
-
 
     });
-  
+    
+    function _uploadServer(dealImg){
+        BWK.api.weixin.uploadImage({serverId:dealImg},function(){
+            //DONOTHING
+        })
+    }
     function _dealInfo(obj) {
         $("#realname").val(obj.username);
         $("#sex").val(obj.sex);
@@ -139,8 +169,6 @@
         $("#weixin").val(obj.weixin);
         $("#nickname").val(obj.nickname);
         $("#city").val(obj.city);
-
-
     }
     </script>
 </body>

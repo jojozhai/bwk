@@ -197,7 +197,7 @@
     });
 
     Zepto(function($) {
-        var productObj;
+        var productObj,currentUserId;
         //商品详情
         BWK.api.lesson.lessonProdectDetail(BWK.UrlParams.id,function(data){
             
@@ -212,7 +212,7 @@
                 var paramsObj = {'lessonName':'test','shareUrl':location.href+'&sharerId='+data.id};
                 if(productObj.key){
                     BWK.WeixinShare(paramsObj,function(){
-                        var shareObj = {'goodsId':BWK.UrlParams.id,'shareId':BWK.UrlParams.shareId};
+                        var shareObj = {'goodsId':BWK.UrlParams.id,'shareId':currentUserId};
                         BWK.api.weixin.dealShare(shareObj,function(){
                             //TODO
                         });

@@ -1,29 +1,38 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>商品详情</title>
+    <title>老师商品介绍</title>
     <link rel="stylesheet" href="../css/frozen.css">
     <link rel="stylesheet" href="../css/public.css">
     <script src="../lib/zepto.min.js"></script>
     <script src="../js/frozen.js"></script>
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <style type="text/css">
-    .ui-video img {display: block;width: 100%;}
-    .ui-tab-content {margin-top: 0;}
+    .ui-video img {display: block;width: 100%;height: 200px;}
     .ui-course-brief {padding:0 10px;background: #fff;}
     .ui-course-brief h3 {border-bottom: 1px solid #e0e0e0;height: 50px;line-height: 50px;}
     .ui-course-brief h3 a {float: right;color:#afafaf;}
     .ui-course-brief h3 a img{width: 18px;padding-left: 4px;}
-    .ui-brief-cont,.item-discuss {background: #fff;border-top: 1px solid #e0e0e0;}
-    .ui-course-lists,.teacher-details.ui-heightAuto,.ui-brief-cont .ui-heightAuto .teacher-brief{height:auto;}
-    .ui-course-lists.ui-heightNone{height:0;overflow:hidden;}
+    .item-discuss,.ui-course-pay{border-top: 1px solid #e0e0e0;}
+    .ui-details-cont{margin-bottom: 10px;}
     .ui-course-lists p {padding: 10px;font-size: 14px;color:#afafaf;}
-    .ui-course-lists p img {display: block;margin-right: 10px;float: left;width:16px;}
-    .ui-about-teacher {padding: 20px 10px;}
+    .ui-icon-unfold{float: right;line-height: 50px;}
+    .ui-icon-fold{transform: rotate(180deg);-webkit-transform:rotate(180deg);}
+    .ui-avatar-lg{margin:0 auto;}
+
+    .ui-course-lists p img {
+        display: block;
+        margin-right: 10px;
+        float: left;
+        width:16px;
+    }
+    
+    .ui-about-teacher {
+        padding: 20px 10px;
+    }
     
     .ui-teacher-pic {
         text-align: center;
@@ -37,25 +46,26 @@
     .ui-teacher-pic img {
         display: block;
         margin: 0 auto;
-        margin-top: 30px;
         border-radius: 50%;
         height: 80px;
         width: 80px;
     }
-    .teacher-brief,.teacher-details .teacher-brief{height:98px;overflow:hidden;}
-    .teacher-brief p {
+    
+    .teacher-brief{
         padding: 0 10px;
-        text-indent: 2em;
         color:#b0b0b0;
     }
+    .teacher-details p{
+        text-indent: 0;
+    }
     
-    .view-more {
+    .teacher-brief .view-more,.item-discuss .view-more{
         display: block;
         padding: 20px;
         width: 120px;
         margin: 0 auto;
     }
-    .view-more  img{
+    .teacher-brief .view-more img,.item-discuss .view-more img{
         float:right;
         width: 9px;
     }
@@ -68,124 +78,113 @@
         color: #999;
     }
     
-    .ui-list .ui-border-t {
-        border-top: 1px solid #e0e0e0;
-    }
-    
     .ui-list-thumb span {
         border-radius: 50%;
     }
     
-    .ui-add-discuss .ui-btn {
+    .ui-add-discuss .ui-btn,.ui-course-pay .ui-btn{
         background: #4cbdff;
         color: #fff;
+        float: right;
+    }
+    .ui-add-discuss .ui-btn{
         border-radius: 16px;
     }
-    
+    .ui-course-pay{
+        padding:10px;
+        line-height: 30px;
+    }
     .ui-btn:before,
     .ui-btn-lg:before,
     .ui-btn-s:before {
         border: none;
     }
-    .ui-course-pay {padding: 13px;line-height: 30px;}
-    .ui-course-pay .ui-btn {background: #4cbdff;color: #fff;float: right;}
     .share-tip{
         text-align: center;
         color: #00a5e0;
         padding: 10px;
         font-size: 14px;
     }
+    .ui-footer{border-top:1px solid #c2c2c2;}
     </style>
 </head>
 
 <body ontouchstart>
-    <footer class="ui-footer ui-footer-btn ui-border-t">
+    
+    <footer class="ui-footer ui-footer-btn">
         <div class="demo-block ui-course-pay">
-             <span class="ui-course-rmb">￥15.9</span>
-             <button class="ui-btn ui-btn-toBuy" id="paysure">立即购买</button>
+            <span class="ui-course-rmb" id="productPrice"></span>
+            <button class="ui-btn ui-btn-toBuy" id="paysure">立即购买</button>
         </div>
     </footer>
+
+    
+
     <section class="ui-container">
         <div class="ui-video">
             <img src="http://placeholder.qiniudn.com/640x200">
         </div>
         <div class="demo-block">
-            <div class="ui-course-brief">
-              <!--  <h3>做好分享的5个方法(本节课程)<a>展开<img src="../img/slidopen.png"></a></h3>
-                <div class="ui-course-lists ui-heightNone">
-	                <p><img src="../img/trangle0.png">如何让你的PPT瞬间高大上</p>
-	                <p><img src="../img/trangle0.png">职场小白最应该学的3种方法</p>
+                <div class="ui-course-brief">
+                    <h3 class="ui-course-title">
+                        <span id="name"></span>
+                        <i class="ui-icon-unfold ui-icon-fold"></i>
+                        <a href="javascript:;">收起</a>
+                    </h3>
+                    <div class="ui-course-lists ui-relation-course" style="overflow:hidden;">
+                        <!-- <p><img src="../img/trangle0.png">如何让你的PPT瞬间高大上</p>
+                        <p><img src="../img/trangle0.png">职场小白最应该学的3种方法</p> -->
+                    </div>
+                    <div class="ui-course-lists ui-border-t">
+                        <p id="intro"></p>
+                        <h3>
+                            <span id="price"></span>
+                            <a href="javascript:;" id="saleCountPlus"></a>
+                        </h3>
+                    </div>
                 </div>
-                <div class="ui-course-lists">
-			        <p>自然科学的奥秘的研究</p>
-			        <h3><span>￥300/次</span><a>12人购买</a></h3>
-		        </div> -->
             </div>
-          </div>
-          <div class="demo-block">
+            <div class="demo-block">
                 <div class="ui-details-cont">
                     <p class="ui-about-teacher">内容详情：</p>
-                    <div class="teacher-brief teacher-details">
-                       <!--  <p>1.何阳，国内知名快速记忆讲师，高效学习专家，世界记忆大师教练快速记忆课程演讲百场以上。</p>
-                        <p>2.拓普教育忆如反掌课程华东区首席讲师，快速记忆专业授课讲师思维导图专业授课讲师。</p>
-                        <p>3.刘雨，国内知名快速记忆讲师，高效学习专家世界记擅长快速记忆和思维导图课程。</p>
-                        <p>4.技术精湛，授课由浅入深条理清晰，语言深刻；启发式教学，课堂氛围好，活泼而不失条理......
-                        </p> -->
-                    </div>
-                    <a class="view-more">展开显示更多<img src="../img/arrowb.png"/></a>
+                    <div class="teacher-brief teacher-details " id="product-details"></div>
+                    <div class="teacher-brief"><a class="view-more">展开显示更多<img src="../img/arrowb.png"/></a></div>
                 </div>
             </div>
-            <div class="ui-brief-cont">
-                 <p class="ui-about-teacher">关于老师：</p>
-                 <div class="teacher-details">	
-                 <div class="ui-teacher-pic">
-	                 <img src="http://placeholder.qiniudn.com/100x100">
-	                 <p>何阳</p>
-                 </div>
-                <div class="teacher-brief">
-                  <!--  <p>何阳，国内知名快速记忆讲师，高效学习专家，世界记忆大师教练快速记忆课程演讲百场以上。</p>
-                     <p>拓普教育忆如反掌课程华东区首席讲师，快速记忆专业授课讲师思维导图专业授课讲师。刘雨，国内知
-                                                               名快速记忆讲师，高效学习专家世界记擅长快速记忆和思维导图课程。技术精湛，授课由浅入深条理清晰，
-                                                               语言深刻；启发式教学，课堂氛围好，活泼而不失条理......</p> -->
-                            </div>
-                            </div>
-                             <a class="view-more">展开显示更多<img src="../img/arrowb.png"/></a>
-                            <div class="demo-item item-discuss">
-                                <p class="demo-desc">评论&nbsp;&nbsp;(<span>3</span>)</p>
-                                <div class="demo-block">
-                                    <ul class="ui-list ui-list-one">
-                                        <li>
-                                            <div class="ui-list-thumb">
-                                                <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
-                                            </div>
-                                            <div class="ui-list-info">
-                                                <h4 class="ui-nowrap">晴天AM-S</h4>
-                                                <div class="ui-txt-info">2016-9-10</div>
-                                            </div>
-                                        </li>
-                                        <li>这次我觉得真是没有白来啊</li>
-                                        <li class="ui-border-t">
-                                            <div class="ui-list-thumb">
-                                                <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
-                                            </div>
-                                            <div class="ui-list-info">
-                                                <h4 class="ui-nowrap">晴天AM-S</h4>
-                                                <div class="ui-txt-info">2016-9-10</div>
-                                            </div>
-                                        </li>
-                                        <li>这次我觉得真是没有白来啊</li>
-                                    </ul>
-                                </div>
-                                <div class="demo-block">
-                                    <section class="ui-input-wrap ui-add-discuss">
-                                        <div class="ui-input ui-border-radius">
-                                            <input type="text" name="" value="" placeholder="输入评论...">
-                                        </div>
-                                        <button class="ui-btn">发布</button>
-                                    </section>
-                                </div>
-                            </div>
-         </div>
+            <div class="demo-block">
+                <div class="ui-brief-cont">
+                    <p class="ui-about-teacher">关于老师：</p>
+                    <div class="ui-teacher-pic">
+                         <div class="ui-avatar-lg">
+                            <span id="teacherImg" style="background-image:url(http://placeholder.qiniudn.com/140x140)"></span>
+                        </div>
+                        <p id="teacherName"></p>
+                    </div>
+                    <div class="teacher-brief" id="teacherDesc"></div>
+                    <div class="teacher-brief"><a class="view-more">展开显示更多<img src="../img/arrowb.png"/></a></div>
+                    
+                    
+                    <div class="demo-item item-discuss">
+                        <p class="demo-desc" id="commentLength"></p>
+                        <div class="demo-block">
+                            <ul class="ui-list ui-list-one ui-list-comments">
+                                <!-- <li>
+                                    <div class="ui-list-thumb">
+                                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+                                    </div>
+                                    <div class="ui-list-info">
+                                        <h4 class="ui-nowrap">晴天AM-S</h4>
+                                        <div class="ui-txt-info">2016-9-10</div>
+                                    </div>
+                                </li>
+                                <li>这次我觉得真是没有白来啊</li>
+                                --> 
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
     </section>
     <!-- /.ui-container-->
     <script>
@@ -197,112 +196,134 @@
     });
 
     Zepto(function($) {
+
         var productObj,currentUserId;
+        _initEvent();
         //商品详情
         BWK.api.lesson.lessonProdectDetail(BWK.UrlParams.id,function(data){
             
             productObj = data;
+            //展示
+            _dealProduct(data);
             //相关课  enable=true&teacherId=1023
             var teacherId = data.lessonInfo.teacherInfo.id;
             BWK.api.lesson.lesson({'enable':true,teacherId:teacherId},function(data){
-            	_dealLesson(data);
+                var dealLessons = data.content || [];
+                var str = '';
+                for (var i = 0; i < dealLessons.length; i++) {
+                    var obj = dealLessons[i];
+                    if(obj.id!=BWK.UrlParams.id){
+                        str += '<p id="'+obj.id+'"><img src="../img/trangle0.png">'+obj.name+'</p>';
+                    }
+                };
+                $('.ui-relation-course').append(str);
+                $('.ui-relation-course p').tap(function(){
+                    location.href = "lessonContents.html?id="+$(this).attr('id');
+                });
             });
             
             BWK.api.user.getUser(null,function(data){
-                var paramsObj = {'lessonName':'test','shareUrl':location.href+'&shareId='+data.id};
-                if(productObj.key){
-                    BWK.WeixinShare(paramsObj,function(){
-                        var shareObj = {'goodsId':BWK.UrlParams.id};
-                        if(BWK.UrlParams.shareId){
-                            shareObj.shareId = BWK.UrlParams.shareId;
-                        }
-                        BWK.api.weixin.dealShare(shareObj,function(){
-                            //TODO
-                        });
-                    });    
-                }else{
-                   BWK.WeixinShare(paramsObj);    
-                }
+                // var paramsObj = {'lessonName':'test','shareUrl':location.href+'&shareId='+data.id};
+                // if(productObj.key){
+                //     BWK.WeixinShare(paramsObj,function(){
+                //         var shareObj = {'goodsId':BWK.UrlParams.id};
+                //         if(BWK.UrlParams.shareId){
+                //             shareObj.shareId = BWK.UrlParams.shareId;
+                //         }
+                //         BWK.api.weixin.dealShare(shareObj,function(){
+                            
+                //         });
+                //     });    
+                // }else{
+                //    BWK.WeixinShare(paramsObj);    
+                // }
                 
             });
         }); 
 
-        //查询商品评论 target=product&targetId=1042
-        BWK.api.lesson.lessonCommentQuery({'target':'product','targetId':BWK.UrlParams.id},function(data){
-            var dealObj = data.content||[];
-            //_dealImgList(dealObj);
-        });
-
+        _getCommentsList();
         
-
-        //发表评论 
-        // var params = {"target": "product", "targetId": BWK.UrlParams.id, "content": "test"};
+        //发表评论
+        // var params = {"target": "lesson", "targetId": 1028, "content": "xxx"};
         // BWK.api.lesson.lessonCommentSub(params,function(data){
         //     var dealObj = data.content||[];
         //     _dealImgList(dealObj);
         // });
-         
+       
+       //显示更多
+       $(".view-more").click(function(){
+           var listCont=$(this).siblings().eq(1);
+           if(!listCont.hasClass("ui-heightAuto")){
+               listCont.addClass("ui-heightAuto");
+           }else{
+               listCont.removeClass("ui-heightAuto");
+           }
+        })
+
+
+    });
+    
+    function _initEvent(){
+
+         $('.ui-course-title').tap(function(){
+            var $fold = $(this).find('.ui-icon-fold');
+            var $unfold = $(this).find('.ui-icon-unfold');
+            if($fold.length>0){
+                $fold.removeClass('ui-icon-fold');
+                $('.ui-relation-course').height(0);
+                $(this).find('a').text('展开');
+                $(this).css({'border-bottom':'none'});
+            }else{
+                $unfold.addClass('ui-icon-fold');
+                $('.ui-relation-course').css({'height':'auto'});
+                $(this).find('a').text('收起');
+                $(this).css({'border-bottom':'1px solid #e0e0e0'});
+            }
+        }); 
+
         $('.ui-btn-toBuy').click(function(){
             location.href = 'lessonProductDate.html?id='+BWK.UrlParams.id;
         })
-        //展开列表
-       $(".ui-course-brief h3 a").click(function(){
-    	   if(!$(".ui-course-lists").hasClass("ui-heightNone")){
-    		   $(".ui-course-lists").addClass("ui-heightNone");
-    	   }else{
-    		   $(".ui-course-lists").removeClass("ui-heightNone");
-    	   }
-       })
-       //显示更多
-       $(".view-more").click(function(){
-    	   var listCont=$(this).siblings().eq(1);
-    	   if(!listCont.hasClass("ui-heightAuto")){
-    		   listCont.addClass("ui-heightAuto");
-    		   
-    	   }else{
-    		   listCont.removeClass("ui-heightAuto");
-    	   }
-        	
-        })
 
-    });
-    function _dealLesson(obj){
-        var str = "";
-        if(obj&&obj.length>0){
-   	     for(var i=0;i<obj.length;i++){
-   	    	str += '<h3>'+obj.name+'<a>展开<img src="../img/slidopen.png"></a></h3><div class="ui-course-lists ui-heightNone">';
-       	    str += '<p><img src="../img/trangle0.png">如何让你的PPT瞬间高大上</p><p><img src="../img/trangle0.png">职场小白最应该学的3种方法</p>';
-       	    str += '</div><div class="ui-course-lists"><p>自然科学的奥秘的研究</p><h3><span>￥300/次</span><a>12人购买</a></h3></div>';
-   	      }
-	   	      $('.ui-course-brief').append(str);
-	   	  }
-	   	  $('.ui-course-brief').on('click','li',function(){
-	   	      location.href = "lessonPackage.html?id="+$(this).attr('id');
-	   	  }); 
     }
-    function _dealImgList(obj) {
 
-        $('.ui-slider-content').css({
-            width: obj.length * 100 + '%'
+    function _dealProduct(obj){
+        $('#name').text(obj.name);
+        $('#intro').text(obj.intro);
+        $('#price').text('￥'+obj.price+'元/次');
+        $('#saleCountPlus').text(obj.saleCountPlus+'人已购买');
+        $('#product-details').html(obj.desc);
+        $('#teacherImg').attr('src',obj.lessonInfo.teacherInfo.image);
+        $('#teacherName').text(obj.lessonInfo.teacherInfo.name);
+        $('#teacherDesc').html(obj.lessonInfo.teacherInfo.desc);
+        $('#productPrice').text('￥'+obj.price+'元/次')  
+    }
+
+    //查询课程评论
+    function _getCommentsList(){
+       
+        BWK.api.lesson.lessonCommentQuery({'target':'product','targetId':BWK.UrlParams.id},function(data){
+            var dealObj = data.content||[];
+            $('#commentLength').text('评论（'+dealObj.length+'）');
+            _dealComments(dealObj);
         });
-        $('.ui-slider-content').empty();
-        var str = "";
-        if (obj && obj.length > 0) {
-            for (var i = 0; i < obj.length; i++) {
-                str += '<li><a href="subjectDetail.html?id=' + obj[i].id + '&name=' + obj[i].name + '" ><img src="' + obj[i].image + '"></a></li>';
-            }
-            $('.ui-slider-content').html(str);
-
-            var slider = new fz.Scroll('.ui-slider', {
-                role: 'slider',
-                indicator: true,
-                autoplay: true,
-                interval: 3000
-            });
-        }
-
     }
-   
+    function _dealComments(commentList){
+        $('.ui-list-comments').empty();
+        var str = "";
+        if(commentList.length>0){
+            for (var i = 0; i < commentList.length; i++) {
+                var commentObj = commentList[i];
+                str += '<li><div class="ui-list-thumb"><span style="background-image:url('+commentObj.createrHeadimgurl+')"></span></div>';
+                str += '<div class="ui-list-info"><h4 class="ui-nowrap">'+commentObj.createrName+'</h4><div class="ui-txt-info">'+BWK.Utils.dateformateLocal(new Date(commentObj.createdTime),'yyyy-MM-dd hh:mm:ss')+'</div></div></li>';
+                str += '<li class="ui-border-b">'+commentObj.content+'</li>';
+            };
+            
+        }else{
+            str += '<li><p style="text-align:center;width:100%;">暂无评论</p></li>';
+        }
+        $('.ui-list-comments').append(str);
+    }
     </script>
 </body>
 

@@ -17,6 +17,7 @@
     
     .demo-block.ui-myadvice {
         margin: 10px;
+        background: none;
     }
     .demo-block.ui-myadvice .ui-input-wrap{
         background: none;
@@ -25,6 +26,8 @@
     }
     .demo-block.ui-myadvice .ui-input-wrap .ui-input{
         margin:0;
+        height: 40px;
+        line-height: 40px;
     }
     .ui-input-wrap .ui-btn-search{
         background-image: url(../img/searchB.png);
@@ -39,7 +42,7 @@
     }
     .ui-myadvice  .ui-list>li {
         margin-left: 0;
-        padding: 15px;
+        padding: 5px;
     }
    
     .demo-block.ui-myadvice .ui-list{
@@ -109,7 +112,7 @@
         <div class="demo-block ui-myadvice">
             <section class="ui-input-wrap">
                 <div class="ui-input ui-border-radius">
-                    <input type="text" name="" value="" placeholder="" onkeyup="_searchLesson(this.value)">
+                    <input type="text" id="searchPro" name="" value="" placeholder="查询商品" />
                 </div>
                 <span class="ui-btn-search"></span>
             </section>
@@ -125,39 +128,102 @@
                     </div>
                 </li> -->
             </ul>
+            <div class="ui-loading-wrap" style="display:none;">
+                <p>下拉加载</p>
+                <i class="ui-loading" style="display:none;"></i>
+            </div>
         </div>
     </section>
     <!-- /.ui-container-->
     <script>
-    Zepto(function($) {
-    	 $('.ui-list li,.ui-tiled li').click(function() {
-    	        if ($(this).data('href')) {
-    	            location.href = $(this).data('href');
-    	        }
-    	 });
-    	
-        var params = {'enable':true};
-        BWK.api.lesson.lessonProdectList(params,function(data){
-            var dealObj = data.content||[];
-            _dealQuestions(dealObj);
-        }); 
+    $('.ui-tiled li').click(function() {
+        if ($(this).data('href')) {
+            location.href = $(this).data('href');
+        }
+    });
 
+    var params = {'enable':true,'page':0,'size':5};
+    var pageNum = 0;
+    Zepto(function($) {
+
+        initReq(true,true);
+
+        $('#searchPro').on('keyup',function(){
+            params.page = 0;
+            pageNum = 0;
+            params.name = $.trim($(this).val());
+            initReq(true,true);
+        });
 
     });
-    //搜索
-    function _searchLesson(obj){
-    	if(obj==""){
-    		_dealQuestions(dealObj);
-    	}else{
-    		
-    	}
+    
+
+    function initReq(flag,isRefresh){
+        $(window).unbind('scroll');
+        if(!flag){
+            params.page = pageNum;
+            _dealLoading('loading');
+        }else{
+            BWK.Utils.loading.show();
+            pageNum = 0;
+            params.page = 0;
+        }      
+
+        BWK.api.lesson.lessonProdectList(params,function(data){
+            var dealObj = data.content||[]; 
+            
+            BWK.Utils.loading.hide();
+            
+            _dealQuestions(dealObj,isRefresh);
+            if(data.totalPages<2){
+                $('.ui-loading-wrap').hide();
+            }else{
+                if(data.totalPages == data.number+1){
+                    _dealLoading('end');
+                }else{
+                    _dealLoading('start');
+                    $(window).bind('scroll',function () { dealPullReq(); });
+                }
+                
+            }
+        }); 
+
     }
-    function _dealQuestions(obj){
+    function dealPullReq(){
+        var scrollTop = document.body.scrollTop;//滚轮高度
+        var windowHeight = $(window).height();  //浏览器显示区域高度
+        var wholeHeight=document.body.scrollHeight;
+        if (scrollTop + windowHeight == wholeHeight) {
+            //加载条
+            pageNum += 1;                   
+            initReq(false);  
+        }
+    }
+    function _dealLoading(type){
+        $('.ui-loading-wrap').show();
+        if(type=='start'){
+            $('.ui-loading-wrap p').text('下拉刷新');
+            $('.ui-loading-wrap .ui-loading').hide();
+        }else if(type=="end"){
+            $('.ui-loading-wrap p').text('亲！已经到底了');
+            //$('.ui-loading-wrap p').addClass('nomore');
+            $('.ui-loading-wrap .ui-loading').hide();
+        }else if(type="loading"){
+            $('.ui-loading-wrap p').text('正在加载中。。。');
+            $('.ui-loading-wrap .ui-loading').show();
+        }   
+    }
+
+    function _dealQuestions(obj,isRefresh){
     	var str = "";
+        if(isRefresh){
+            $('.ui-list-product').empty();
+        }
         if(obj&&obj.length>0){
             for(var i=0;i<obj.length;i++){
-            	str += '<li id="'+obj[i].id+'"><div class="ui-avatar"><span style="background-image:url('+obj[i].image+')"></span></div><div class="ui-list-info">';
-            	str += '<h4 class="ui-nowrap">'+obj[i].desc+'</h4><p class="ui-nowrap ui-teacher-name"><span>'+obj[i].name+'</span><span class="teacher-honour">北京大学博士</span></p>';
+            	str += '<li id="'+obj[i].id+'"><div class="ui-avatar"><span style="background-image:url('+obj[i].lessonInfo.teacherInfo.image+')"></span></div><div class="ui-list-info">';
+
+            	str += '<h4 class="ui-nowrap">'+obj[i].name+'</h4><p class="ui-nowrap ui-teacher-name"><span>'+obj[i].lessonInfo.teacherInfo.name+'</span><span class="teacher-honour">'+obj[i].intro+'</span></p>';
             	str += '<p class="ui-nowrap">'+obj[i].saleCountPlus+'约见<span class="ystars"></span><span class="ystars"></span><span class="ystars"></span>';
             	str += '<span class="ystars"></span><span class="ystars"></span></p></div></li>';
             }

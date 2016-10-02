@@ -58,7 +58,7 @@
         </div>
         <div class="demo-item item-range">
              <ul class="ui-list ui-border-tb">
-                <!-- <li class="ui-border-t">
+                <li class="ui-border-t">
                     <span class="ui-numList">1</span>
                     <div class="ui-avatar">
                         <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
@@ -97,52 +97,102 @@
                         <span>远程高数老</span>
                         <div class="ui-range-score"><span class="ui-lineG"></span><span>￥547</span></div>
                     </div>
-                </li> -->
+                </li> 
             </ul>
         </div>
     </section>
     <!-- /.ui-container-->
     <script>
+
+    var params = {'sort':'money,desc',page:0,size:10};
     Zepto(function($) {
-    	$('.ui-tiled li').click(function() {
+    	
+        $('.ui-tiled li').click(function() {
             if ($(this).data('href')) {
                 location.href = $(this).data('href');
             }
         });
-        //轮播
-        $("#btn1").click(function(){
-            $(".ui-dialog").dialog("show");
-        })
-
-        var params = {'sort':'money,desc'};
-        BWK.api.user.userList(params,function(data){
-           /*  console.log(data); */
-            var dealObj = data.content||[];
-            _dealImgList(dealObj);
-        });
+        
+        initReq(true,true);
+        
     });
     
-    function _dealImgList(obj) {
+    function _dealList(arrList,isRefresh) {
     	var str = "";
-	   	 if(obj&&obj.length>0){
-	   	     for(var i=0;i<obj.length;i++){
-	   	    	if(i<3){
-	   	    		str += '<li class="ui-border-t" id="'+obj[i].id+'"><span class="ui-numList">'+(i+1)+'</span><div class="ui-avatar"><span style="background-image:url('+obj[i].image+')"></span>';
-			   	    str += '</div><div class="ui-list-info"><span>'+obj[i].name+'</span><div class="ui-range-score"><span class="ui-lineG"></span><span>￥'+obj[i].money+'</span>';
-			   	    str += '<img class="ui-range-pic" src="../img/jiang'+i+'.png"/></div></div></li>';
-	   	    	}else{
-	   	    		str += '<li class="ui-border-t" id="'+obj[i].id+'"><span class="ui-numList">1</span><div class="ui-avatar"><span style="background-image:url('+obj[i].image+')"></span>';
-			   	    str += '</div><div class="ui-list-info"><span>'+obj[i].name+'</span><div class="ui-range-score"><span class="ui-lineG"></span><span>￥'+obj[i].money+'</span>';
-			   	    str += '</div></div></li>';
-	   	    	}
-	   	      }
-	   	      $('.ui-list').append(str);
-	   	  }
-	   	  $('.ui-list').on('click','li',function(){
-	   		  //TODO 跳转
-	   	      location.href = "lessonPackage.html?id="+$(this).attr('id');
-	   	  });    	
+        if(isRefresh){
+            $('.ui-list').empty();
+        }
+       	if(arrList&&arrList.length>0){
+       	    for(var i=0;i<arrList.length;i++){
+                var obj = arrList[i];
+                str += '<li class="ui-border-t"><span class="ui-numList">'+(i+1)+'</span><div class="ui-avatar">';
+                str += '<span style="background-image:url('+obj.headimgurl+')"></span></div>';
+                str += '<div class="ui-list-info"><span>'+obj.nickname+'</span><div class="ui-range-score"><span class="ui-lineG"></span>';
+                str += '<span>￥'+obj.money+'</span>';
+                if(i<3){
+                    str += '<img class="ui-range-pic" src="../img/jiang'+i+'.png"/>';    
+                }
+                str += '</div></div></li>';
+       	    }
+       	    $('.ui-list').append(str);
+       	}
     }
+
+    function initReq(flag,isRefresh){
+            $(window).unbind('scroll');
+            if(!flag){
+                params.page = pageNum;
+                _dealLoading('loading');
+            }else{
+                BWK.Utils.loading.show();
+                pageNum = 0;
+                params.page = 0;
+            }   
+            BWK.api.user.userList(params,function(data){
+                var dealObj = data.content||[]; 
+                if(flag){
+                    BWK.Utils.loading.hide();
+                }
+                _dealList(dealObj,isRefresh);
+                if(data.totalPages<2){
+                    $('.ui-loading-wrap').hide();
+                }else{
+                    if(data.totalPages == data.number+1){
+                        _dealLoading('end');
+                    }else{
+                        _dealLoading('start');
+                        $(window).bind('scroll',function () { dealPullReq(); });
+                    }
+                    
+                }
+            }); 
+
+        }
+        function dealPullReq(){
+            var scrollTop = document.body.scrollTop;//滚轮高度
+            var windowHeight = $(window).height();  //浏览器显示区域高度
+            var wholeHeight=document.body.scrollHeight;
+            if (scrollTop + windowHeight == wholeHeight) {
+                //加载条
+                pageNum += 1;                   
+                initReq(false);  
+            }
+        }
+        function _dealLoading(type){
+            $('.ui-loading-wrap').show();
+            if(type=='start'){
+                $('.ui-loading-wrap p').text('下拉刷新');
+                $('.ui-loading-wrap .ui-loading').hide();
+            }else if(type=="end"){
+                $('.ui-loading-wrap p').text('亲！已经到底了');
+                //$('.ui-loading-wrap p').addClass('nomore');
+                $('.ui-loading-wrap .ui-loading').hide();
+            }else if(type="loading"){
+                $('.ui-loading-wrap p').text('正在加载中。。。');
+                $('.ui-loading-wrap .ui-loading').show();
+            }   
+        }
+
     </script>
 </body>
 

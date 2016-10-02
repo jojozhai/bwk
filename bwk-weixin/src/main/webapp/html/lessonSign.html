@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/public.css">
     <script src="../lib/zepto.min.js"></script>
     <script src="../js/frozen.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <style type="text/css">
     .ui-lesson-header img {display: block;height: 200px;width: 100%;}
     .ui-lesson-header .ui-lesson-headerIntro {text-align: center;background-color: #fff;padding: 10px 0;}
@@ -118,10 +119,10 @@
                     <div class="but-wrap">
                         <div class="ui-btn-small">
                            <label class="ui-checkbox-s">
-                                <input type="checkbox" name="checkbox" checked="">线上
+                                <input type="radio" name="online" value="1" checked>线上
                             </label>
                             <label class="ui-checkbox-s">
-                                <input type="checkbox" name="checkbox" checked="">线上
+                                <input type="radio" name="online" value="2">线下
                             </label>
                         </div>
                         <button class="ui-btn-lg ui-btn-primary" id="btn-submit">提交</button>
@@ -154,7 +155,8 @@
         }); 
     	//分享文字
     	BWK.api.lesson.shareText(null,function(data){
-           //TODO
+           var shareObj = {lessonName:data.name,desc:data.value,shareUrl:location.href};
+           BWK.WeixinShare(shareObj); 
         }); 
         
     	$("#btn1").click(function(){
@@ -171,10 +173,11 @@
             });
 
             BWK.api.user.updateUser(params,function(data){
+                var online = $('input[type="radio"]:checked').val()==1?true:false; 
 
-                BWK.api.lesson.lessonSign({"lessonId":BWK.UrlParams.id,"online":true},function(data){
+                BWK.api.lesson.lessonSign({"lessonId":BWK.UrlParams.id,"online":online},function(data){
                     $(".ui-dialog").dialog("hide"); 
-                    //TODO
+                    BWK.Utils.Tips('已报名成功！');
                 });
             });
 

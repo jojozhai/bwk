@@ -30,12 +30,15 @@
             <ul class="ui-list">
                 <li>
                     <div class="ui-avatar">
-                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+                        <span id="teacherImg" style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
                     </div>
                     <div class="ui-list-info">
-                        <h4 class="ui-nowrap">远程：高数老不回怎么办，点击看看</h4>
-                        <p class="ui-nowrap ui-teacher-name"><span>OIHIOD</span><span class="teacher-honour">北京大学博士</span></p>
-                        <p class="ui-nowrap ui-txt-right">652484约见<span>约1小时</span><span>￥300</span></p>
+                        <h4 class="ui-nowrap" id="name"></h4>
+                        <p class="ui-nowrap ui-teacher-name">
+                            <span id="teacherName"></span>
+                            <span id="teacherIntro" class="teacher-honour"></span>
+                        </p>
+                        <p class="ui-nowrap ui-txt-right"><span id="dataNum">652484约见</span><span>￥300</span></p>
                     </div>
                 </li>
             </ul>
@@ -86,16 +89,29 @@
     });
     var shareId,payObj;
     Zepto(function($) {
-        //轮播
-        $("#btn1").click(function(){
-            $(".ui-dialog").dialog("show");
-        });
+        
         //问题输入
         $(".ui-masssage-cont").click(function(){
             if($(this).html()=="请在500字以内 描述你想咨询的问题"){
                 $(this).html("");
             };
         })
+
+        BWK.api.lesson.lessonProdectDetail(BWK.UrlParams.id,function(data){
+            $('#teacherImg').css({'background-image':'url('+data.lessonInfo.teacherInfo.image+')'});
+            $('#name').text(data.name);
+            $('#teacherName').text(data.lessonInfo.teacherInfo.name);
+            $('#teacherIntro').text(data.lessonInfo.teacherInfo.title);
+        });
+
+        BWK.api.user.getUser(null,function(data){
+               
+            $('#realname').val(data.realname);
+            $('#mobile').val(data.mobile);
+            $('#province').val(data.province);
+            $('#city').val(data.city);p
+
+        });
 
         var params = {"cartInfos":[{"productId":BWK.UrlParams.id,"count":1}],"message":$(".ui-masssage-cont").val()};
         if(window.localStorage){

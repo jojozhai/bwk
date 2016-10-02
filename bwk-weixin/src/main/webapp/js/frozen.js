@@ -6,7 +6,7 @@ if (!window.BWK) {
 BWK.globalConfig = {
 	appId:'wx016ebcb63afc3dc1',
 	redirect_uri:'http://wx.51bwk.com/weixin/weixin/oauth',
-	DEBUG:true
+	DEBUG:false
 }
 BWK.api = function() {	
 	var api = {};
@@ -102,6 +102,10 @@ BWK.api = function() {
 	//商品购买
 	api.lesson.lessonProdectBuy = function(params,callback){
 		return api.Post('../order',params,callback);
+	}
+	//商品推荐 TODO
+	api.lesson.lessonProdectIntro = function(params,callback){
+		return api.Get('../product/intro',params,callback);
 	}
 
 	api.user = {};
@@ -212,6 +216,8 @@ BWK.Utils.loading = {
 };
 BWK.Page = function(){
 
+	
+
 }
 //图片上传、微信支付
 BWK.Weixin = function(params,callback){
@@ -266,7 +272,7 @@ BWK.WeixinShare = function(params,callback){
 				//分享给朋友
 				wx.onMenuShareAppMessage({
 			      title: params.lessonName,
-			      desc: '天下尽是免费的好课',
+			      desc: params.desc || '天下尽是免费的好课',
 			      link: params.shareUrl,
 			      imgUrl: 'http://www.51bwk.com/bwk/images/logo.jpg',
 			      trigger: function (res) {
@@ -287,7 +293,7 @@ BWK.WeixinShare = function(params,callback){
 				//分享到朋友圈
 				wx.onMenuShareTimeline({
 			      title: params.lessonName,
-			      desc: '天下尽是免费的好课',
+			      desc: params.desc || '天下尽是免费的好课',
 			      link: params.shareUrl,
 			      imgUrl: 'http://www.51bwk.com/bwk/images/logo.jpg',
 			      trigger: function (res) {
@@ -308,7 +314,7 @@ BWK.WeixinShare = function(params,callback){
 				//分享到QQ
 				wx.onMenuShareQQ({
 			      title: params.lessonName,
-			      desc: '天下尽是免费的好课',
+			      desc: params.desc || '天下尽是免费的好课',
 			      link: params.shareUrl,
 			      imgUrl: 'http://www.51bwk.com/bwk/images/logo.jpg',
 			      trigger: function (res) {
@@ -329,7 +335,7 @@ BWK.WeixinShare = function(params,callback){
 				//分享到微博
 				wx.onMenuShareWeibo({
 			      title: params.lessonName,
-			      desc: '天下尽是免费的好课',
+			      desc: params.desc || '天下尽是免费的好课',
 			      link: params.shareUrl,
 			      imgUrl: 'http://www.51bwk.com/bwk/images/logo.jpg',
 			      trigger: function (res) {
@@ -350,7 +356,7 @@ BWK.WeixinShare = function(params,callback){
 				//分享到QZone
 				wx.onMenuShareQZone({
 			      title: params.lessonName,
-			      desc: '天下尽是免费的好课',
+			      desc: params.desc || '天下尽是免费的好课',
 			      link: params.shareUrl,
 			      imgUrl: 'http://www.51bwk.com/bwk/images/logo.jpg',
 			      trigger: function (res) {

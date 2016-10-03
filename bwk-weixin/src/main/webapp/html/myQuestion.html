@@ -12,14 +12,15 @@
     <script src="../js/frozen.js"></script>
     <style type="text/css">
     .ui-tab-content {margin-top: 0;}
-    .demo-block.ui-myteacher {margin: 10px;}
-    .ui-myteacher  .ui-list>li {margin-left: 0;padding: 15px;}
-    .demo-block.ui-myteacher .ui-list{background: #f6f6f6;}
-    .demo-block.ui-myteacher .ui-list li{margin-bottom: 20px;background: #fff;}
-    .ui-list-info .ui-teacher-name{color:#333;}
-    .ui-list-info .ui-nowrap{line--height:24px;}
-    .ui-btn-sure{margin-top:80px;color:#999;font-size: 12px;text-align: center;}
-    .ui-btn-sure a{color: #999;}
+    
+    .demo-block .ui-list{background: #f6f6f6;}
+    .demo-block .ui-list li{background: #fff;margin-left: 0;padding: 10px 10px 10px 15px;border-bottom: 1px solid #e0e0e0;}
+    
+    .ui-list .ui-list-info h4{color: #585858;font-size: 14px;}
+    .ui-list-info .ui-teacher-info{margin-top:5px;}
+    .ui-list-info .ui-teacher-name{color:#a7a4a4;font-size: 12px;}
+    .ui-list-info .ui-teacher-title{color:#a7a4a4;font-size: 12px;margin-left:5px;}
+    
     .ui-btn-sure .ui-teleph{margin-top:40px;}
     .item-passed .ui-list li{margin-left:0;}
     .item-passed .ui-avatar{margin: 20px 10px 20px 10px;height: 60px;width: 60px;}
@@ -27,6 +28,11 @@
     .pad16{padding-left:16px;}
     .btn-r{color: #fff;border-radius: 11px;padding: 4px 10px;float: right;background-color:#f66161;}
     .btn-r.btn-rb{background-color:#18b4ed;margin-right: 8px;}
+
+    .demo-block .ui-list .ui-nomsg{margin-left: 0;border: none;height: 400px;z-index: 0;}
+    .ui-label{height: 20px;line-height: 20px;float: right;color: #fff;}
+    .ui-label-cancel{background-color: #f66161;}
+    .ui-label-success{background-color: #53bcf9;}
     </style>
 </head>
 
@@ -44,8 +50,8 @@
                 <ul class="ui-tab-content" style="width:200%">
                     <li>
                         <div class="demo-block ui-myteacher">
-                            <ul class="ui-list">
-                                <li>
+                            <ul class="ui-list ui-border-tb">
+                                <!-- <li>
                                     <div class="ui-avatar">
                                         <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
                                     </div>
@@ -54,50 +60,22 @@
                                         <p class="ui-nowrap ui-teacher-name">OIHIOD</p>
                                         <p class="ui-nowrap"><span>北京大学博士</span><button class="btn-r">取消</button><button class="btn-r btn-rb">确定</button></p>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="ui-avatar">
-                                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
-                                    </div>
-                                    <div class="ui-list-info">
-                                        <h4 class="ui-nowrap">远程：高数老不回怎么办，点击看看</h4>
-                                        <p class="ui-nowrap ui-teacher-name">马云</p>
-                                        <p class="ui-nowrap"><span>这是内容</span><button class="btn-r">取消</button><button class="btn-r btn-rb">确定</button></p>
-                                    </div>
-                                </li>
+                                </li> -->
                             </ul>
-                            <div class="ui-btn-sure">
-                                <button class="ui-btn-lg ui-btn-primary">确定</button>
-                                <p class="ui-teleph">霸王课热线</p>
-                                <p><a  href="tel:010-56029675">010-56029675</a></p>
+                            <!-- 下拉加载提示 -->
+                            <div class="ui-loading-wrap" style="display:none;">
+                                <p>下拉加载</p>
+                                <i class="ui-loading" style="display:none;"></i>
                             </div>
                         </div>
                     </li>
                     <li class="item-passed">
                         <div class="demo-block ui-item-list">
-                            <ul class="ui-list">
-                                <li class="ui-border-b">
-                                    <div class="ui-avatar">
-                                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
-                                    </div>
-                                    <div class="ui-list-info">
-                                        <h4 class="ui-nowrap">职业规划</h4>
-                                        <p class="ui-nowrap"><span>李季</span><span class="pad16">北京大学博士</span><button class="btn-r">已取消</button></p>
-                                    </div>
-                                </li>
-                                <li class="ui-border-b">
-                                    <div class="ui-avatar">
-                                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
-                                    </div>
-                                    <div class="ui-list-info">
-                                        <h4 class="ui-nowrap">职业规划</h4>
-                                        <p class="ui-nowrap"><span>李季</span><span class="pad16">北京大学博士</span><button class="btn-r btn-rb">已完成</button></p>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="ui-loading-wrap">
-                                <p>加载中</p>
-                                <i class="ui-loading"></i>
+                            <ul class="ui-list"></ul>
+                            <!-- 下拉加载提示 -->
+                            <div class="ui-loading-wrap" style="display:none;">
+                                <p>下拉加载</p>
+                                <i class="ui-loading" style="display:none;"></i>
                             </div>
                         </div>
                     </li>
@@ -107,60 +85,123 @@
     </section>
     <!-- /.ui-container-->
     <script>
-    (function() {
-        var tab = new fz.Scroll('.ui-tab', {
-            role: 'tab',
-            autoplay: false,
-            interval: 3000
-        });
-        /* 滑动开始前 */
-        tab.on('beforeScrollStart', function(fromIndex, toIndex) {
-            console.log(fromIndex, toIndex); // from 为当前页，to 为下一页
-        })
-    })();
+   
     $('.ui-list li,.ui-tiled li').click(function() {
         if ($(this).data('href')) {
             location.href = $(this).data('href');
         }
     });
 
+    var params = {'finish':false,page:0,size:10};
+    var currIndex = 0;
+
     Zepto(function($) {
-        //列表 finish=true/false  
-        BWK.api.user.userOrderList({'finish':false}, function(data) {
-            var dealObj = data.content || [];
-            _dealImgList(dealObj);
 
-            //state 有INIT(进行中) FINISH（完成） 和 CANCEL（取消）
+        var tab = new fz.Scroll('.ui-tab', {
+            role: 'tab',
+            autoplay: false,
+            interval: 3000
         });
-
-        $('.ui-list').on('click','li',function(){
-             location.href = "lessonProduct.html?id=1042";
+        tab.on('beforeScrollStart', function(from, to) {
+            $('.ui-list').eq(to).empty();
         });
+        tab.on('scrollEnd', function(curPage) {
+            // curPage 当前页
+            currIndex = curPage;
+            params.finish = currIndex==0?false:true;
+            initReq(true,true);
+        });
+        initReq(true,true);
 
     });
 
-    function _dealImgList(obj) {
-
-        $('.ui-slider-content').css({
-            width: obj.length * 100 + '%'
-        });
-        $('.ui-slider-content').empty();
-        var str = "";
-        if (obj && obj.length > 0) {
-            for (var i = 0; i < obj.length; i++) {
-                str += '<li><a href="subjectDetail.html?id=' + obj[i].id + '&name=' + obj[i].name + '" ><img src="' + obj[i].image + '"></a></li>';
-            }
-            $('.ui-slider-content').html(str);
-
-            var slider = new fz.Scroll('.ui-slider', {
-                role: 'slider',
-                indicator: true,
-                autoplay: true,
-                interval: 3000
-            });
+    function _dealList(dealList,isRefresh){
+        //state 有INIT(进行中) FINISH（完成） 和 CANCEL（取消）
+        if(isRefresh){
+            $('.ui-list').eq(currIndex).empty();    
         }
+        var str = "";
+        if(dealList.length>0){
+            for (var i = 0; i < dealList.length; i++) {
+                var dealObj = dealList[i];
+                str += '<li id="'+dealObj.id+'"><div class="ui-avatar"><span style="background-image:url('+dealObj.teacherImage+')"></span></div>';
+                str += '<div class="ui-list-info"><h4 class="ui-nowrap">'+dealObj.productName+'</h4>';
+                str += '<p class="ui-nowrap ui-teacher-info"><span class="ui-teacher-name">'+dealObj.teacherName+'</span>';
+                str += '<span class="ui-teacher-title">'+dealObj.teacherTitle+'</span>';
+                if(currIndex==1){
+                    str += '<label class="ui-label '+(dealObj.state=='CANCEL'?'ui-label-cancel':'ui-label-success')+'">'+(dealObj.state=='CANCEL'?'已取消':'已完成')+'</label>';
+                }
+                str += '</p></div></li>';
+            };
+            
+            $('.ui-list').eq(currIndex).append(str);
+            $('.ui-list').on('click','li',function(){
+                 location.href = "lessonProduct.html?id="+$(this).attr('id');
+            });
+
+        }else{
+            $('.ui-list').eq(currIndex).append('<li class="ui-nomsg"><section class="ui-notice"><i></i><p>暂无预约信息</p></section></li>');
+        }
+        
+    }
+    function initReq(flag,isRefresh){
+        $(window).unbind('scroll');
+        if(!flag){
+            params.page = pageNum;
+            _dealLoading('loading');
+        }else{
+            BWK.Utils.loading.show();
+            pageNum = 0;
+            params.page = 0;
+        }   
+
+        BWK.api.user.userOrderList(params,function(data){
+            var dealObj = data.content||[]; 
+            if(flag){
+                BWK.Utils.loading.hide();
+            }
+            _dealList(dealObj,isRefresh);
+            if(data.totalPages<2){
+                $('.ui-loading-wrap').hide();
+            }else{
+                if(data.totalPages == data.number+1){
+                    _dealLoading('end');
+                }else{
+                    _dealLoading('start');
+                    $(window).bind('scroll',function () { dealPullReq(); });
+                }
+                
+            }
+        }); 
 
     }
+    function dealPullReq(){
+        var scrollTop = document.body.scrollTop;//滚轮高度
+        var windowHeight = $(window).height();  //浏览器显示区域高度
+        var wholeHeight=document.body.scrollHeight;
+        if (scrollTop + windowHeight == wholeHeight) {
+            //加载条
+            pageNum += 1;                   
+            initReq(false);  
+        }
+    }
+    function _dealLoading(type){
+        $('.ui-loading-wrap').hide();
+        $('.ui-loading-wrap').eq(currIndex).show();
+        if(type=='start'){
+            $('.ui-loading-wrap p').text('下拉刷新');
+            $('.ui-loading-wrap .ui-loading').hide();
+        }else if(type=="end"){
+            $('.ui-loading-wrap p').text('亲！已经到底了');
+            //$('.ui-loading-wrap p').addClass('nomore');
+            $('.ui-loading-wrap .ui-loading').hide();
+        }else if(type="loading"){
+            $('.ui-loading-wrap p').text('正在加载中。。。');
+            $('.ui-loading-wrap .ui-loading').show();
+        }   
+    }
+
+    
     </script>
 </body>
 

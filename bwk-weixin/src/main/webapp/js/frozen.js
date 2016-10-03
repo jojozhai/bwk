@@ -191,7 +191,7 @@ BWK.Utils.Tips = function(content){
 	$('body').append(str);
 	setTimeout(function(){$(".ui-poptips .ui-poptips-cnt").height(0);$(".ui-poptips").remove();},3000);
 }
-BWK.Utils.dialogAlert = function(content){
+BWK.Utils.dialogAlert = function(content,callback){
 	var str = '<div class="ui-dialog ui-msgAlertDialog"><div class="ui-dialog-cnt">\
         		<header class="ui-dialog-hd ui-border-b"><h3>消息提示</h3>\
             	<i class="ui-dialog-close" data-role="button"></i></header>\
@@ -199,7 +199,10 @@ BWK.Utils.dialogAlert = function(content){
 				<div class="ui-dialog-ft ui-btn-group"><button type="button" data-role="button" class="select">关闭</button></div></div></div>';
         		
      $('body').append(str);
-     $(".ui-msgAlertDialog").dialog("show");
+     var dialog = $(".ui-msgAlertDialog").dialog("show");
+     dialog.on("dialog:action",function(e){
+        callback && callback();
+     });
 }
 BWK.Utils.dialogConfirm = function(){
 

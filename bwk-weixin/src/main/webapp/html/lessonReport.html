@@ -10,40 +10,20 @@
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
         <style type="text/css">
-            
-            .ui-row-flex .ui-col{
-                background: none;
-                border: none;
-            }
-                       
-            
-            .ui-container .ui-item-list{margin: 10px 0;}
-
-            .ui-container .ui-item-list .ui-less-title{font-size: 14px;color: #5f5f5f;}   
-            .ui-container .ui-item-list .ui-less-desc{font-size: 12px;color: #bbb;margin-top: 10px;}
-            .ui-container .ui-item-list .ui-list-img span{border-radius: 5px;-webkit-border-radius:5px;-moz-border-radius:5px;}
-            
-            .ui-lessonType{background-color: #18b4ed;color: #fff;}
-            .ui-month{text-align: center;padding:15px 0; }
-            .ui-month .line{width: 30px;height: 1px;background-color: #fff;line-height: 1px;display: inline-block;vertical-align: middle;}
-            .ui-row-flex .ui-col h5{font-size: 12px;color: #fff;margin: 10px 0;}
-            .tranigle{width: 0;height: 0;border-left: 5px solid transparent;border-right: 5px solid transparent;border-top: 10px solid #fff;margin: 0 auto;}
-            .ui-col.current h5{
-                font-size: 12px;
-                color: #18b4ed;
-                width: 20px;
-                height: 20px;
-                margin: 10px auto;
-                border-radius: 10px;
-                -webkit-border-radius:10px;
-                background-color: #fff;
-            }
-
+        .ui-row-flex .ui-col{background: none;border: none;}
+        .ui-container .ui-item-list{margin: 10px 0;}
+        .ui-container .ui-item-list .ui-less-title{font-size: 14px;color: #5f5f5f;}   
+        .ui-container .ui-item-list .ui-less-desc{font-size: 12px;color: #bbb;margin-top: 10px;}
+        .ui-container .ui-item-list .ui-list-img span{border-radius: 5px;-webkit-border-radius:5px;-moz-border-radius:5px;}
+        .ui-lessonType{background-color: #18b4ed;color: #fff;}
+        .ui-month{text-align: center;padding:15px 0; }
+        .ui-month .line{width: 30px;height: 1px;background-color: #fff;line-height: 1px;display: inline-block;vertical-align: middle;}
+        .ui-row-flex .ui-col h5{font-size: 12px;color: #fff;margin: 10px 0;}
+        .tranigle{width: 0;height: 0;border-left: 5px solid transparent;border-right: 5px solid transparent;border-top: 10px solid #fff;margin: 0 auto;}
+        .ui-col.current h5{font-size: 12px;color: #18b4ed;width: 20px;height: 20px;margin: 10px auto;border-radius: 10px;-webkit-border-radius:10px;background-color: #fff;}
         </style>
     </head>
-    
     <body ontouchstart>
-       
         <section class="ui-container">
            
             <div class="ui-lessonType">
@@ -61,7 +41,7 @@
             
             <div class="demo-block ui-item-list">
                 
-                <ul class="ui-list ui-list-link ui-border-tb ui-list-lesson">
+                <ul class="ui-list ui-border-tb ui-list-lesson">
                     <!-- <li class="ui-border-t">
                         <div class="ui-list-img">
                             <span style="background-image:url(http://placeholder.qiniudn.com/200x136)"></span>
@@ -81,11 +61,6 @@
                         </div>
                     </li> -->
                 </ul>
-                <!-- <div class="ui-loading-wrap">
-                    <p>加载中</p>
-                    <i class="ui-loading"></i>
-                </div> -->
-
             </div>           
 
         </section><!-- /.ui-container-->
@@ -99,7 +74,6 @@
         var monthArry = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
         var weekArry = ['周日','周一','周二','周三','周四','周五','周六'];
 
-
         var params = {'enable':true,'herald':true,'startTime':BWK.Utils.dateformate(new Date()),'startTimeTo':BWK.Utils.dateformate(new Date())};
         Zepto(function($){
         	
@@ -111,7 +85,9 @@
 
         });
         function _getLesson(){
+            BWK.Utils.loading.show();
             BWK.api.lesson.lesson(params,function(data){
+                BWK.Utils.loading.hide();
                 var dealObj = data.content||[];
                 _dealLessonList(dealObj);
             });    
@@ -130,7 +106,6 @@
                 }else{
                     str += '<div id="'+dealDate.getTime()+'" class="ui-col ui-col"><div>'+weekArry[dealDate.getDay()]+'</div><h5>'+dealDate.getDate()+'</h5></div>';
                 }
-                
             }
             $('.ui-date-list').append(str);
 
@@ -149,19 +124,24 @@
             });
         }
         function _dealLessonList(list){
-            $('.ui-list-lesson').empty();
-            var str = '';
-            for (var i = 0; i < list.length; i++) {
-                var obj = list[i];
-                str  += '<li class="ui-border-t" id="'+obj.id+'"><div class="ui-list-img">';
-                str  += '<span style="background-image:url('+obj.image+')"></span>';       
-                str  += '</div><div class="ui-list-info"><h4 class="ui-nowrap ui-less-title">'+obj.name+'</h4>';
-                str  += '<p class="ui-nowrap ui-less-desc">老师:  '+obj.teacherInfo.name+'</p></div></li>';
-            };
-            $('.ui-list-lesson').append(str);
-            $('.ui-list-lesson li').tap(function(){
-                location.href = "lessonSign.html?id="+$(this).attr('id');
-            });
+            $('.ui-list-lesson').removeClass('ui-list-link').empty();
+            if(list.length>0){
+                var str = '';
+                for (var i = 0; i < list.length; i++) {
+                    var obj = list[i];
+                    str  += '<li class="ui-border-t" id="'+obj.id+'"><div class="ui-list-img">';
+                    str  += '<span style="background-image:url('+obj.image+')"></span>';       
+                    str  += '</div><div class="ui-list-info"><h4 class="ui-nowrap ui-less-title">'+obj.name+'</h4>';
+                    str  += '<p class="ui-nowrap ui-less-desc">老师:  '+obj.teacherInfo.name+'</p></div></li>';
+                };
+                $('.ui-list-lesson').addClass('ui-list-link').append(str);
+                $('.ui-list-lesson li').tap(function(){
+                    location.href = "lessonSign.html?id="+$(this).attr('id');
+                });
+            }else{
+                $('.ui-list-lesson').append('<li><section class="ui-notice"><i></i><p>暂无课程信息</p></section></li>');
+            }
+            
         }
         </script>
     </body>

@@ -127,6 +127,10 @@ BWK.api = function() {
 	api.user.orderEnd = function(params,callback){
 		return api.Put('../order/'+params,null,callback);
 	}
+	//提现
+	api.user.getMoney = function(params,callback){
+		return api.Post('../withdrawals',params,callback);
+	}
 	api.weixin = {};
 	api.weixin.getJsApiTicket = function(params,callback){
 		return api.Get('../weixin/jsapiTicket',params,callback);
@@ -199,7 +203,12 @@ BWK.Utils.dialogAlert = function(content){
 				<div class="ui-dialog-ft ui-btn-group"><button type="button" data-role="button" class="select">关闭</button></div></div></div>';
         		
      $('body').append(str);
-     $(".ui-msgAlertDialog").dialog("show");
+     var dialogAlert = $(".ui-msgAlertDialog").dialog("show");
+     
+     dialogAlert.on("dialog:hide",function(e){
+    	 $(".ui-msgAlertDialog").remove();
+     });
+     
 }
 BWK.Utils.dialogConfirm = function(){
 

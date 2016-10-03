@@ -11,14 +11,15 @@
     <script src="../lib/zepto.min.js"></script>
     <script src="../js/frozen.js"></script>
     <style type="text/css">
-    .ui-userinfo-header{color: #fff;position: relative;}
-    .ui-userinfo-header .ui-setpic{position: absolute;right: 40px;top:20px;height:28px;width: 28px;}
+    .ui-userinfo-header{position: relative;}
+    .ui-userinfo-header .ui-setpic{position: absolute;right: 28px;top:20px;height:28px;width: 28px;}
     .ui-userinfo-header .ui-setBg{display: block;height: 200px;width: 100%;}
-    .ui-userinfo-header .ui-userP{font-size:14px;position: absolute;text-align: center;top: 50%;margin-top: -44px;left: 50%;margin-left: -36px;}
-    .ui-userP .ui-avatar{display: block;margin: 0 auto 16px;height:72px;width: 72px;}
+    .ui-userinfo-header .ui-userP{font-size:14px;position: absolute;text-align: center;top: 50%;margin-top: -41px;left: 50%;margin-left: -36px;}
+    .ui-userP .ui-avatar{display: block;margin: 0 auto;height:72px;width: 72px;}
     .demo-desc,.ui-list-info .ui-teacher-name{color: #333;}
-    .demo-desc img {width: 22px;display: block;float: left;margin-right: 5px;}
+    .demo-desc img {width: 20px;display: block;float: left;margin-right: 5px;}
     .demo-desc a {float: right;color: #888;font-size: 12px;}
+    .teacher-honour{padding-left: 16px;}
     .ui-teacherAd .ui-avatar{width:60px;height:60px;}
     .ui-teacherAd{margin:10px;}
     .ystars,.gstars{width: 14px;height: 14px;margin-top:4px;float: right;display: inline-block;background-size: cover;background-repeat: no-repeat;background-position: center center; 
@@ -44,7 +45,6 @@
 		        <img class="ui-setBg" src="../img/userBg.jpg" />
 		        <div class="ui-userP">
 		            <span class="ui-avatar"></span>
-		            <p>立即登陆</p>
 		        </div>
 		    </div>
 	        <p class="demo-desc ui-border-b"><img src="../img/usego.png">我咨询的老师<a href="myQuestion.html">最近咨询 &gt;</a></p>
@@ -53,18 +53,18 @@
             <ul class="ui-list">
                 <li data-href="myQuestion.html">
                     <div class="ui-avatar">
-                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+                        <span id="course_pic"></span>
                     </div>
                     <div class="ui-list-info">
-                        <h4 class="ui-nowrap">远程：高数老不回怎么办，点击看看</h4>
-                        <p class="ui-nowrap ui-teacher-name"><span>OIHIOD</span><span class="teacher-honour">北京大学博士</span></p>
-                        <p class="ui-nowrap">652484约见<span class="ystars"></span><span class="ystars"></span><span class="ystars"></span><span class="ystars"></span><span class="ystars"></span></p>
+                        <h4 class="ui-nowrap" id="lessonName"></h4>
+                        <p class="ui-nowrap ui-teacher-name"><span id="teacherName"></span><span class="teacher-honour"></span></p>
+                        <p class="ui-nowrap"><span id="viewNum"></span><span class="ystars"></span><span class="ystars"></span><span class="ystars"></span><span class="ystars"></span><span class="ystars"></span></p>
                     </div>
                 </li>
             </ul>
         </div>
         <div class="demo-item">
-            <p class="demo-desc ui-border-tb"><img src="../img/usego.png">我获得的奖学金<a href="myQuestion.html"> &gt;</a></p>
+            <p class="demo-desc ui-border-tb"><img src="../img/usego.png">我获得的奖学金</p>
             <div class="ui-scholarNumb">
                 <img src="../img/rmbpic.jpg">
                 <div class="ui-scholarmb-txt">
@@ -117,16 +117,25 @@
         //查询个人信息
         BWK.api.user.getUser(null,function(data){
             console.log(data);
+            _dealImgList(data);
         });
-        /* $('#testtip').click(function(){
-        	BWK.Utils.Tips("test");
-        }); */
-        
+        //咨询的老师
+        BWK.api.lesson.lessonProdectList(null,function(data){
+            var dealObj = data.content||[]; 
+            console.log(dealObj);
+            _dealQuestions(dealObj);
+        })
     })  
     function _dealImgList(obj) {
-
-
-
+    	$(".ui-userP .ui-avatar").css({"background-image":'url('+obj.headimgurl+')'});
+    	$(".ui-scholarmb-txt h2").html('￥'+obj.money);
+    }
+    function _dealQuestions(obj){
+    	$("#course_pic").css({"background-image":'url('+obj[0].lessonInfo.teacherInfo.image+')'});
+    	$("#lessonName").html(obj[0].name);
+    	$("#teacherName").html(obj[0].lessonInfo.teacherInfo.name);
+    	$(".teacher-honour").html(obj[0].intro)
+    	$("#viewNum").html(obj[0].saleCountPlus);
     }
     </script>
 </body>

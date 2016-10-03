@@ -10,51 +10,17 @@
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
         <style>
-           .ui-user-cash{
-              margin: 20px 10px;
-              background: #fff;
-           }
-           .ui-user-cash h3{
-             color:#4cbdff;
-             height: 60px;
-		    line-height: 60px;
-		    text-align: center;
-		    border-bottom: 1px solid #eee;
-           }
-           .ui-user-cash .demo-block{
-              padding: 0 20px;
-           }
-           .cash-title,.cash-numb{
-			    height: 60px;
-			    line-height: 60px;
-           }
-           .cash-numb{
-              text-align:center;
-           }
-           .cash-numb span{
-             float:left;
-           }
-           .cash-numb strong {
-              font-size:30px;
-              font-weight:normal;
-           }
-           .cash-title{
-               color: #b2b2b2;
-           }
-           .cash-tip{
-              color: #c6c6c6;
-			    text-align: center;
-			    font-size: 12px;
-           }
-           .cash-btn{
-                 position: absolute;
-			    bottom: 100px;
-			    width: 100%;
-           }
-            .cash-btn .ui-btn-lg{
-              width:auto;
-              margin:0 10px;
-            }
+           .ui-user-cash{margin: 20px 10px;background: #fff;}
+           .ui-user-cash h3{color:#4cbdff;height: 60px;line-height: 60px;text-align: center;border-bottom: 1px solid #eee;}
+           .ui-user-cash .demo-block{padding: 0 20px;}
+           .cash-title,.cash-numb{height: 60px;line-height: 60px;}
+           .cash-numb{text-align:center;}
+           .cash-numb span{float:left;}
+           .cash-title{color: #b2b2b2;}
+           .cash-tip{color: #c6c6c6;text-align: center;font-size: 12px;}
+           .cash-btn{position: absolute;bottom: 100px;width: 100%;}
+            .cash-btn .ui-btn-lg{width:auto;margin:0 10px;}
+            #amount{height: 60px;border: none;padding: 0 10px;}
         </style>
     </head>
     
@@ -65,23 +31,41 @@
 			<h3>奖学金提现</h3>
             <div class="demo-block">
                <p class="cash-title">提现金额</p>
-               <p class="cash-numb"><span>￥</span><strong>200</strong></p>
-            </div> 
+               <p class="cash-numb"><span>￥</span><input type="number" id="amount" placeholder="200" /></p>
+            </div>  
          </div>
             <p class="cash-tip">温馨提示：微信红包一次只可以提现200元哦</p> 
            <div class="demo-block cash-btn">
-            <a class="ui-btn-lg ui-btn-primary" id="btnT" href="cash.html">确认提现</a>
+            <a class="ui-btn-lg ui-btn-primary" id="btnGet" href="javascript:;">确认提现</a>
            </div>
         </section><!-- /.ui-container-->
         <script>
         
-
+		var initMoney = 0;
         Zepto(function($){
+        	 //查询个人信息
+            BWK.api.user.getUser(null,function(data){
+            	initMoney = data.money;
+            });
+        	$('#amount').on('keyup',function(){
+        		if($(this).val()){
+        			if(parseInt($(this).val())>200){
+        				BWK.Utils.dialogAlert('你提现的金额超出最大限额，请核实后再提现！');
+        				return false;
+        			}
+        		}
+        	})
+        	$('#btnGet').tap(function(){
+        		BWK.api.user.getMoney({'amount':$('#amount').val()},function(data){
+        			BWK.Utils.dialogAlert('你已成功提现，如有问题请联系我们！');
+                }); 
+        	});
             
-            
-
+        	 
         });
-        
+        function _dealImgList(obj) {
+        	$(".cash-numb strong").html(obj.money);
+        }
        
         </script>
     </body>

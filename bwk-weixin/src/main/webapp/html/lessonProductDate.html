@@ -133,6 +133,9 @@
                         paySign: payObj.paySign, 
                         success: function (res) {
                             // 支付成功后的回调函数
+                            BWK.Utils.dialogAlert('已完成支付，点击关闭将跳到我的预约页面！',function(){
+                                window.location.href = 'myQuestion.html';
+                            })
                         }
                     });
                 });

@@ -11,13 +11,13 @@
     <script src="../lib/zepto.min.js"></script>
     <script src="../js/frozen.js"></script>
     <style type="text/css">
-    .ui-userinfo-header{position: relative;font-size: 16px;color: #fff}
+    .ui-userinfo-header{color: #fff;position: relative;}
     .ui-userinfo-header .ui-setpic{position: absolute;right: 40px;top:20px;height:28px;width: 28px;}
     .ui-userinfo-header .ui-setBg{display: block;height: 200px;width: 100%;}
-    .ui-userinfo-header .ui-userP{position: absolute;text-align: center;top: 50%;margin-top: -52px;left: 50%;margin-left: -47px;}
-    .ui-userP .ui-avatar{display: block;margin: 0 auto 16px;height:80px;width: 80px;}
+    .ui-userinfo-header .ui-userP{font-size:14px;position: absolute;text-align: center;top: 50%;margin-top: -44px;left: 50%;margin-left: -36px;}
+    .ui-userP .ui-avatar{display: block;margin: 0 auto 16px;height:72px;width: 72px;}
     .demo-desc,.ui-list-info .ui-teacher-name{color: #333;}
-    .demo-desc img {width: 25px;display: block;float: left;margin-right: 5px;}
+    .demo-desc img {width: 22px;display: block;float: left;margin-right: 5px;}
     .demo-desc a {float: right;color: #888;font-size: 12px;}
     .ui-teacherAd .ui-avatar{width:60px;height:60px;}
     .ui-teacherAd{margin:10px;}
@@ -38,16 +38,17 @@
 
 <body ontouchstart>
     <section class="ui-container">
-        <div class="demo-block ui-userinfo-header">
-            <a href="userInfo.html"><img class="ui-setpic" src="../img/setting.png"/></a>
-            <img class="ui-setBg" src="http://placeholder.qiniudn.com/640x200" />
-            <div class="ui-userP">
-                <span class="ui-avatar"></span>
-                <p>立即登陆</p>
-            </div>
-            <p class="demo-desc ui-border-b"><img src="../img/usego.png">我咨询的老师<a href="myQuestion.html">最近咨询 &gt;</a></p>
+        <div class="demo-block">
+            <div class="ui-userinfo-header">
+		        <a href="userInfo.html"><img class="ui-setpic" src="../img/setting.png"/></a>
+		        <img class="ui-setBg" src="../img/userBg.jpg" />
+		        <div class="ui-userP">
+		            <span class="ui-avatar"></span>
+		            <p>立即登陆</p>
+		        </div>
+		    </div>
+	        <p class="demo-desc ui-border-b"><img src="../img/usego.png">我咨询的老师<a href="myQuestion.html">最近咨询 &gt;</a></p>
         </div>
-      
         <div class="demo-item ui-teacherAd">
             <ul class="ui-list">
                 <li data-href="myQuestion.html">
@@ -77,7 +78,7 @@
             <a class="ui-btn-lg ui-btn-fff" id="btnB" href="lessonMoneyTips.html">获取奖学金攻略</a>
             <p class="ui-teleph">霸王课热线</p>
             <p><a  href="tel:010-56029675">010-56029675</a></p>
-            <button id="testtip">test</button>
+           <!--  <button id="testtip">test</button> -->
         </div>
     </section>
     <footer class="ui-footer ui-footer-btn">
@@ -117,9 +118,9 @@
         BWK.api.user.getUser(null,function(data){
             console.log(data);
         });
-        $('#testtip').click(function(){
+        /* $('#testtip').click(function(){
         	BWK.Utils.Tips("test");
-        });
+        }); */
         
     })  
     function _dealImgList(obj) {

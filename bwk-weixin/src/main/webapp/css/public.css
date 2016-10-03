@@ -6,7 +6,7 @@ html,body{height:100%;}
 body>a{display: none;}
 .demo-desc{
     padding: 10px;
-    font-size: 16px;
+    font-size: 14px;
     color: #949494;
 }
 .demo-block,.demo-item{

@@ -11,7 +11,7 @@
     <script src="../js/frozen.js"></script>
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <style type="text/css">
-    .ui-video img {display: block;width: 100%;height: 200px;}
+    .ui-video{display: block;width: 100%;height: 200px;}
     .ui-course-brief {padding:0 10px;background: #fff;}
     .ui-course-brief h3 {border-bottom: 1px solid #e0e0e0;height: 50px;line-height: 50px;}
     .ui-course-brief h3 a {float: right;color:#afafaf;}
@@ -22,83 +22,22 @@
     .ui-icon-unfold{float: right;line-height: 50px;}
     .ui-icon-fold{transform: rotate(180deg);-webkit-transform:rotate(180deg);}
     .ui-avatar-lg{margin:0 auto;}
-
-    .ui-course-lists p img {
-        display: block;
-        margin-right: 10px;
-        float: left;
-        width:16px;
-    }
-    
-    .ui-about-teacher {
-        padding: 20px 10px;
-    }
-    
-    .ui-teacher-pic {
-        text-align: center;
-        font-size:18px;
-    }
-    .ui-teacher-pic p{
-         color:#010101;
-         margin:8px 0 16px;
-    }
-    
-    .ui-teacher-pic img {
-        display: block;
-        margin: 0 auto;
-        border-radius: 50%;
-        height: 80px;
-        width: 80px;
-    }
-    
-    .teacher-brief{
-        padding: 0 10px;
-        color:#b0b0b0;
-    }
-    .teacher-details p{
-        text-indent: 0;
-    }
-    
-    .teacher-brief .view-more,.item-discuss .view-more{
-        display: block;
-        padding: 20px;
-        width: 120px;
-        margin: 0 auto;
-    }
-    .teacher-brief .view-more img,.item-discuss .view-more img{
-        float:right;
-        width: 9px;
-    }
-    .ui-list>li {
-        margin-left: 0;
-        padding-left: 15px;
-    }
-    
-    .item-discuss .ui-list-info .ui-txt-info {
-        color: #999;
-    }
-    
-    .ui-list-thumb span {
-        border-radius: 50%;
-    }
-    
-    .ui-add-discuss .ui-btn,.ui-course-pay .ui-btn{
-        background: #4cbdff;
-        color: #fff;
-        float: right;
-    }
-    .ui-add-discuss .ui-btn{
-        border-radius: 16px;
-    }
-    .ui-course-pay{
-        padding:10px;
-        line-height: 30px;
-    }
-    .ui-btn:before,
-    .ui-btn-lg:before,
-    .ui-btn-s:before {
-        border: none;
-    }
+    .ui-course-lists p img {display: block;margin-right: 10px;float: left;width:16px;}
+    .ui-about-teacher {padding: 20px 10px;}
+    .ui-teacher-pic {text-align: center;font-size:18px;}
+    .ui-teacher-pic p{color:#010101;margin:8px 0 16px;}
+    .ui-teacher-pic img {display: block;margin: 0 auto;border-radius: 50%;height: 80px;width: 80px;}
+    .teacher-brief{padding: 0 10px;color:#b0b0b0;}
+    .teacher-details p{text-indent: 0;}
+    .teacher-brief .view-more,.item-discuss .view-more{display: block;padding: 20px;width: 120px;margin: 0 auto;}
+    .teacher-brief .view-more img,.item-discuss .view-more img{float:right;width: 9px;}
+    .ui-list>li {margin-left: 0;padding-left: 15px;}
+    .item-discuss .ui-list-info .ui-txt-info {color: #999;}
+    .ui-list-thumb span {border-radius: 50%;}
+    .ui-add-discuss .ui-btn,.ui-course-pay .ui-btn{background: #4cbdff;color: #fff;float: right;}
+    .ui-add-discuss .ui-btn{border-radius: 16px;}
+    .ui-course-pay{padding:10px;line-height: 30px;}
+    .ui-btn:before,.ui-btn-lg:before,.ui-btn-s:before {border: none;}
     .share-tip{
         text-align: center;
         color: #00a5e0;
@@ -117,12 +56,11 @@
             <button class="ui-btn ui-btn-toBuy" id="paysure">立即购买</button>
         </div>
     </footer>
-
-    
-
     <section class="ui-container">
         <div class="ui-video">
-            <img src="http://placeholder.qiniudn.com/640x200">
+            <div class="demo-block">
+                <div class="ui-form ui-border-t" id="subVideo"></div>
+            </div>
         </div>
         <div class="demo-block">
                 <div class="ui-course-brief">
@@ -201,7 +139,6 @@
         _initEvent();
         //商品详情
         BWK.api.lesson.lessonProdectDetail(BWK.UrlParams.id,function(data){
-            
             productObj = data;
             //展示
             _dealProduct(data);
@@ -223,21 +160,20 @@
             });
             
             BWK.api.user.getUser(null,function(data){
-                // var paramsObj = {'lessonName':'test','shareUrl':location.href+'&shareId='+data.id};
-                // if(productObj.key){
-                //     BWK.WeixinShare(paramsObj,function(){
-                //         var shareObj = {'goodsId':BWK.UrlParams.id};
-                //         if(BWK.UrlParams.shareId){
-                //             shareObj.shareId = BWK.UrlParams.shareId;
-                //         }
-                //         BWK.api.weixin.dealShare(shareObj,function(){
+                var paramsObj = {'lessonName':'test','shareUrl':location.href+'&shareId='+data.id};
+                if(productObj.key){
+                    BWK.WeixinShare(paramsObj,function(){
+                        var shareObj = {'goodsId':BWK.UrlParams.id};
+                        if(BWK.UrlParams.shareId){
+                            shareObj.shareId = BWK.UrlParams.shareId;
+                        }
+                        BWK.api.weixin.dealShare(shareObj,function(){
                             
-                //         });
-                //     });    
-                // }else{
-                //    BWK.WeixinShare(paramsObj);    
-                // }
-                
+                        });
+                    });    
+                }else{
+                   BWK.WeixinShare(paramsObj);    
+                }
             });
         }); 
 
@@ -259,7 +195,6 @@
                listCont.removeClass("ui-heightAuto");
            }
         })
-
 
     });
     
@@ -288,15 +223,16 @@
     }
 
     function _dealProduct(obj){
-        $('#name').text(obj.name);
-        $('#intro').text(obj.intro);
+        $('#name').text(obj.lessonInfo.name);
+        $('#intro').text(obj.name);
         $('#price').text('￥'+obj.price+'元/次');
         $('#saleCountPlus').text(obj.saleCountPlus+'人已购买');
         $('#product-details').html(obj.desc);
         $('#teacherImg').attr('src',obj.lessonInfo.teacherInfo.image);
         $('#teacherName').text(obj.lessonInfo.teacherInfo.name);
         $('#teacherDesc').html(obj.lessonInfo.teacherInfo.desc);
-        $('#productPrice').text('￥'+obj.price+'元/次')  
+        $('#productPrice').text('￥'+obj.price+'元/次');
+        $('#subVideo').html('<iframe height="200" width="100%" src="'+obj.lessonInfo.video+'"  frameborder=0  allowfullscreen></iframe>');
     }
 
     //查询课程评论

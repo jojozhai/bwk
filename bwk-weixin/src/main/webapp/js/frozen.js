@@ -269,12 +269,19 @@ BWK.WeixinShare = function(params,callback){
 
 		setTimeout((function(params){
 			wx.ready(function(){
+				var defaultShareParams = {
+					'lessonName':'见效',
+					'desc':'天下尽是免费的好课',
+					'shareUrl':location.href,
+					'imgUrl':'http://www.51bwk.com/bwk/images/logo.jpg'
+				}
+				$.extend(defaultShareParams,params);
 				//分享给朋友
 				wx.onMenuShareAppMessage({
-			      title: params.lessonName,
-			      desc: params.desc || '天下尽是免费的好课',
-			      link: params.shareUrl,
-			      imgUrl: 'http://www.51bwk.com/bwk/images/logo.jpg',
+			      title: defaultShareParams.lessonName,
+			      desc: defaultShareParams.desc,
+			      link: defaultShareParams.shareUrl,
+			      imgUrl: defaultShareParams.imgUrl,
 			      trigger: function (res) {
 			        // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
 			        //alert('用户点击发送给朋友');
@@ -292,10 +299,10 @@ BWK.WeixinShare = function(params,callback){
 			    });
 				//分享到朋友圈
 				wx.onMenuShareTimeline({
-			      title: params.lessonName,
-			      desc: params.desc || '天下尽是免费的好课',
-			      link: params.shareUrl,
-			      imgUrl: 'http://www.51bwk.com/bwk/images/logo.jpg',
+			      title: defaultShareParams.lessonName,
+			      desc: defaultShareParams.desc,
+			      link: defaultShareParams.shareUrl ,
+			      imgUrl: defaultShareParams.imgUrl,
 			      trigger: function (res) {
 			        // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
 			        //alert('用户点击发送给朋友');
@@ -313,10 +320,10 @@ BWK.WeixinShare = function(params,callback){
 			    }); 
 				//分享到QQ
 				wx.onMenuShareQQ({
-			      title: params.lessonName,
-			      desc: params.desc || '天下尽是免费的好课',
-			      link: params.shareUrl,
-			      imgUrl: 'http://www.51bwk.com/bwk/images/logo.jpg',
+			      title: defaultShareParams.lessonName ,
+			      desc: defaultShareParams.desc,
+			      link: defaultShareParams.shareUrl ,
+			      imgUrl: defaultShareParams.imgUrl,
 			      trigger: function (res) {
 			        // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
 			        //alert('用户点击发送给朋友');
@@ -334,10 +341,10 @@ BWK.WeixinShare = function(params,callback){
 			    });
 				//分享到微博
 				wx.onMenuShareWeibo({
-			      title: params.lessonName,
-			      desc: params.desc || '天下尽是免费的好课',
-			      link: params.shareUrl,
-			      imgUrl: 'http://www.51bwk.com/bwk/images/logo.jpg',
+			      title: defaultShareParams.lessonName ,
+			      desc: defaultShareParams.desc,
+			      link: defaultShareParams.shareUrl ,
+			      imgUrl: defaultShareParams.imgUrl,
 			      trigger: function (res) {
 			        // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
 			        //alert('用户点击发送给朋友');
@@ -355,10 +362,10 @@ BWK.WeixinShare = function(params,callback){
 			    });
 				//分享到QZone
 				wx.onMenuShareQZone({
-			      title: params.lessonName,
-			      desc: params.desc || '天下尽是免费的好课',
-			      link: params.shareUrl,
-			      imgUrl: 'http://www.51bwk.com/bwk/images/logo.jpg',
+			      title: defaultShareParams.lessonName ,
+			      desc: defaultShareParams.desc,
+			      link: defaultShareParams.shareUrl ,
+			      imgUrl: defaultShareParams.imgUrl,
 			      trigger: function (res) {
 			        // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
 			        //alert('用户点击发送给朋友');

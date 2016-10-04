@@ -84,6 +84,23 @@
             </div>
         </div>
     </section>
+    <!-- 确认支付 -->
+    <div class="ui-dialog">
+        <div class="ui-dialog-cnt">
+            <header class="ui-dialog-hd ui-border-b">
+                <h3>确认支付</h3>
+                <i class="ui-dialog-close" data-role="button"></i>
+            </header>
+            <div class="ui-dialog-bd">
+                <!-- <h4>标题标题</h4> -->
+                <div>亲，请在确认支付前确实你咨询的问题已完成，确认后将无法回退！</div>
+            </div>
+            <div class="ui-dialog-ft">
+                <button type="button" data-role="button">取消</button>
+                <button type="button" data-role="button">开通</button>
+            </div>
+        </div>        
+    </div>
     <!-- /.ui-container-->
     <script>
    
@@ -95,7 +112,7 @@
 
     var params = {'finish':false,page:0,size:10};
     var currIndex = 0;
-
+    var productId;
     Zepto(function($) {
 
         var tab = new fz.Scroll('.ui-tab', {
@@ -131,6 +148,8 @@
                 str += '<span class="ui-teacher-title">'+dealObj.teacherTitle+'</span>';
                 if(currIndex==1){
                     str += '<label class="ui-label '+(dealObj.state=='CANCEL'?'ui-label-cancel':'ui-label-success')+'">'+(dealObj.state=='CANCEL'?'已取消':'已完成')+'</label>';
+                }else{
+                    str += '<button class="btn-r btn-rb">确定</button>';
                 }
                 str += '</p></div></li>';
             };
@@ -138,6 +157,20 @@
             $('.ui-list').eq(currIndex).append(str);
             $('.ui-list').on('click','li',function(){
                  location.href = "lessonProduct.html?id="+$(this).attr('id');
+            });
+            //确认支付
+            $('.btn-rb').tap(function(){
+                productId = $(this).closest('li').attr('id');
+                var dia = $(".ui-dialog").dialog("show");
+                dia.on("dialog:action",function(e){
+                    if(e.index == 2){
+                        BWK.api.user.orderEnd({id:productId},function(data){
+                            BWK.Utils.dialogAlert('交易已完成，关闭后将前往评论页面',function(){
+                                location.href = "lessonProductComment.html?id="+productId;
+                            })
+                        });
+                    }
+                });
             });
 
         }else{

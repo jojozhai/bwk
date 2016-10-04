@@ -125,7 +125,7 @@ BWK.api = function() {
 	}
 	// 预约确定完成  PUT
 	api.user.orderEnd = function(params,callback){
-		return api.Put('../order/'+params,null,callback);
+		return api.Put('../order/'+params.id,null,callback);
 	}
 	//提现
 	api.user.getMoney = function(params,callback){

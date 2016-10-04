@@ -103,9 +103,9 @@ BWK.api = function() {
 	api.lesson.lessonProdectBuy = function(params,callback){
 		return api.Post('../order',params,callback);
 	}
-	//商品推荐 TODO
+	//商品推荐
 	api.lesson.lessonProdectIntro = function(params,callback){
-		return api.Get('../product/intro',params,callback);
+		return api.Get('../lesson/'+params.id+'/recommend',null,callback);
 	}
 
 	api.user = {};

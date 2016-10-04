@@ -161,7 +161,7 @@
         Zepto(function($){
             BWK.Utils.loading.show();
             //轮播
-            BWK.api.lesson.swiper(null,function(data){
+            BWK.api.lesson.swiper({'sort':'index,asc'},function(data){
                 var dealObj = data.content||[];
                 _dealImgList(dealObj);
             });
@@ -178,7 +178,7 @@
             });
         
 			//lesson report
-			BWK.api.lesson.lesson({'enable':true,'top':true},function(data){
+			BWK.api.lesson.lesson({'enable':true,'top':true,'herald':true},function(data){
                 var dealObj = data.content||[];
                 _dealLessonPre(dealObj);
                 BWK.Utils.loading.hide();
@@ -216,9 +216,13 @@
         	var str = "";
             if(obj&&obj.length>0){
                 for(var i=0;i<obj.length;i++){
+                    
+                    var endDate = new Date(obj[i].startTime);
+                    var mdstr = (endDate.getMonth()+1)+'月'+endDate.getDate()+'日';
+                    var timestr = (endDate.getHours()<10?'0'+endDate.getHours():endDate.getHours())+':'+(endDate.getMinutes()<10?'0'+endDate.getMinutes():endDate.getMinutes());
                     str += '<li class="ui-border-t" id="'+obj[i].id+'"><div class="ui-avatar"><span style="background-image:url('+obj[i].image+')"></span></div>';
                     str += '<div class="ui-list-info"><h4 class="ui-nowrap ui-info-title">'+obj[i].name+'</h4>';
-                    str +='<p class="ui-nowrap ui-info-desc">'+BWK.Utils.dateformateLocal(new Date(obj[i].endTime),"yyyy-MM-dd hh:mm")+'</p></div></li>';
+                    str +='<p class="ui-nowrap ui-info-desc"><span>'+mdstr+'</span><span style="margin-left:10px;">'+timestr+'开课</span></p></div></li>';
                 }
                 $('.item-ad .ui-list').append(str);
             }

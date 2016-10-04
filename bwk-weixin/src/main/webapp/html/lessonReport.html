@@ -42,15 +42,7 @@
             <div class="demo-block ui-item-list">
                 
                 <ul class="ui-list ui-border-tb ui-list-lesson">
-                    <!-- <li class="ui-border-t">
-                        <div class="ui-list-img">
-                            <span style="background-image:url(http://placeholder.qiniudn.com/200x136)"></span>
-                        </div>
-                        <div class="ui-list-info">
-                            <h4 class="ui-nowrap ui-less-title">半个小时PPT逆袭之路</h4>
-                            <p class="ui-nowrap ui-less-desc">老师:  高兴</p>
-                        </div>
-                    </li>
+                    <!-- 
                     <li class="ui-border-t">
                         <div class="ui-list-img">
                             <span style="background-image:url(http://placeholder.qiniudn.com/200x136)"></span>
@@ -73,8 +65,8 @@
 
         var monthArry = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
         var weekArry = ['周日','周一','周二','周三','周四','周五','周六'];
-
-        var params = {'enable':true,'herald':true,'startTime':BWK.Utils.dateformate(new Date()),'startTimeTo':BWK.Utils.dateformate(new Date())};
+        var nextDay = new Date((new Date().getTime()+1000*60*60*24));
+        var params = {'enable':true,'herald':true,'startTime':BWK.Utils.dateformate(new Date()),'startTimeTo':BWK.Utils.dateformate(nextDay)};
         Zepto(function($){
         	
             _createDay();
@@ -114,11 +106,12 @@
                 $(this).addClass('current');
                 $('.tranigle').appendTo($(this));
                 var dealObj = new Date(parseInt($(this).attr('id')));
+                var nextDealObj = new Date(parseInt($(this).attr('id'))+1000*3600*24);
                 $('.ui-cmonth').text((dealObj.getMonth()+1)+'月');
                 $('.ui-emonth').text(monthArry[dealObj.getMonth()]);
 
                 params.startTime = BWK.Utils.dateformate(dealObj);
-                params.startTimeTo = BWK.Utils.dateformate(dealObj);
+                params.startTimeTo = BWK.Utils.dateformate(nextDealObj);
                 _getLesson();
 
             });

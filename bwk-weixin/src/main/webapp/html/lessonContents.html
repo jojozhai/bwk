@@ -11,7 +11,6 @@
     <script src="../lib/zepto.min.js"></script>
     <script src="../js/frozen.js"></script>
     <style type="text/css">
-    .ui-video{width: 100%;height:200px;}
     .ui-tab-content {margin-top: 0;}
     .ui-course-brief {padding:0 10px;background: #fff;}
     .ui-course-brief h3 {border-bottom: 1px solid #e0e0e0;height: 50px;line-height: 50px;}
@@ -24,63 +23,29 @@
     .ui-icon-unfold{float: right;line-height: 50px;}
     .ui-icon-fold{transform: rotate(180deg);-webkit-transform:rotate(180deg);}
     .ui-tab-nav li.current{border-bottom: 3px #00a5e0 solid;}
-    .ui-teacher-pic {
-        text-align: center;
-        font-size:18px;
-    }
+    .ui-teacher-pic {text-align: center;font-size:18px;}
     .ui-teacher-pic{color:#010101;}
     .ui-teacher-pic .ui-avatar-lg{margin: 0 auto;}
     .teacher-brief{color:#b0b0b0;padding: 0 10px;}
     
-    .teacher-info-more .view-more {
-        display: block;
-        padding: 20px;
-        width: 120px;
-        margin: 0 auto;
-    }
-    .teacher-info-more .view-more  img{
-        float:right;
-        width: 9px;
-    }
-    .ui-list>li {
-        margin-left: 0;
-        padding-left: 15px;
-    }
+    .teacher-info-more .view-more {display: block;padding: 20px;width: 120px;margin: 0 auto;}
+    .teacher-info-more .view-more  img{float:right;width: 9px;}
+    .ui-list>li {margin-left: 0;padding-left: 15px;}
+    .item-discuss .ui-list-info .ui-txt-info {color: #999;}
+    .ui-list .ui-border-t {border-top: 1px solid #e0e0e0;}
     
-    .item-discuss .ui-list-info .ui-txt-info {
-        color: #999;
-    }
+    .ui-list-thumb span {border-radius: 50%;}
     
-    .ui-list .ui-border-t {
-        border-top: 1px solid #e0e0e0;
-    }
-    
-    .ui-list-thumb span {
-        border-radius: 50%;
-    }
-    
-    .ui-add-discuss{
-        height: 56px;
-    }
-    .ui-add-discuss .ui-btn {
-        background: #4cbdff;
-        color: #fff;
-        border-radius: 16px;
-    }
+    .ui-add-discuss{height: 56px;}
+    .ui-add-discuss .ui-btn {background: #4cbdff;color: #fff;border-radius: 16px;}
     
     .ui-btn:before,
     .ui-btn-lg:before,
-    .ui-btn-s:before {
-        border: none;
-    }
-    .share-tip{
-        text-align: center;
-        color: #00a5e0;
-        padding: 10px;
-        font-size: 12px;
-    }
+    .ui-btn-s:before {border: none;}
+    .share-tip{text-align: center;color: #00a5e0;padding: 10px;font-size: 12px;}
     .ui-footer{border-top: none;}
     .ui-input.ui-border-radius {height: 42px;line-height: 42px;}
+    .demo-block .ui-list .ui-nomsg{margin-left: 0;padding-left:0;border: none;height: 400px;z-index: 0;}
     </style>
 </head>
 
@@ -201,7 +166,7 @@
             $('#teacherName').text(data.teacherInfo.name);
             $('#teacherImg').css({'background-image':'url('+data.teacherInfo.image+')'});
             $('#teacherDesc').html(data.teacherInfo.desc);
-            $('#subVideo').html('<iframe height="200" width="100%" src="'+data.video+'"  frameborder=0  allowfullscreen></iframe>');
+            $('#subVideo').html('<iframe height="210" width="100%" src="'+data.video+'"  frameborder=0  allowfullscreen></iframe>');
             //相关课  enable=true&teacherId=1023
             var teacherId = data.teacherInfo.id;
             BWK.api.lesson.lesson({'enable':true,teacherId:teacherId},function(data){
@@ -235,12 +200,10 @@
             });
         });
         
-        //TODO
-        _getRelationLesson([]);
         //相关商品推荐
-        // BWK.api.lesson.lessonProdectIntro(null,function(data){
-        //     _getRelationLesson(data.content);
-        // });
+        BWK.api.lesson.lessonProdectIntro({'id':BWK.UrlParams.id},function(data){
+            _getRelationLesson(data.content);
+        });
         
         $('.ui-course-title').tap(function(){
             var $fold = $(this).find('.ui-icon-fold');
@@ -276,7 +239,7 @@
             for (var i = 0; i < commentList.length; i++) {
                 var commentObj = commentList[i];
                 str += '<li><div class="ui-list-thumb"><span style="background-image:url('+commentObj.createrHeadimgurl+')"></span></div>';
-                str += '<div class="ui-list-info"><h4 class="ui-nowrap">'+commentObj.createrName+'</h4><div class="ui-txt-info">'+BWK.Utils.dateformateLocal(new Date(commentObj.createdTime),'yyyy-MM-dd hh:mm:ss')+'</div></div></li>';
+                str += '<div class="ui-list-info"><h4 class="ui-nowrap">'+commentObj.createrName+'</h4><div class="ui-txt-info">'+BWK.Utils.dateformateLocal(new Date(commentObj.createdTime),'yyyy-MM-dd')+'</div></div></li>';
                 str += '<li class="ui-border-b">'+commentObj.content+'</li>';
             };
             
@@ -289,6 +252,7 @@
     //商品推荐
     function _getRelationLesson(relationList){
         var str = "";
+
         if(relationList.length>0){
             for (var i = 0; i < relationList.length; i++) {
                 var product = relationList[i];
@@ -299,7 +263,7 @@
             };
             $('.ui-relation-proList').append(str);
         }else{
-            //$('.ui-relation-proList').append('<li><section class="ui-notice"><i></i><p>暂无相关推荐商品</p></section></li>');
+            $('.ui-relation-proList').removeClass('ui-list-link').append('<li class="ui-nomsg"><section class="ui-notice"><i></i><p>暂无相关推荐商品</p></section></li>');
         }
     }
    

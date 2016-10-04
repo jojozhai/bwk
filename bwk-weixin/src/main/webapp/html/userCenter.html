@@ -12,7 +12,8 @@
     <script src="../js/frozen.js"></script>
     <style type="text/css">
     .ui-userinfo-header{position: relative;}
-    .ui-userinfo-header .ui-setpic{position: absolute;right: 28px;top:20px;height:28px;width: 28px;}
+    .ui-userinfo-header .ui-userinfo-set{position: absolute;right: 14px;top:14px;font-size:14px;}
+    .ui-userinfo-header .ui-setpic{height:26px;width: 26px;display:block;margin-bottom:4px;}
     .ui-userinfo-header .ui-setBg{display: block;height: 200px;width: 100%;}
     .ui-userinfo-header .ui-userP{font-size:14px;position: absolute;text-align: center;top: 50%;margin-top: -41px;left: 50%;margin-left: -36px;}
     .ui-userP .ui-avatar{display: block;margin: 0 auto;height:72px;width: 72px;}
@@ -33,7 +34,7 @@
     .ui-scholarNumb .ui-scholarmb-txt h2{font-size: 30px}
     .ui-scholarNumb .ui-scholarmb-txt p{font-size: 14px;}
     .ui-user-apply{margin:10px 0 50px;padding:30px 10px;color:#999;font-size: 12px;text-align: center;}
-    .ui-user-apply .ui-btn-fff{border:1px solid #00a5e0;margin:10px 0 20px;color: #999;}
+    .ui-user-apply .ui-btn-lg{margin:10px 0 20px;}
     </style>
 </head>
 
@@ -41,13 +42,13 @@
     <section class="ui-container">
         <div class="demo-block">
             <div class="ui-userinfo-header">
-		        <a href="userInfo.html"><img class="ui-setpic" src="../img/setting.png"/></a>
+		        <a href="userInfo.html" class="ui-userinfo-set"><img class="ui-setpic" src="../img/setting.png"/><span>设置</span></a>
 		        <img class="ui-setBg" src="../img/userBg.jpg" />
 		        <div class="ui-userP">
 		            <span class="ui-avatar"></span>
 		        </div>
 		    </div>
-	        <p class="demo-desc ui-border-b"><img src="../img/usego.png">我咨询的老师<a href="myQuestion.html">最近咨询 &gt;</a></p>
+	        <p class="demo-desc ui-border-b"><img src="../img/usego.png">我咨询的老师<a href="myQuestion.html">更多 &gt;</a></p>
         </div>
         <div class="demo-item ui-teacherAd">
             <ul class="ui-list">
@@ -75,7 +76,7 @@
         </div>
         <div class="demo-block ui-user-apply">
             <a class="ui-btn-lg ui-btn-primary" id="btnT" href="cash.html">申请提现</a>
-            <a class="ui-btn-lg ui-btn-fff" id="btnB" href="lessonMoneyTips.html">获取奖学金攻略</a>
+            <a class="ui-btn-lg ui-btn-primary" id="btnB" href="lessonMoneyTips.html">获取奖学金攻略</a>
             <p class="ui-teleph">霸王课热线</p>
             <p><a  href="tel:010-56029675">010-56029675</a></p>
            <!--  <button id="testtip">test</button> -->

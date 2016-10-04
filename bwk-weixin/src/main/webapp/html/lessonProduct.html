@@ -27,6 +27,8 @@
     .ui-teacher-pic p{color:#010101;margin:8px 0 16px;}
     .ui-teacher-pic img {display: block;margin: 0 auto;border-radius: 50%;height: 80px;width: 80px;}
     .teacher-brief{padding: 0 10px;color:#b0b0b0;}
+    .teacher-details{height:146px;overflow:hidden;}
+    .teacher-details.ui-heightAuto{height:auto;}
     .teacher-details p{text-indent: 0;}
     .teacher-brief .view-more,.item-discuss .view-more{display: block;padding: 20px;width: 120px;margin: 0 auto;}
     .teacher-brief .view-more img,.item-discuss .view-more img{float:right;width: 9px;}
@@ -84,7 +86,7 @@
             <div class="demo-block">
                 <div class="ui-details-cont">
                     <p class="ui-about-teacher">内容详情：</p>
-                    <div class="teacher-brief teacher-details " id="product-details"></div>
+                    <div class="teacher-brief teacher-details" id="product-details"></div>
                     <div class="teacher-brief"><a class="view-more">展开显示更多<img src="../img/arrowb.png"/></a></div>
                 </div>
             </div>
@@ -97,7 +99,7 @@
                         </div>
                         <p id="teacherName"></p>
                     </div>
-                    <div class="teacher-brief" id="teacherDesc"></div>
+                    <div class="teacher-brief teacher-details" id="teacherDesc"></div>
                     <div class="teacher-brief"><a class="view-more">展开显示更多<img src="../img/arrowb.png"/></a></div>
                     
                     
@@ -187,7 +189,7 @@
        
        //显示更多
        $(".view-more").click(function(){
-           var listCont=$(this).siblings().eq(1);
+           var listCont=$(this).closest(".teacher-brief").siblings().eq(1);
            if(!listCont.hasClass("ui-heightAuto")){
                listCont.addClass("ui-heightAuto");
            }else{

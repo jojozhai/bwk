@@ -31,8 +31,10 @@ BWK.api = function() {
 					location.href = redirect_uri;
 				}else{
 					var res = jqXHR&&eval('('+jqXHR.response+')');
-	                var msg = res.message?res.message.replace(/([^\u4e00-\u9fa5]+)/g,''):'未知错误';
+	                var msg = res.errorMsg?res.errorMsg.replace(/([^\u4e00-\u9fa5]+)/g,''):'未知错误';
+	                BWK.Utils.loading.hide();
 	                alert(msg);
+
 				}
 			}
 		});
@@ -220,7 +222,9 @@ BWK.Utils.loading = {
 		this.el = $.loading({content:'加载中...'});
 	},
 	hide:function(){
-		this.el.loading("hide");
+		if(this.el){
+			this.el.loading("hide");	
+		}
 	}
 };
 BWK.Page = function(){

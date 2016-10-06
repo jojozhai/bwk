@@ -92,7 +92,7 @@
         })
 
         BWK.api.lesson.lessonProdectDetail(BWK.UrlParams.id,function(data){
-        	console.log(data);
+        	
             $('#teacherImg').css({'background-image':'url('+data.lessonInfo.teacherInfo.image+')'});
             $('#name').text(data.name);
             $('#teacherName').text(data.lessonInfo.teacherInfo.name);
@@ -106,7 +106,7 @@
             $('#realname').val(data.realname);
             $('#mobile').val(data.mobile);
             $('#province').val(data.province);
-            $('#city').val(data.city);p
+            $('#city').val(data.city);
 
         });
 
@@ -118,6 +118,7 @@
             }
         } 
         $('#btnApply').click(function(){
+            BWK.Utils.loading.show();
             //预约购买商品
             BWK.api.lesson.lessonProdectBuy(params,function(data){
                 payObj = data['data'];

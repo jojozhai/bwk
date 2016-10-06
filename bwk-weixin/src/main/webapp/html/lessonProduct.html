@@ -236,13 +236,14 @@
     function _dealProduct(obj){
         $('#name').text(obj.lessonInfo.name);
         $('#intro').text(obj.name);
-        $('#price').text('￥'+obj.price+'元/次');
+        $('#price').text('￥'+obj.priceDesc);
+        $('#productPrice').text('￥'+obj.price);
         $('#saleCountPlus').text(obj.saleCountPlus+'人已购买');
         $('#product-details').html(obj.desc);
         $('#teacherImg').css({'background-image':'url('+obj.lessonInfo.teacherInfo.image+')'});
         $('#teacherName').text(obj.lessonInfo.teacherInfo.name);
         $('#teacherDesc').html(obj.lessonInfo.teacherInfo.desc);
-        $('#productPrice').text('￥'+obj.priceDesc);
+
         $('#subVideo').html('<iframe height="210" width="100%" src="'+obj.lessonInfo.video+'"  frameborder=0  allowfullscreen></iframe>');
        
         var $pdpare = $('#product-details').parent();

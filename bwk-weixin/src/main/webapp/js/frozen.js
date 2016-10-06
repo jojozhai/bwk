@@ -142,7 +142,7 @@ BWK.api = function() {
 	}
 	api.weixin.dealShare = function(params,callback){
 		if(params&&params.goodsId){
-			return api.Post('../clearing/user?goodsId='+params.goodsId+(params.sharerId?'&sharerId='+params.shareId:''),null,callback);	
+			return api.Post('../clearing/user?goodsId='+params.goodsId+(params.sharerId?'&sharerId='+params.sharerId:''),null,callback);	
 		}else{
 			console.log('没有goodsid');
 		}		
@@ -161,7 +161,7 @@ BWK.UrlParams = {};
   }
   if(window.localStorage){
   	if(BWK.UrlParams.sharerId){  
-  		
+
   		window.localStorage.setItem('sharerId',BWK.UrlParams.sharerId);
   	}
   }	

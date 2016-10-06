@@ -117,10 +117,8 @@
 
         BWK.api.lesson.lessonProdectList(params,function(data){
             var dealObj = data.content||[]; 
-            
-            BWK.Utils.loading.hide();
-            
             _dealQuestions(dealObj,isRefresh);
+            BWK.Utils.loading.hide();
             if(data.totalPages<2){
                 $('.ui-loading-wrap').hide();
             }else{
@@ -176,8 +174,9 @@
             $('.ui-list-product').append(str);
         }
         
-        $('.ui-list-product').on('click','li',function(){
+        $('.ui-list-product li').tap(function(){
             location.href = "lessonProduct.html?id="+$(this).attr('id');
+            return false;
         });
     }
    

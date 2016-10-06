@@ -33,9 +33,14 @@
                <p class="cash-numb"><span>￥</span><input type="number" id="amount" placeholder="200" /></p>
             </div>  
          </div>
+
            <div class="demo-block cash-btn">
-            <a class="ui-btn-lg ui-btn-primary" id="btnGet" href="javascript:;">确认提现</a>
+
+                <a class="ui-btn-lg ui-btn-primary" id="btnGet" href="javascript:;">确认提现</a>
+
+
            </div>
+            <p  style="text-align: center;padding: 10px;color: #9E9E9E;">温馨提示：提现金额需要50元以上哟~</p>
         </section><!-- /.ui-container-->
         <script>
         
@@ -56,6 +61,14 @@
         	$('#btnGet').tap(function(){
                 if(!$('#amount').val()){
                     return false;
+                }
+                if($('#amount').val()<50){
+                   BWK.Utils.dialogAlert('提现金额需要50元以上哟~'); 
+                   return false;
+                }
+                if($('#amount').val()>initMoney){
+                    BWK.Utils.dialogAlert('当前余额不足，提现失败！'); 
+                   return false;
                 }
         		BWK.api.user.getMoney({'amount':$('#amount').val()},function(data){
         			BWK.Utils.dialogAlert('您的提现申请已提交，待审核通过后，5个工作日内发放给您',function(){

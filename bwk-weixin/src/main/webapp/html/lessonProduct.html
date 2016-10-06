@@ -47,6 +47,9 @@
         font-size: 14px;
     }
     .ui-footer{border-top:1px solid #c2c2c2;}
+    .demo-comment{margin-top: 10px;}
+    .demo-comment .demo-desc{text-align: center;color:#000;}
+    li.nocomment{padding-left:0; }
     </style>
 </head>
 
@@ -106,27 +109,27 @@
                     </div>
                     <div class="teacher-brief teacher-details"><div class="teacher-details-warp" id="teacherDesc"></div></div>
                     <div class="teacher-brief"><a class="view-more"><span>展开显示更多</span><img src="../img/arrowb.png"/></a></div>
-                    
-  -->
-                    <div class="demo-item item-discuss">
-                        <p class="demo-desc" id="commentLength"></p>
-                        <div class="demo-block">
-                            <ul class="ui-list ui-list-one ui-list-comments">
-                                <!-- <li>
-                                    <div class="ui-list-thumb">
-                                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
-                                    </div>
-                                    <div class="ui-list-info">
-                                        <h4 class="ui-nowrap">晴天AM-S</h4>
-                                        <div class="ui-txt-info">2016-9-10</div>
-                                    </div>
-                                </li>
-                                <li>这次我觉得真是没有白来啊</li>
-                                --> 
-                            </ul>
-                        </div>
+                    -->
+                </div>
+            </div>
+            <div class="demo-block demo-comment">
+                <div class="demo-item item-discuss">
+                    <p class="demo-desc" id="commentLength"></p>
+                    <div class="demo-block">
+                        <ul class="ui-list ui-list-one ui-list-comments">
+                            <!-- <li>
+                                <div class="ui-list-thumb">
+                                    <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+                                </div>
+                                <div class="ui-list-info">
+                                    <h4 class="ui-nowrap">晴天AM-S</h4>
+                                    <div class="ui-txt-info">2016-9-10</div>
+                                </div>
+                            </li>
+                            <li>这次我觉得真是没有白来啊</li>
+                            --> 
+                        </ul>
                     </div>
-
                 </div>
             </div>
     </section>
@@ -167,13 +170,13 @@
             });
             
             BWK.api.user.getUser(null,function(data){
-                var url = location.href.substring(0,location.href.indexOf('?')+1)+'id='+BWK.UrlParams.id+'&shareId='+data.id;
+                var url = location.href.substring(0,location.href.indexOf('?')+1)+'id='+BWK.UrlParams.id+'&sharerId='+data.id;
                 var paramsObj = {'lessonName':productObj.shareTitle,'desc':productObj.shareTip,'shareUrl':url,'imgUrl':productObj.image};
                 if(productObj.key){
                     BWK.WeixinShare(paramsObj,function(){
                         var shareObj = {'goodsId':BWK.UrlParams.id};
-                        if(BWK.UrlParams.shareId){
-                            shareObj.shareId = BWK.UrlParams.shareId;
+                        if(BWK.UrlParams.sharerId){
+                            shareObj.sharerId = BWK.UrlParams.sharerId;
                         }
                         BWK.api.weixin.dealShare(shareObj,function(){
                             
@@ -262,7 +265,7 @@
        
         BWK.api.lesson.lessonCommentQuery({'target':'product','targetId':BWK.UrlParams.id},function(data){
             var dealObj = data.content||[];
-            $('#commentLength').text('评论（'+dealObj.length+'）');
+            $('#commentLength').text('学员点评（'+dealObj.length+'）');
             _dealComments(dealObj);
         });
     }
@@ -278,7 +281,7 @@
             };
             
         }else{
-            str += '<li><p style="text-align:center;width:100%;">暂无评论</p></li>';
+            str += '<li class="nocomment"><p style="text-align:center;width:100%;">暂无点评</p></li>';
         }
         $('.ui-list-comments').append(str);
     }

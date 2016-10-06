@@ -30,6 +30,20 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group"  ng-class="productForm.shareTitle.$invalid && productForm.shareTitle.$dirty ? 'has-error': ''">
+                <label class="control-label col-lg-3"><span class="text_red">*</span>&nbsp;分享标题:</label>
+                <div class="col-lg-9">
+                    <input name="shareTitle" ng-model="product.shareTitle" type="text" class="form-control input-sm" placeholder="分享标题" required>
+                    <label class="control-label" ng-show="productForm.shareTitle.$invalid && productForm.shareTitle.$dirty">分享标题不能为空</label>
+                </div>
+            </div>
+            <div class="form-group"  ng-class="productForm.shareTip.$invalid && productForm.shareTip.$dirty ? 'has-error': ''">
+                <label class="control-label col-lg-3"><span class="text_red">*</span>&nbsp;分享描述:</label>
+                <div class="col-lg-9">
+                    <input name="shareTip" ng-model="product.shareTip" type="text" class="form-control input-sm" placeholder="分享描述" required>
+                    <label class="control-label" ng-show="productForm.shareTip.$invalid && productForm.shareTip.$dirty">分享描述不能为空</label>
+                </div>
+            </div>
             <div class="form-group"  ng-class="productForm.index.$invalid && productForm.index.$dirty ? 'has-error': ''">
                 <label class="control-label col-lg-3"><span class="text_red">*</span>&nbsp;展示顺序号:</label>
                 <div class="col-lg-3">

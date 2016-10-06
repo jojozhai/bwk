@@ -40,7 +40,7 @@
 							<th width="100">姓名</th>
 							<th width="50">性别</th>
 							<th width="100">手机号</th>
-							<th width="100">省份</th>
+							<th width="100">省份/城市</th>
 							<th width="200">操作</th>
 						</tr>
 					</thead>
@@ -51,7 +51,7 @@
 							<td>{{user.realname}}</td>
 							<td>{{user.sex | sex}}</td>
 							<td>{{user.mobile}}</td>
-							<td>{{user.province}}</td>
+							<td>{{user.province}}/{{user.city}}</td>
 							<td>
                                 <button class="btn btn-warning btn-xs" ng-click="update(user)">
                                     <i class="ion-edit m-right-xs"></i>修改

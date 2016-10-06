@@ -150,6 +150,7 @@ public class ProductServiceImpl implements ProductService, OrderGoodsService {
             info.setTeacherImage(teacher.getImage());
             info.setTeacherTitle(teacher.getTitle());
             info.setState(order.getState());
+            info.setSaleCount(teacher.getSaleCount() + teacher.getSaleCountPlus());
             infos.add(info);
         }
         return infos;

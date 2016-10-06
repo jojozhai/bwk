@@ -22,14 +22,14 @@
     .ui-course-lists p {padding: 10px 0;font-size: 14px;color:#afafaf;}
     .ui-course-lists p img {display: block;margin-right: 10px;float: left;width:16px;}
     .ui-grid-halve .noProduct{padding: 20px;text-align: center;color: #999;}
-    .ui-about-teacher {padding: 20px 10px;}
+    .ui-about-teacher {padding: 20px 10px;text-align: center;}
     .ui-icon-unfold{float: right;line-height: 50px;}
     .ui-icon-fold{transform: rotate(180deg);-webkit-transform:rotate(180deg);}
     .ui-tab-nav li.current{border-bottom: 3px #00a5e0 solid;}
     .ui-teacher-pic {text-align: center;font-size:18px;}
     .ui-teacher-pic{color:#010101;}
     .ui-teacher-pic .ui-avatar-lg{margin: 0 auto;}
-    .teacher-brief{color:#b0b0b0;padding: 0 10px;height:146px;overflow:hidden;}
+    .teacher-brief{color:#b0b0b0;padding: 0 10px;/*height:146px;overflow:hidden;*/}
     .teacher-info-more .view-more {display: block;padding: 20px;width: 120px;margin: 0 auto;}
     .teacher-info-more .view-more  img{float:right;width: 9px;}
     .ui-list>li {margin-left: 0;padding-left: 15px;}
@@ -50,7 +50,10 @@
 </head>
 
 <body ontouchstart>
-    
+    <header class="ui-header ui-header-positive ui-border-b">
+        <i class="ui-icon-return" onclick="history.back()"></i>
+        <h1>课程详情</h1>
+    </header>
     <footer class="ui-footer ui-footer-btn">
         <section class="ui-input-wrap ui-add-discuss">
             <div class="ui-input ui-border-radius">
@@ -92,6 +95,10 @@
                     </div>
                         <div class="ui-brief-cont">
                             <p class="ui-about-teacher">老师介绍</p>
+                            <div class="teacher-brief" > 
+                                <div id="teacherDesc"></div>
+                            </div>
+                            <!-- 
                             <div class="ui-teacher-pic">
                                  <div class="ui-avatar-lg">
                                     <span id="teacherImg"></span>
@@ -103,7 +110,8 @@
                             </div>
                             <div class="teacher-info-more"> 
                                 <a class="view-more">展开显示更多<img src="../img/arrowb.png"/></a>
-                            </div>
+                            </div> 
+                            -->
                           </div>
                           <div class="demo-block">
                               <p class="ui-about-teacher">咨询老师</p>

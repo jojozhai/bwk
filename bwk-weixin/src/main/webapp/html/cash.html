@@ -54,9 +54,15 @@
         		}
         	})
         	$('#btnGet').tap(function(){
+                if(!$('#amount').val()){
+                    return false;
+                }
         		BWK.api.user.getMoney({'amount':$('#amount').val()},function(data){
-        			BWK.Utils.dialogAlert('您的提现申请已提交，待审核通过后，5个工作日内发放给您');
+        			BWK.Utils.dialogAlert('您的提现申请已提交，待审核通过后，5个工作日内发放给您',function(){
+                        location.href = "userCenter.html";
+                    });
                 }); 
+                return false;
         	});
             
         	 

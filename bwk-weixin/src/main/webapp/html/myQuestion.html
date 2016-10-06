@@ -149,7 +149,7 @@
                 if(currIndex==1){
                     str += '<label class="ui-label '+(dealObj.state=='CANCEL'?'ui-label-cancel':'ui-label-success')+'">'+(dealObj.state=='CANCEL'?'已取消':'已完成')+'</label>';
                 }else{
-                    str += '<button class="btn-r btn-rb">确认完成</button>';
+                    str += '<button class="btn-r btn-rb" id="'+dealObj.id+'">确认完成</button>';
                 }
                 str += '</p></div></li>';
             };
@@ -160,13 +160,13 @@
             });
             //确认支付
             $('.btn-rb').tap(function(){
-                productId = $(this).closest('li').attr('id');
+                productId = $(this).attr('id');
                 var dia = $(".ui-dialog").dialog("show");
                 dia.on("dialog:action",function(e){
                     if(e.index == 2){
                         BWK.api.user.orderEnd({id:productId},function(data){
                             BWK.Utils.dialogAlert('交易已完成，关闭后将前往评论页面',function(){
-                                location.href = "lessonProductComment.html?id="+productId;
+                                location.href = "lessonProductComment.html?id="+$(this).closest('li').attr('id');
                             })
                         });
                     }

@@ -160,7 +160,8 @@ BWK.UrlParams = {};
     } 
   }
   if(window.localStorage){
-  	if(BWK.UrlParams.sharerId){
+  	if(BWK.UrlParams.sharerId){  
+  		
   		window.localStorage.setItem('sharerId',BWK.UrlParams.sharerId);
   	}
   }	

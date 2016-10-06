@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
-    <title>报名课程</title>
+    <title>课程报名</title>
     <link rel="stylesheet" href="../css/frozen.css">
     <link rel="stylesheet" href="../css/public.css">
     <script src="../lib/zepto.min.js"></script>
@@ -22,7 +22,7 @@
     .item-details .demo-desc {color: #555;font-size: 14px;}
     .item-details .demo-desc span {margin-right: 10px;color: #000;font-weight: bold;font-size: 14px;}
     .item-text {background-color: #fff;padding-bottom: 40px;overflow:hidden;}
-    .item-text .ui-btn-lg {width: 100px;margin: 20px auto 0;}
+    .item-text .ui-btn-lg {height: 57px;line-height: 57px;border-radius: 0;}
     .ui-form-item label:not(.ui-switch):not(.ui-checkbox):not(.ui-checkbox-s):not(.ui-radio){width: 80px;}
     .ui-sign-lesson .ui-dialog-cnt{width: 80%;}
     .ui-sign-lesson .ui-dialog-hd{background-color: #fff; margin-bottom: 10px;border-radius:5px;-webkit-border-radius:5px;}
@@ -34,10 +34,22 @@
     .ui-form-item label,.ui-form-item input,.ui-form-item span,.ui-form-item select{font-size:12px;}
     .ui-form-item select option{list-style:none;}
     .ui-user-city input{width:70px;text-align: center;padding:0}
+    #content{padding: 0 10px;position: relative;z-index: 10;}
+    #content img{width: 100%;}
+    .ui-footer{border-top: 0;}
     </style>
 </head>
 
 <body ontouchstart>
+    <header class="ui-header ui-header-positive ui-border-b">
+        <i class="ui-icon-return" onclick="history.back()"></i>
+        <h1>课程报名</h1>
+    </header>
+    <footer class="ui-footer ui-footer-btn">
+        <div class="demo-item item-text">
+            <button class="ui-btn-lg ui-btn-primary" id="btn1">立即参加</button>
+        </div>
+    </footer>
     <section class="ui-container">
         <div class="demo-block ui-lesson-header">
             <img id="image" src="http://placeholder.qiniudn.com/640x200" />
@@ -45,16 +57,17 @@
                 <h3><span>——</span><span id="name"></span><span>——</span></h3>
                 <p >主讲人:<span id="teacher"></span></p>
                 <p>时间:<span id="startTime"></span></p>
+
                 <p>地点:<span id="address"></span></p>
             </div>
         </div>
         <div class="demo-item item-details">
             <p class="demo-desc"><span>|</span>课程详情</p>
-            <img id="thumbnail" src="../img/detail_ad0.png">
+            <div id="content" ></div>
         </div>
         <div class="demo-item item-text">
             <div id="desc"></div>
-            <button class="ui-btn-lg ui-btn-primary" id="btn1">立即参加</button>
+            <!-- <button class="ui-btn-lg ui-btn-primary" id="btn1">立即参加</button> -->
         </div>
 
         <div class="demo-block ui-sign-lesson">
@@ -155,9 +168,17 @@
             $('#teacher').text(dealObj.teacher);
             $('#startTime').text(BWK.Utils.dateformateLocal(new Date(dealObj.startTime),"yyyy-MM-dd hh:mm"));
             $('#endTime').text(BWK.Utils.dateformateLocal(new Date(dealObj.endTime),"yyyy-MM-dd hh:mm"));
-            $('#address').text(dealObj.address);
+            
+            var addr = '';
+            if(dealObj.online){
+                addr += '线上';
+            }
+            if(dealObj.offline){
+                addr += (dealObj.online?'/':'') +'线下'+'('+dealObj.address+')';
+            }
+            $('#address').text(addr);
             $('#image').attr('src',dealObj.image);
-            $('#thumbnail').attr('src',dealObj.thumbnail);
+            $('#content').html(dealObj.content);
             $('#desc').html(dealObj.desc);
            
         }); 

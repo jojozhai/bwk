@@ -240,7 +240,7 @@
         $('#teacherImg').css({'background-image':'url('+obj.lessonInfo.teacherInfo.image+')'});
         $('#teacherName').text(obj.lessonInfo.teacherInfo.name);
         $('#teacherDesc').html(obj.lessonInfo.teacherInfo.desc);
-        $('#productPrice').text('￥'+obj.price+'元/次');
+        $('#productPrice').text('￥'+obj.priceDesc);
         $('#subVideo').html('<iframe height="210" width="100%" src="'+obj.lessonInfo.video+'"  frameborder=0  allowfullscreen></iframe>');
        
         var $pdpare = $('#product-details').parent();

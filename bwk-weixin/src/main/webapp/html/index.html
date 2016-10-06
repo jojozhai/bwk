@@ -54,14 +54,11 @@
     </head>
     
     <body ontouchstart>
-        <header class="ui-header ui-header-positive ui-border-b">
-            <h1>霸王大学</h1>
-        </header>
         <footer class="ui-footer ui-footer-btn">
             <ul class="ui-tiled ui-border-t">
                 <li data-href="lessonTypes.html" >
                     <div class="ui-title-img"><img src="../img/footerType.png"  /></div>
-                    <div class="ui-title-name">课程分类</div>
+                    <div class="ui-title-name">课程视频</div>
                 </li>
                 <li data-href="lessonQuestion.html" >
                     <div class="ui-title-img"><img src="../img/footerTeacher.png"  /></div>
@@ -130,7 +127,7 @@
                 </div>
             </div>
             <div class="demo-item item-hot">
-                <p class="demo-desc"><img src="../img/hot.png" />精彩回顾</p>
+                <p class="demo-desc"><img src="../img/hot.png" />热门专题</p>
                 <div class="demo-block">
                     <ul class="ui-list ui-border-tb">
                         <!--
@@ -198,7 +195,7 @@
             var str = "";
             if(obj&&obj.length>0){
                 for(var i=0;i<obj.length;i++){
-                    str += '<li><a href="'+obj.link+'" ><img style="background-image:url('+obj[i].image+')"></a></li>';
+                    str += '<li><a href="'+obj[i].link+'" ><img style="background-image:url('+obj[i].image+')"></a></li>';
                 }
                 $('.ui-slider-content').append(str);
                 

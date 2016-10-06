@@ -30,7 +30,7 @@
     .teacher-details{height:146px;overflow:hidden;}
     .teacher-details.ui-heightAuto{height:auto;}
     .teacher-details p{text-indent: 0;}
-    .teacher-brief .view-more,.item-discuss .view-more{display: block;padding: 20px;width: 120px;margin: 0 auto;}
+    .teacher-brief .view-more,.item-discuss .view-more{display: block;padding: 20px;width: 120px;margin: 0 auto;text-align:center;}
     .teacher-brief .view-more img,.item-discuss .view-more img{float:right;width: 9px;}
     .ui-list>li {margin-left: 0;padding-left: 15px;}
     .item-discuss .ui-list-info .ui-txt-info {color: #999;}
@@ -50,7 +50,10 @@
 </head>
 
 <body ontouchstart>
-    
+    <header class="ui-header ui-header-positive ui-border-b">
+        <i class="ui-icon-return" onclick="history.back()"></i>
+        <h1>项目介绍</h1>
+    </header>
     <footer class="ui-footer ui-footer-btn">
         <div class="demo-block ui-course-pay">
             <span class="ui-course-rmb" id="productPrice"></span>
@@ -86,8 +89,8 @@
             <div class="demo-block">
                 <div class="ui-details-cont">
                     <p class="ui-about-teacher">内容详情：</p>
-                    <div class="teacher-brief teacher-details" id="product-details"></div>
-                    <div class="teacher-brief"><a class="view-more">展开显示更多<img src="../img/arrowb.png"/></a></div>
+                    <div class="teacher-brief teacher-details"><div class="teacher-details-warp" id="product-details"></div></div>
+                    <div class="teacher-brief"><a class="view-more"><span>展开显示更多</span><img src="../img/arrowb.png"/></a></div>
                 </div>
             </div>
             <div class="demo-block">
@@ -99,10 +102,10 @@
                         </div>
                         <p id="teacherName"></p>
                     </div>
-                    <div class="teacher-brief teacher-details" id="teacherDesc"></div>
-                    <div class="teacher-brief"><a class="view-more">展开显示更多<img src="../img/arrowb.png"/></a></div>
+                    <div class="teacher-brief teacher-details"><div class="teacher-details-warp" id="teacherDesc"></div></div>
+                    <div class="teacher-brief"><a class="view-more"><span>展开显示更多</span><img src="../img/arrowb.png"/></a></div>
                     
-                    
+ 
                     <div class="demo-item item-discuss">
                         <p class="demo-desc" id="commentLength"></p>
                         <div class="demo-block">
@@ -189,11 +192,13 @@
        
        //显示更多
        $(".view-more").click(function(){
-           var listCont=$(this).closest(".teacher-brief").siblings().eq(1);
+           var listCont=$(this).closest(".teacher-brief").siblings(".teacher-details");
            if(!listCont.hasClass("ui-heightAuto")){
                listCont.addClass("ui-heightAuto");
+               $(this).find("span").html("收起");
            }else{
                listCont.removeClass("ui-heightAuto");
+               $(this).find("span").html("展开显示更多");
            }
         })
 
@@ -234,6 +239,16 @@
         $('#teacherDesc').html(obj.lessonInfo.teacherInfo.desc);
         $('#productPrice').text('￥'+obj.price+'元/次');
         $('#subVideo').html('<iframe height="210" width="100%" src="'+obj.lessonInfo.video+'"  frameborder=0  allowfullscreen></iframe>');
+       
+        var $pdpare = $('#product-details').parent();
+        if($('#product-details').height()<$pdpare.height()){
+        	$pdpare.next('.teacher-brief').hide();
+        }
+        var $tdpare = $('#teacherDesc').parent();
+        if($('#teacherDesc').height()<$tdpare.height()){
+        	$tdpare.next('.teacher-brief').hide();
+        }
+        
     }
 
     //查询课程评论

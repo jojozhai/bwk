@@ -15,8 +15,8 @@
     .ui-userinfo-header .ui-userinfo-set{position: absolute;right: 14px;top:14px;font-size:14px;}
     .ui-userinfo-header .ui-setpic{height:26px;width: 26px;display:block;margin-bottom:4px;}
     .ui-userinfo-header .ui-setBg{display: block;height: 200px;width: 100%;}
-    .ui-userinfo-header .ui-userP{font-size:14px;position: absolute;text-align: center;top: 50%;margin-top: -41px;left: 50%;margin-left: -36px;}
-    .ui-userP .ui-avatar{display: block;margin: 0 auto;height:72px;width: 72px;}
+    .ui-userinfo-header .ui-userP{font-size:14px;position: absolute;text-align: center;color:#fff;top: 50%;margin-top: -41px;left: 50%;margin-left: -36px;}
+    .ui-userP .ui-avatar{display: block;margin: 0 auto 10px;height:72px;width: 72px;}
     .demo-desc,.ui-list-info .ui-teacher-name{color: #333;}
     .demo-desc img {width: 20px;display: block;float: left;margin-right: 5px;}
     .demo-desc a {float: right;color: #888;font-size: 12px;}
@@ -46,6 +46,7 @@
 		        <img class="ui-setBg" src="../img/userBg.jpg" />
 		        <div class="ui-userP">
 		            <span class="ui-avatar"></span>
+		            <p id="userName"></p>
 		        </div>
 		    </div>
 	        <p class="demo-desc ui-border-b"><img src="../img/usego.png">我咨询的老师<a href="myQuestion.html">更多 &gt;</a></p>
@@ -86,7 +87,7 @@
             <ul class="ui-tiled ui-border-t">
                 <li data-href="lessonTypes.html" >
                     <div class="ui-title-img"><img src="../img/footerType.png"  /></div>
-                    <div class="ui-title-name">课程分类</div>
+                    <div class="ui-title-name">课程视频</div>
                 </li>
                 <li data-href="lessonQuestion.html" >
                     <div class="ui-title-img"><img src="../img/footerTeacher.png"  /></div>
@@ -128,6 +129,7 @@
         })
     })  
     function _dealImgList(obj) {
+    	$("#userName").html(obj.nickname);
     	$(".ui-userP .ui-avatar").css({"background-image":'url('+obj.headimgurl+')'});
     	$(".ui-scholarmb-txt h2").html('￥'+obj.money);
     }

@@ -22,16 +22,18 @@
     .item-details .demo-desc {color: #555;font-size: 14px;}
     .item-details .demo-desc span {margin-right: 10px;color: #000;font-weight: bold;font-size: 14px;}
     .item-text {background-color: #fff;padding-bottom: 40px;overflow:hidden;}
-   
     .item-text .ui-btn-lg {width: 100px;margin: 20px auto 0;}
     .ui-form-item label:not(.ui-switch):not(.ui-checkbox):not(.ui-checkbox-s):not(.ui-radio){width: 80px;}
     .ui-sign-lesson .ui-dialog-cnt{width: 80%;}
     .ui-sign-lesson .ui-dialog-hd{background-color: #fff; margin-bottom: 10px;border-radius:5px;-webkit-border-radius:5px;}
     .ui-sign-lesson .ui-dialog-hd h3{font-weight: 600;font-size: 14px;color: #3d3d3d;background-color:#fff;border-radius:5px;-webkit-border-radius:5px;}
     .ui-sign-lesson .ui-form label{color: #424242;}
-    .ui-sign-lesson .but-wrap {text-align: center;background-color: #fff;padding: 20px 0;}
-    .ui-sign-lesson .but-wrap label{color: #7e7e7e;}
-    .ui-sign-lesson .but-wrap .ui-btn-primary{width: 150px;margin: 20px auto 10px;height: 35px;line-height: 35px;}
+    .ui-sign-lesson .but-wrap {text-align: center;background-color: #fff;padding: 20px 0;border-radius: 5px;-webkit-border-radius:5px;}
+    .ui-sign-lesson .but-wrap label{color: #7e7e7e;font-size:12px;}
+    .ui-sign-lesson .but-wrap .ui-btn-primary{width: 150px;font-size:12px;margin: 20px auto 10px;height: 35px;line-height: 35px;}
+    .ui-form-item label,.ui-form-item input,.ui-form-item span,.ui-form-item select{font-size:12px;}
+    .ui-form-item select option{list-style:none;}
+    .ui-user-city input{width:70px;text-align: center;padding:0}
     </style>
 </head>
 
@@ -66,53 +68,59 @@
                         <div class="ui-form ui-border-t">
                             <form action="#">
                                 <div class="ui-form-item ui-border-b">
-                                    <label class="ui-border-r">
-                                        姓名：
-                                    </label>
+                                    <label class="ui-border-r">姓名：</label>
                                     <input type="text" id="realname" class="ui-toWd" placeholder="输入您的姓名" />
                                 </div>
                                 <div class="ui-form-item ui-border-b">
-                                    <label class="ui-border-r">
-                                        性别：
-                                    </label>
+                                    <label class="ui-border-r"> 性别：</label>
                                     <input type="text" id="sex" class="ui-toWd" placeholder="输入您的性别" />
                                 </div>
                                 <div class="ui-form-item ui-border-b">
-                                    <label class="ui-border-r">
-                                        职业：
-                                    </label>
-                                    <input type="text" id="participationCount" class="ui-toWd" placeholder="输入您的职业" />
+                                    <label class="ui-border-r">职业：</label>
+                                    <div class="ui-select">
+			                            <select>
+			                                <option>计算机/互联网/通信/电子</option>
+			                                <option selected="">销售/客服/技术支持</option>
+			                                <option>会计/金融/银行/保险</option>
+			                                <option>生产/营运/采购/物流</option>
+			                                <option>生物/制药/医疗/护理</option>
+			                                <option>广告/市场/媒体/艺术</option>
+			                                <option>建筑/房地产</option>
+			                                <option>人事/行政/高级管理</option>
+			                                <option>咨询/法律/教育/科研</option>
+			                                <option>服务业</option>
+			                                <option>公务员/翻译</option>
+			                                <option>其他</option>
+			                            </select>
+			                        </div>
+                                </div>
+                                 <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">工作年限：</label>
+                                    <div class="ui-select">
+			                            <select>
+			                                <option>学生</option>
+			                                <option selected="">1~3年</option>
+			                                <option>3~5年</option>
+			                                <option>5~10年</option>
+			                                <option>10年以上</option>
+			                            </select>
+			                        </div>
                                 </div>
                                 <div class="ui-form-item ui-border-b">
-                                    <label class="ui-border-r">
-                                        年龄：
-                                    </label>
-                                    <input type="text" id="birthday" class="ui-toWd" placeholder="输入您的年龄" />
-                                </div>
-                                <div class="ui-form-item ui-border-b">
-                                    <label class="ui-border-r">
-                                        手机号：
-                                    </label>
+                                    <label class="ui-border-r">手机号：</label>
                                     <input type="text" id="mobile" class="ui-thWd" placeholder="输入您的手机号" />
                                 </div>
                                 <div class="ui-form-item ui-border-b">
-                                    <label class="ui-border-r">
-                                        微信号：
-                                    </label>
+                                    <label class="ui-border-r">微信号：</label>
                                     <input type="text" id="weixin" class="ui-thWd" placeholder="输入您的微信号" />
                                 </div>
-                                <div class="ui-form-item ui-border-b">
-                                    <label class="ui-border-r">
-                                        微信昵称：
-                                    </label>
-                                    <input type="text" id="nickname" class="ui-foWd" placeholder="输入您的微信昵称" />
-                                </div>
-                                <div class="ui-form-item ui-border-b">
-                                    <label class="ui-border-r">
-                                        所在城市：
-                                    </label>
-                                    <input type="text" id="city" class="ui-foWd" placeholder="输入您的所在城市" />
-                                </div>
+                                <div class="ui-form-item ui-border-b ui-user-city">
+			                        <span> 城市：</span>
+			                        <input type="text" id="province" class="ui-huWd">
+			                         <span>省</span>
+			                        <input type="text" id="city" class="ui-eiWd">
+			                         <span> 市</span>
+			                    </div>
                             </form>
                         </div>
                     </div>

@@ -72,7 +72,7 @@
     var params = {'sort':'moneySort,desc',page:0,size:10};
     Zepto(function($) {
     	
-        $('.ui-tiled li').click(function() {
+        $('.ui-tiled li').tap(function() {
             if ($(this).data('href')) {
                 location.href = $(this).data('href');
             }

@@ -217,7 +217,7 @@
                     var endDate = new Date(obj[i].startTime);
                     var mdstr = (endDate.getMonth()+1)+'月'+endDate.getDate()+'日';
                     var timestr = (endDate.getHours()<10?'0'+endDate.getHours():endDate.getHours())+':'+(endDate.getMinutes()<10?'0'+endDate.getMinutes():endDate.getMinutes());
-                    str += '<li class="ui-border-t" id="'+obj[i].id+'"><div class="ui-avatar"><span style="background-image:url('+obj[i].image+')"></span></div>';
+                    str += '<li class="ui-border-t" id="'+obj[i].id+'"><div class="ui-avatar"><span style="background-image:url('+obj[i].teacherImage+')"></span></div>';
                     str += '<div class="ui-list-info"><h4 class="ui-nowrap ui-info-title">'+obj[i].name+'</h4>';
                     str +='<p class="ui-nowrap ui-info-desc"><span>'+mdstr+'</span><span style="margin-left:10px;">'+timestr+'开课</span></p></div></li>';
                 }

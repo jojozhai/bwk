@@ -18,6 +18,8 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -51,7 +53,8 @@ public class ScheduleServiceImpl implements ScheduleService {
     
     @Autowired
     private ParamService paramService;
-
+    
+    private Logger logger = LoggerFactory.getLogger(getClass());
     /* (non-Javadoc)
      * @see com.ymt.bwk.schedule.ScheduleService#clear()
      */
@@ -73,6 +76,8 @@ public class ScheduleServiceImpl implements ScheduleService {
         
         Order order = orderRepository.findOne(orderId);
         
+        logger.info("结算订单:"+orderId);
+        
         Product product = productRepository.findOne(order.getProducts().get(0).getGoodsId());
         product.setSaleCount(product.getSaleCount() + 1);
         
@@ -88,6 +93,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             if(cityVip != null && !cityVip.getId().equals(order.getUser().getId())) {
                 BigDecimal amount = order.getAmount().multiply(new BigDecimal(paramService.getParam("cityVipRate", "0.02").getValue()));
                 cityVip.setMoney(cityVip.getMoney().add(amount));
+                logger.info("城市霸主"+cityVip.getNickname()+"("+cityVip.getId()+")分成"+amount);
             }
         }        
     }

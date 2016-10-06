@@ -167,7 +167,7 @@
             
             BWK.api.user.getUser(null,function(data){
                 var url = location.href.substring(0,location.href.indexOf('?')+1)+'id='+BWK.UrlParams.id+'&shareId='+data.id;
-                var paramsObj = {'lessonName':'test','shareUrl':url};
+                var paramsObj = {'lessonName':productObj.shareTitle,'desc':productObj.shareTip,'shareUrl':url,'imgUrl':productObj.image};
                 if(productObj.key){
                     BWK.WeixinShare(paramsObj,function(){
                         var shareObj = {'goodsId':BWK.UrlParams.id};

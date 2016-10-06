@@ -122,9 +122,8 @@
             _dealImgList(data);
         });
         //咨询的老师
-        BWK.api.lesson.lessonProdectList(null,function(data){
+        BWK.api.user.userOrderList(null,function(data){
             var dealObj = data.content||[]; 
-            console.log(dealObj);
             _dealQuestions(dealObj);
         })
     })  
@@ -134,10 +133,10 @@
     	$(".ui-scholarmb-txt h2").html('￥'+obj.money);
     }
     function _dealQuestions(obj){
-    	$("#course_pic").css({"background-image":'url('+obj[0].lessonInfo.teacherInfo.image+')'});
-    	$("#lessonName").html(obj[0].name);
-    	$("#teacherName").html(obj[0].lessonInfo.teacherInfo.name);
-    	$(".teacher-honour").html(obj[0].intro)
+    	$("#course_pic").css({"background-image":'url('+obj[0].teacherImage+')'});
+    	$("#lessonName").html(obj[0].productName);
+    	$("#teacherName").html(obj[0].teacherName);
+    	$(".teacher-honour").html(obj[0].teacherTitle);
     	$("#viewNum").html(obj[0].saleCountPlus);
     }
     </script>

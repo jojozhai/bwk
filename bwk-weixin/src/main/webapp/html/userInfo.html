@@ -28,6 +28,10 @@
 </head>
 
 <body ontouchstart>
+    <header class="ui-header ui-header-positive ui-border-b">
+        <i class="ui-icon-return" onclick="history.back()"></i>
+        <h1>个人信息</h1>
+    </header>
     <section class="ui-container">
         <div class="demo-block ui-userinfo-header">
             <img class="ui-setBg" src="../img/editorBg.jpg" />
@@ -125,14 +129,13 @@
             });
 
             BWK.api.user.updateUser(params,function(data){
-
-                
+                BWK.Utils.Tips('信息修改成功！');                
             });
 
         })
         //查询个人信息
         BWK.api.user.getUser(null,function(data){
-            console.log(data);
+            
             _dealInfo(data);
         });
 
@@ -144,6 +147,7 @@
         })
     }
     function _dealInfo(obj) {
+        $('.ui-userImg').css({'background-image':'url('+obj.headimgurl+')'});  
         $("#realname").val(obj.username);
         $("#sex").val(obj.sex);
         $("#participationCount").val(obj.participationCount);

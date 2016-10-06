@@ -26,7 +26,7 @@ BWK.api = function() {
 			}, error : function(jqXHR, textStatus, errorThrown) {
 				if(jqXHR&&(jqXHR.status=='403'||jqXHR.status=="401")){
 					var uri = encodeURIComponent(BWK.globalConfig.redirect_uri);
-					var state = encodeURIComponent(location.href);
+					var state = encodeURIComponent(location.href.substring(location.href.indexOf('/html')+1));
 					var redirect_uri = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+BWK.globalConfig.appId+'&redirect_uri='+uri+'&response_type=code&scope=snsapi_userinfo&state='+state+'#wechat_redirect'
 					location.href = redirect_uri;
 				}else{
@@ -207,6 +207,7 @@ BWK.Utils.dialogAlert = function(content,callback){
      dialog.on("dialog:action",function(e){
         callback && callback();
         $(".ui-msgAlertDialog").remove();
+        return false;
      });
 }
 BWK.Utils.dialogConfirm = function(){

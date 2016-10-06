@@ -155,7 +155,7 @@
             };
             
             $('.ui-list').eq(currIndex).append(str);
-            $('.ui-list').on('click','li',function(){
+            $('.ui-list li').tap(function(){
                  location.href = "lessonProduct.html?id="+$(this).attr('id');
             });
             //确认支付
@@ -170,7 +170,9 @@
                             })
                         });
                     }
+                    return false;
                 });
+                return false;
             });
 
         }else{

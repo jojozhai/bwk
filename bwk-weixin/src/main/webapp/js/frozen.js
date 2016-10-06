@@ -31,7 +31,7 @@ BWK.api = function() {
 					location.href = redirect_uri;
 				}else{
 					var res = jqXHR&&eval('('+jqXHR.response+')');
-	                var msg = res.errorMsg?res.errorMsg.replace(/([^\u4e00-\u9fa5]+)/g,''):'未知错误';
+	                var msg = res.errorMsg?res.errorMsg:'未知错误';
 	                BWK.Utils.loading.hide();
 	                alert(msg);
 

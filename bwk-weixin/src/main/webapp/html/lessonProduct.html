@@ -18,6 +18,7 @@
     .item-discuss,.ui-course-pay{border-top: 1px solid #e0e0e0;}
     .ui-details-cont{margin-bottom: 10px;}
     .ui-course-lists p {padding: 10px;font-size: 14px;color:#afafaf;}
+    .ui-course-lists #intro{font-size: 16px;color: #03a9f4;padding-left: 0;}
     .ui-icon-unfold{float: right;line-height: 50px;}
     .ui-icon-fold{transform: rotate(180deg);-webkit-transform:rotate(180deg);}
     .ui-avatar-lg{margin:0 auto;}
@@ -30,7 +31,7 @@
     .teacher-details{height:146px;overflow:hidden;}
     .teacher-details.ui-heightAuto{height:auto;}
     .teacher-details p{text-indent: 0;}
-    .teacher-brief .view-more,.item-discuss .view-more{display: block;padding: 20px;width: 120px;margin: 0 auto;}
+    .teacher-brief .view-more,.item-discuss .view-more{display: block;padding: 20px;width: 120px;margin: 0 auto;text-align:center;}
     .teacher-brief .view-more img,.item-discuss .view-more img{float:right;width: 9px;}
     .ui-list>li {margin-left: 0;padding-left: 15px;}
     .item-discuss .ui-list-info .ui-txt-info {color: #999;}
@@ -50,7 +51,10 @@
 </head>
 
 <body ontouchstart>
-    
+    <header class="ui-header ui-header-positive ui-border-b">
+        <i class="ui-icon-return" onclick="history.back()"></i>
+        <h1>项目介绍</h1>
+    </header>
     <footer class="ui-footer ui-footer-btn">
         <div class="demo-block ui-course-pay">
             <span class="ui-course-rmb" id="productPrice"></span>
@@ -86,8 +90,8 @@
             <div class="demo-block">
                 <div class="ui-details-cont">
                     <p class="ui-about-teacher">内容详情：</p>
-                    <div class="teacher-brief teacher-details" id="product-details"></div>
-                    <div class="teacher-brief"><a class="view-more">展开显示更多<img src="../img/arrowb.png"/></a></div>
+                    <div class="teacher-brief teacher-details"><div class="teacher-details-warp" id="product-details"></div></div>
+                    <div class="teacher-brief"><a class="view-more"><span>展开显示更多</span><img src="../img/arrowb.png"/></a></div>
                 </div>
             </div>
             <div class="demo-block">
@@ -99,10 +103,10 @@
                         </div>
                         <p id="teacherName"></p>
                     </div>
-                    <div class="teacher-brief teacher-details" id="teacherDesc"></div>
-                    <div class="teacher-brief"><a class="view-more">展开显示更多<img src="../img/arrowb.png"/></a></div>
+                    <div class="teacher-brief teacher-details"><div class="teacher-details-warp" id="teacherDesc"></div></div>
+                    <div class="teacher-brief"><a class="view-more"><span>展开显示更多</span><img src="../img/arrowb.png"/></a></div>
                     
-                    
+ 
                     <div class="demo-item item-discuss">
                         <p class="demo-desc" id="commentLength"></p>
                         <div class="demo-block">
@@ -161,7 +165,8 @@
             });
             
             BWK.api.user.getUser(null,function(data){
-                var paramsObj = {'lessonName':'test','shareUrl':location.href+'&shareId='+data.id};
+                var url = location.href.substring(0,location.href.indexOf('?')+1)+'id='+BWK.UrlParams.id+'&shareId='+data.id;
+                var paramsObj = {'lessonName':'test','shareUrl':url};
                 if(productObj.key){
                     BWK.WeixinShare(paramsObj,function(){
                         var shareObj = {'goodsId':BWK.UrlParams.id};
@@ -189,11 +194,13 @@
        
        //显示更多
        $(".view-more").click(function(){
-           var listCont=$(this).closest(".teacher-brief").siblings().eq(1);
+           var listCont=$(this).closest(".teacher-brief").siblings(".teacher-details");
            if(!listCont.hasClass("ui-heightAuto")){
                listCont.addClass("ui-heightAuto");
+               $(this).find("span").html("收起");
            }else{
                listCont.removeClass("ui-heightAuto");
+               $(this).find("span").html("展开显示更多");
            }
         })
 
@@ -219,7 +226,8 @@
 
         $('.ui-btn-toBuy').click(function(){
             location.href = 'lessonProductDate.html?id='+BWK.UrlParams.id;
-        })
+        });
+        $('.ui-course-title').trigger('tap');
 
     }
 
@@ -229,11 +237,21 @@
         $('#price').text('￥'+obj.price+'元/次');
         $('#saleCountPlus').text(obj.saleCountPlus+'人已购买');
         $('#product-details').html(obj.desc);
-        $('#teacherImg').attr('src',obj.lessonInfo.teacherInfo.image);
+        $('#teacherImg').css({'background-image':'url('+obj.lessonInfo.teacherInfo.image+')'});
         $('#teacherName').text(obj.lessonInfo.teacherInfo.name);
         $('#teacherDesc').html(obj.lessonInfo.teacherInfo.desc);
         $('#productPrice').text('￥'+obj.price+'元/次');
         $('#subVideo').html('<iframe height="210" width="100%" src="'+obj.lessonInfo.video+'"  frameborder=0  allowfullscreen></iframe>');
+       
+        var $pdpare = $('#product-details').parent();
+        if($('#product-details').height()<$pdpare.height()){
+        	$pdpare.next('.teacher-brief').hide();
+        }
+        var $tdpare = $('#teacherDesc').parent();
+        if($('#teacherDesc').height()<$tdpare.height()){
+        	$tdpare.next('.teacher-brief').hide();
+        }
+        
     }
 
     //查询课程评论

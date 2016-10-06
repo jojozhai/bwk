@@ -11,14 +11,17 @@
     <script src="../lib/zepto.min.js"></script>
     <script src="../js/frozen.js"></script>
     <style type="text/css">
-    .ui-tab-content {margin-top: 0;}
     .ui-course-brief {padding:0 10px;background: #fff;}
     .ui-course-brief h3 {border-bottom: 1px solid #e0e0e0;height: 50px;line-height: 50px;}
     .ui-course-brief h3 a {float: right;color:#afafaf;}
     .ui-course-brief h3 a img{width: 18px;padding-left: 4px;}
+    .ui-brief-cont{margin:10px 0;}
     .ui-brief-cont,.item-discuss {background: #fff;border-top: 1px solid #e0e0e0;}
+    .ui-grid-halve{padding-left:10px;margin-bottom:10px;padding-top:0;}
+    .ui-grid-halve-img{padding:40px 0;text-align: center;background: #ccc;color: #fff;border-radius: 8px;}
     .ui-course-lists p {padding: 10px 0;font-size: 14px;color:#afafaf;}
     .ui-course-lists p img {display: block;margin-right: 10px;float: left;width:16px;}
+    .ui-grid-halve .noProduct{padding: 20px;text-align: center;color: #999;}
     .ui-about-teacher {padding: 20px 10px;}
     .ui-icon-unfold{float: right;line-height: 50px;}
     .ui-icon-fold{transform: rotate(180deg);-webkit-transform:rotate(180deg);}
@@ -26,19 +29,15 @@
     .ui-teacher-pic {text-align: center;font-size:18px;}
     .ui-teacher-pic{color:#010101;}
     .ui-teacher-pic .ui-avatar-lg{margin: 0 auto;}
-    .teacher-brief{color:#b0b0b0;padding: 0 10px;}
-    
+    .teacher-brief{color:#b0b0b0;padding: 0 10px;height:146px;overflow:hidden;}
     .teacher-info-more .view-more {display: block;padding: 20px;width: 120px;margin: 0 auto;}
     .teacher-info-more .view-more  img{float:right;width: 9px;}
     .ui-list>li {margin-left: 0;padding-left: 15px;}
     .item-discuss .ui-list-info .ui-txt-info {color: #999;}
     .ui-list .ui-border-t {border-top: 1px solid #e0e0e0;}
-    
     .ui-list-thumb span {border-radius: 50%;}
-    
     .ui-add-discuss{height: 56px;}
     .ui-add-discuss .ui-btn {background: #4cbdff;color: #fff;border-radius: 16px;}
-    
     .ui-btn:before,
     .ui-btn-lg:before,
     .ui-btn-s:before {border: none;}
@@ -50,6 +49,7 @@
 </head>
 
 <body ontouchstart>
+    
     <footer class="ui-footer ui-footer-btn">
         <section class="ui-input-wrap ui-add-discuss">
             <div class="ui-input ui-border-radius">
@@ -66,13 +66,14 @@
             </div>
         </div>
         <div class="demo-block">
-            <div class="ui-tab">
+        
+            <!-- <div class="ui-tab">
                 <ul class="ui-tab-nav ui-border-b">
                     <li class="current">课程简介</li>
                     <li>相关推荐</li>
                 </ul>
-                <ul class="ui-tab-content" style="width:200%">
-                    <li>
+                <ul class="ui-tab-content">
+                    <li> -->
                         <div class="ui-course-brief">
                             <h3 class="ui-course-title">
                                 <span id="name"></span>
@@ -83,21 +84,33 @@
                                 <!-- <p><img src="../img/trangle0.png">如何让你的PPT瞬间高大上</p>
                                 <p><img src="../img/trangle0.png">职场小白最应该学的3种方法</p> -->
                             </div>
-                        </div>
+                        </div>                 
+                    </div>
                         <div class="ui-brief-cont">
                             <p class="ui-about-teacher">关于老师：</p>
                             <div class="ui-teacher-pic">
                                  <div class="ui-avatar-lg">
-                                    <span id="teacherImg" style="background-image:url(http://placeholder.qiniudn.com/140x140)"></span>
+                                    <span id="teacherImg"></span>
                                 </div>
                                 <p id="teacherName"></p>
                             </div>
-                            <div class="teacher-brief" id="teacherDesc">
+                            <div class="teacher-brief" > 
+                            	<div id="teacherDesc"></div>
                             </div>
                             <div class="teacher-info-more"> 
                                 <a class="view-more">展开显示更多<img src="../img/arrowb.png"/></a>
                             </div>
-                            
+                          </div>
+                          <div class="demo-block">
+                              <p class="ui-about-teacher">咨询老师</p>
+					          <ul class="ui-grid-halve ui-list-product">
+					              <!-- <li>
+					                  <div class="ui-grid-halve-img">
+					                      <span style="background-image:url(http://placeholder.qiniudn.com/290x160)"></span>
+					                  </div>
+					              </li> -->
+					           </ul>
+					       </div>
                             <div class="demo-item item-discuss">
                                 <p class="demo-desc" id="commentLength"></p>
                                 <div class="demo-block">
@@ -116,13 +129,13 @@
                                     </ul>
                                 </div>
                             </div>
-                    </li>
+                  <!--   </li>
                     <li>
                         <div class="demo-block ui-item-list">
                             <p class="share-tip">分享课程还能获得收益</p>
                             <div>
                                 <ul class="ui-list ui-list-link ui-border-tb ui-relation-proList">
-                                    <!-- <li class="ui-border-t">
+                                    <li class="ui-border-t">
                                         <div class="ui-list-img">
                                             <span style="background-image:url(http://placeholder.qiniudn.com/200x136)"></span>
                                         </div>
@@ -131,16 +144,13 @@
                                             <p class="ui-nowrap ui-less-desc">老师: 高兴</p>
                                         </div>
                                     </li>
-                                     -->
-
                                 </ul>
                                 <section class="ui-notice"><i></i><p>暂无相关推荐商品</p></section>
                             </div>
                         </div>
                     </li>
-                </ul>
-            </div>
-         </div>
+                </ul> -->
+     
     </section>
     <!-- /.ui-container-->
     <script>
@@ -153,12 +163,17 @@
 
     Zepto(function($) {
 
-        var tab = new fz.Scroll('.ui-tab', {
+      /*   var tab = new fz.Scroll('.ui-tab', {
             role: 'tab',
             autoplay: false,
             interval: 3000
+        }); */
+        //咨询老师
+        BWK.api.lesson.lessonProdectIntro({'id':BWK.UrlParams.id},function(data){
+            var dealObj = data.content||[]; 
+            console.log(data);
+            _dealQuestions(dealObj);
         });
-        
         //课程详情
         BWK.api.lesson.lessonDetail(BWK.UrlParams.id,function(data){
             //name \ teacherName  teacherImg  teacherDesc
@@ -167,6 +182,11 @@
             $('#teacherImg').css({'background-image':'url('+data.teacherInfo.image+')'});
             $('#teacherDesc').html(data.teacherInfo.desc);
             $('#subVideo').html('<iframe height="210" width="100%" src="'+data.video+'"  frameborder=0  allowfullscreen></iframe>');
+           
+            var $tdpare = $('#teacherDesc').parent();
+            if( $('#teacherDesc').height()<$tdpare.height()){
+            	$('.teacher-info-more').hide();
+            }
             //相关课  enable=true&teacherId=1023
             var teacherId = data.teacherInfo.id;
             BWK.api.lesson.lesson({'enable':true,teacherId:teacherId},function(data){
@@ -201,9 +221,9 @@
         });
         
         //相关商品推荐
-        BWK.api.lesson.lessonProdectIntro({'id':BWK.UrlParams.id},function(data){
+       /*  BWK.api.lesson.lessonProdectIntro({'id':BWK.UrlParams.id},function(data){
             _getRelationLesson(data.content);
-        });
+        }); */
         
         $('.ui-course-title').tap(function(){
             var $fold = $(this).find('.ui-icon-fold');
@@ -248,9 +268,25 @@
         }
         $('.ui-list-comments').append(str);
     }
-
+    function _dealQuestions(obj){
+    	var str = "";
+        if(obj&&obj.length>0){
+            for(var i=0;i<obj.length;i++){
+            	str += '<li id="'+obj[i].id+'"><div class="ui-grid-halve-img"><h4 class="ui-nowrap">'+obj[i].name+'</h4>';
+            	str += '<p class="ui-nowrap ui-teacher-name"><span>'+obj[i].lessonInfo.teacherInfo.name+'</span><span class="teacher-honour">'+obj[i].intro+'</span></p>';
+            	str +='</div></li>';
+            }
+            $('.ui-list-product').append(str);
+        }else{
+        	$('.ui-list-product').html('<p class="noProduct">暂无相关推荐商品</p>')
+        }
+        
+        $('.ui-list-product').on('click','li',function(){
+            location.href = "lessonProduct.html?id="+$(this).attr('id');
+        });
+    }
     //商品推荐
-    function _getRelationLesson(relationList){
+   /*  function _getRelationLesson(relationList){
         var str = "";
 
         if(relationList.length>0){
@@ -265,7 +301,7 @@
         }else{
             $('.ui-relation-proList').removeClass('ui-list-link').append('<li class="ui-nomsg"><section class="ui-notice"><i></i><p>暂无相关推荐商品</p></section></li>');
         }
-    }
+    } */
    
     </script>
 </body>

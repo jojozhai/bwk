@@ -17,8 +17,7 @@
            .cash-numb{text-align:center;}
            .cash-numb span{float:left;}
            .cash-title{color: #b2b2b2;}
-           .cash-tip{color: #c6c6c6;text-align: center;font-size: 12px;}
-           .cash-btn{position: absolute;bottom: 100px;width: 100%;}
+           .cash-btn{margin-top: 300px;width: 100%;}
             .cash-btn .ui-btn-lg{width:auto;margin:0 10px;}
             #amount{height: 60px;border: none;padding: 0 10px;}
         </style>
@@ -34,7 +33,6 @@
                <p class="cash-numb"><span>￥</span><input type="number" id="amount" placeholder="200" /></p>
             </div>  
          </div>
-            <p class="cash-tip">温馨提示：微信红包一次只可以提现200元哦</p> 
            <div class="demo-block cash-btn">
             <a class="ui-btn-lg ui-btn-primary" id="btnGet" href="javascript:;">确认提现</a>
            </div>
@@ -57,7 +55,7 @@
         	})
         	$('#btnGet').tap(function(){
         		BWK.api.user.getMoney({'amount':$('#amount').val()},function(data){
-        			BWK.Utils.dialogAlert('你已成功提现，如有问题请联系我们！');
+        			BWK.Utils.dialogAlert('您的提现申请已提交，待审核通过后，5个工作日内发放给您');
                 }); 
         	});
             

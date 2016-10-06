@@ -25,6 +25,10 @@ public class ProductInfo {
     
     private Long id;
     /**
+     * 顺序号
+     */
+    private Integer index;
+    /**
      * 名称
      */
     private String name;
@@ -195,6 +199,18 @@ public class ProductInfo {
      */
     public void setKey(boolean key) {
         this.key = key;
+    }
+    /**
+     * @return the index
+     */
+    public Integer getIndex() {
+        return index;
+    }
+    /**
+     * @param index the index to set
+     */
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 
 }

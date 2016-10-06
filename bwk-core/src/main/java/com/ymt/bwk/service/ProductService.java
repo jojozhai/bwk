@@ -40,6 +40,8 @@ public interface ProductService {
     
     List<ProductInfo> findAll();
 
+    List<com.ymt.mirage.lesson.dto.ProductInfo> getRecommend(Long lessonId);
+
     
 
 }

@@ -55,5 +55,10 @@
             <artifactId>mirage-clearing</artifactId>
             <version>${mirage.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.ymt.mirage</groupId>
+            <artifactId>mirage-sms</artifactId>
+            <version>${mirage.version}</version>
+        </dependency>
 	</dependencies>
 </project>

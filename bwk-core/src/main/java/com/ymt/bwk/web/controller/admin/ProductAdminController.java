@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ymt.bwk.dto.LessonProductInfo;
 import com.ymt.bwk.dto.ProductInfo;
 import com.ymt.bwk.service.ProductService;
 
@@ -47,6 +48,11 @@ public class ProductAdminController {
     @RequestMapping(value = "/product", method = RequestMethod.GET)
     public Page<ProductInfo> query(ProductInfo productInfo, Pageable pageable) {
         return productService.query(productInfo, pageable);
+    }
+    
+    @RequestMapping(value = "/product/recommend", method = RequestMethod.GET)
+    public List<com.ymt.mirage.lesson.dto.ProductInfo> getRecommend(LessonProductInfo lessonProductInfo) {
+        return productService.getRecommend(lessonProductInfo.getLessonId());
     }
     
     @RequestMapping(value = "/product/{id}", method = RequestMethod.GET)

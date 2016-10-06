@@ -31,7 +31,8 @@ angular.module('productAdminModule',[]).config(function($stateProvider) {
 			price: 0,
 			saleCount: 0,
 			saleCountPlus: 0,
-			enable: true
+			enable: true,
+			index:0
 		});
 	}
 	

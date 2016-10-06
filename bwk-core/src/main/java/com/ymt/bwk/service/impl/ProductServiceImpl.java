@@ -168,4 +168,15 @@ public class ProductServiceImpl implements ProductService, OrderGoodsService {
         return result;
     }
 
+    @Override
+    public List<com.ymt.mirage.lesson.dto.ProductInfo> getRecommend(Long lessonId) {
+        List<LessonProduct> products = lessonProductRepository.findByLessonId(lessonId);
+        return QueryResultConverter.convert(products, new AbstractDomain2InfoConverter<LessonProduct, com.ymt.mirage.lesson.dto.ProductInfo>() {
+            @Override
+            protected void doConvert(LessonProduct domain, com.ymt.mirage.lesson.dto.ProductInfo info) throws Exception {
+                BeanUtils.copyProperties(domain.getProduct(), info);
+            }
+        });
+    }
+
 }

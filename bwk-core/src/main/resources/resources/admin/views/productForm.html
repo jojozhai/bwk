@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-lg-3">发布:</label>
+                <label class="control-label col-lg-3">上架:</label>
                 <div class="col-lg-2">
                     <div class="custom-checkbox todo-checkbox">
                         <input id="selection" ng-model="product.enable" ng-checked="product.enable" type="checkbox">
@@ -30,6 +30,13 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group"  ng-class="productForm.index.$invalid && productForm.index.$dirty ? 'has-error': ''">
+                <label class="control-label col-lg-3"><span class="text_red">*</span>&nbsp;展示顺序号:</label>
+                <div class="col-lg-3">
+                    <input name="index" ng-model="product.index" type="number" class="form-control input-sm" placeholder="展示顺序号" required>
+                    <label class="control-label" ng-show="productForm.index.$invalid && productForm.index.$dirty">展示顺序号不能为空</label>
+                </div>
+            </div>
             <div class="form-group"  ng-class="productForm.name.$invalid && productForm.name.$dirty ? 'has-error': ''">
                 <label class="control-label col-lg-3"><span class="text_red">*</span>&nbsp;商品名称:</label>
                 <div class="col-lg-6">
@@ -39,10 +46,10 @@
             </div>
             
 			<div class="form-group"  ng-class="productForm.intro.$invalid && productForm.intro.$dirty ? 'has-error': ''">
-				<label class="control-label col-lg-3"><span class="text_red">*</span>&nbsp;简介:</label>
+				<label class="control-label col-lg-3"><span class="text_red">*</span>&nbsp;老师简介:</label>
 				<div class="col-lg-6">
-					<input name="intro" ng-model="product.intro" type="text" class="form-control input-sm" placeholder="简介" required>
-					<label class="control-label" ng-show="productForm.intro.$invalid && productForm.intro.$dirty">简介不能为空</label>
+					<input name="intro" ng-model="product.intro" type="text" class="form-control input-sm" placeholder="老师简介" required>
+					<label class="control-label" ng-show="productForm.intro.$invalid && productForm.intro.$dirty">老师简介不能为空</label>
 				</div>
 			</div>
 			

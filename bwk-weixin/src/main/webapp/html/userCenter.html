@@ -122,7 +122,7 @@
             _dealImgList(data);
         });
         //咨询的老师
-        BWK.api.user.userOrderList({'sort':'createdTime,desc'},function(data){
+        BWK.api.user.userOrderList({'sort':'createdTime,desc','state': "FINISH"},function(data){
             var dealObj = data.content||[]; 
             _dealQuestions(dealObj);
         })

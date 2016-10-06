@@ -159,9 +159,11 @@
             location.href = $(this).data('href');
         }
     });
+    var paramsObj = {};
 	//TODO 
     Zepto(function($) {
     	
+        BWK.Utils.loading.show();
     	BWK.api.lesson.lessonDetail(BWK.UrlParams.id,function(data){
             var dealObj = data||{};
             $('#name').text(dealObj.name);
@@ -180,13 +182,17 @@
             $('#image').attr('src',dealObj.image);
             $('#content').html(dealObj.content);
             $('#desc').html(dealObj.desc);
+
+            paramsObj.imgUrl = data.image;
+            //分享文字
+            BWK.api.lesson.shareText(null,function(data){
+               paramsObj.lessonName = data.name;
+               paramsObj.desc = data.value;
+               BWK.WeixinShare(paramsObj);  
+            }); 
            
         }); 
-    	//分享文字
-    	BWK.api.lesson.shareText(null,function(data){
-           var shareObj = {lessonName:data.name,desc:data.value,shareUrl:location.href};
-           BWK.WeixinShare(shareObj); 
-        }); 
+    	
         
     	$("#btn1").click(function(){
             $(".ui-dialog").dialog("show");

@@ -277,6 +277,7 @@ BWK.WeixinShare = function(params,callback){
 		wx.config(defaultConfig);
 
 		setTimeout((function(params){
+			BWK.Utils.loading.hide();
 			wx.ready(function(){
 				var defaultShareParams = {
 					'lessonName':'见效',

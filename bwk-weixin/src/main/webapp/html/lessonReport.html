@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="../css/public.css">
         <script src="../lib/zepto.min.js"></script>
         <script src="../js/frozen.js"></script>
+        <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
         <style type="text/css">
         .ui-row-flex .ui-col{background: none;border: none;}
         .ui-container .ui-item-list{margin: 10px 0;}
@@ -78,11 +79,16 @@
 
         });
         function _getLesson(){
-            BWK.Utils.loading.show();
+            
             BWK.api.lesson.lesson(params,function(data){
-                BWK.Utils.loading.hide();
+                
                 var dealObj = data.content||[];
                 _dealLessonList(dealObj);
+
+
+                  
+                
+
             });    
         }   
         function _createDay(){

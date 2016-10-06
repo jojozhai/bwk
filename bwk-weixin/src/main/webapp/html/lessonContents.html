@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/public.css">
     <script src="../lib/zepto.min.js"></script>
     <script src="../js/frozen.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <style type="text/css">
     .ui-course-brief {padding:0 10px;background: #fff;}
     .ui-course-brief h3 {border-bottom: 1px solid #e0e0e0;height: 50px;line-height: 50px;}
@@ -180,6 +181,8 @@
             autoplay: false,
             interval: 3000
         }); */
+        BWK.Utils.loading.show();
+    
         //咨询老师
         BWK.api.lesson.lessonProdectIntro({'id':BWK.UrlParams.id},function(data){
             var dealObj = data.content||[]; 
@@ -216,6 +219,9 @@
                     location.href = "lessonContents.html?id="+$(this).attr('id');
                 });
             });
+
+            var paramsObj = {'lessonName':data.shareTitle,'desc':data.shareTip,'imgUrl':data.image};
+            BWK.WeixinShare(paramsObj);   
             
         }); 
         

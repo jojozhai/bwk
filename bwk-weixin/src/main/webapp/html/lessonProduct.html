@@ -143,6 +143,7 @@
 
         var productObj,currentUserId;
         _initEvent();
+        BWK.Utils.loading.show();
         //商品详情
         BWK.api.lesson.lessonProdectDetail(BWK.UrlParams.id,function(data){
             productObj = data;

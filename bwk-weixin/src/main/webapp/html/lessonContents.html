@@ -19,7 +19,7 @@
     .ui-brief-cont{margin:10px 0;}
     .ui-brief-cont,.item-discuss {background: #fff;border-top: 1px solid #e0e0e0;}
     .ui-grid-halve{padding-left:10px;margin-bottom:10px;padding-top:0;}
-    .ui-grid-halve img{display:block;height:100px;border-radius: 4px;}
+    .ui-grid-halve-img{border: 1px solid #ccc;}
     .ui-course-lists p {padding: 10px 0;font-size: 14px;color:#afafaf;}
     .ui-course-lists p img {display: block;margin-right: 10px;float: left;width:16px;}
     .ui-grid-halve .noProduct{padding: 20px;text-align: center;color: #999;}
@@ -47,6 +47,7 @@
     .ui-input.ui-border-radius {height: 42px;line-height: 42px;}
     .demo-block .ui-list .ui-nomsg{margin-left: 0;padding-left:0;border: none;height: 400px;z-index: 0;}
     .demo-intro{margin-top: 10px;padding: 0px 10px;color: #2196F3;font-size: 12px;text-align: center;}
+    .demo-intro img{float:left;width:30px;}
     </style>
 </head>
 
@@ -92,7 +93,7 @@
                         </div>                 
                     </div>
                     <div class="demo-intro">
-                        <div><a href="lessonMoneyTips.html">申请成为超级课代表，为知识代言，每月躺赚万元以上</a></div>
+                        <div><a href="lessonMoneyTips.html"><img src="../img/pointer.jpg">申请成为超级课代表，为知识代言，每月躺赚万元以上</a></div>
                     </div>
                         <div class="ui-brief-cont">
                             <p class="ui-about-teacher">老师介绍</p>
@@ -291,7 +292,7 @@
     	var str = "";
         if(obj&&obj.length>0){
             for(var i=0;i<obj.length;i++){
-            	str += '<li id="'+obj[i].id+'"><img src="'+obj[i].image+'"></li>';
+            	str += '<li id="'+obj[i].id+'"><div class="ui-grid-halve-img"><span style="background-image:url('+obj[i].image+')"></span></div></li>';
             }
             $('.ui-list-product').append(str);
         }else{

@@ -112,7 +112,7 @@
 
     var params = {'finish':false,page:0,size:10,sort:'createdTime,desc'};
     var currIndex = 0;
-    var productId;
+    var productId,itemId;
     Zepto(function($) {
 
         var tab = new fz.Scroll('.ui-tab', {
@@ -161,11 +161,11 @@
             //确认支付
             $('.btn-rb').tap(function(){
                 productId = $(this).closest('li').attr('id');
-                productId = $(this).attr('id');
+                itemId = $(this).attr('id');
                 var dia = $(".ui-dialog").dialog("show");
                 dia.on("dialog:action",function(e){
                     if(e.index == 2){
-                        BWK.api.user.orderEnd({id:$(this).attr('id')},function(data){
+                        BWK.api.user.orderEnd({id:itemId},function(data){
                             BWK.Utils.dialogAlert('交易已完成，关闭后将前往评论页面',function(){
                                 location.href = "lessonProductComment.html?id="+productId;
                             })

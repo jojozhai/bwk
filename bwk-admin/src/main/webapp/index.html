@@ -27,6 +27,9 @@
 	.text_red {color: red}
 	-->
 	</style>
+	<script type="text/javascript">
+        var commentTypes = [{name: '商品', value: 'product'},{name: '课程', value: 'lesson'}];
+    </script>
   </head>
   <body class="overflow-hidden" ng-controller="mainCtrl">
     <!--[if lte IE 8]>
@@ -71,6 +74,7 @@
    	<script src="scripts/platform/controller/roleController.js"></script>
    	<script src="scripts/platform/controller/menuController.js"></script>
    	
+   	<script src="admin/scripts/social/commentAdminModule.js"></script>
    	<script src="admin/scripts/userAdminModule.js"></script>
    	<script src="admin/scripts/poster/posterAdminModule.js"></script>
    	<script src="admin/scripts/weixin/weixinReplyAdminModule.js"></script>

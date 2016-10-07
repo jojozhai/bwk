@@ -35,6 +35,7 @@ public class ProductSpec extends PzSimpleSpecification<Product, ProductInfo> {
     @SuppressWarnings("unchecked")
     @Override
     protected void addCondition(QueryWraper<Product> queryWraper) {
+        addEqualsCondition(queryWraper, "enable");
         if(StringUtils.isNotBlank(getCondition().getName())) {
             Predicate condition1 = queryWraper.getCb().like(getPath(queryWraper.getRoot(), "name"), "%"+getCondition().getName()+"%");
             Predicate condition2 = queryWraper.getCb().like(getPath(queryWraper.getRoot(), "desc"), "%"+getCondition().getName()+"%");

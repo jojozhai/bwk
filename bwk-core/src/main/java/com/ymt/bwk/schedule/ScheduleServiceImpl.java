@@ -84,7 +84,7 @@ public class ScheduleServiceImpl implements ScheduleService {
         Teacher teacher = product.getLesson().getTeacher();
         teacher.setSaleCount(teacher.getSaleCount() + 1);
         
-        clearingService.addUser(order.getProducts().get(0).getGoodsId().toString(), order.getUser().getId(), order.getSharer().getId());
+        clearingService.addUser(order.getProducts().get(0).getGoodsId().toString(), order.getUser().getId(), order.getSharer().getId(), true);
         clearingService.clearing(order);
         
         //城市霸主分成

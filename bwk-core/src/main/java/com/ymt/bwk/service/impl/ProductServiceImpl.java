@@ -145,6 +145,7 @@ public class ProductServiceImpl implements ProductService, OrderGoodsService {
             info.setId(order.getId());
             Product product = productRepository.findOne(order.getProducts().get(0).getGoodsId());
             Teacher teacher = product.getLesson().getTeacher();
+            info.setProductId(product.getId());
             info.setProductName(product.getName());
             info.setTeacherName(teacher.getName());
             info.setTeacherImage(teacher.getImage());

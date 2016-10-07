@@ -9,7 +9,7 @@
  */
 // 应用主模块
 angular.module('adminApp', [ 'admin', 'userAdminModule', 'posterAdminModule', 'buttonAdminModule', 'paramAdminModule', 
-		'weixinReplyAdminModule', "messageSendModule", "swiperAdminModule",
+		'weixinReplyAdminModule', "messageSendModule", "swiperAdminModule", "commentAdminModule",
 		"tagAdminModule", "teacherAdminModule", "lessonAdminModule", 
 		"productAdminModule", "orderAdminModule", "withdrawalsAdminModule", 
 		"heraldAdminModule", "rebateConfigAdminModule"]);

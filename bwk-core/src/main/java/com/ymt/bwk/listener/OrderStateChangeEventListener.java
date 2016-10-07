@@ -11,6 +11,8 @@
  */
 package com.ymt.bwk.listener;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -79,6 +81,8 @@ public class OrderStateChangeEventListener implements ApplicationListener<OrderS
             
             Order order = orderRepository.findOne(event.getOrderId());
             Product product = productRepository.findOne(order.getProducts().get(0).getGoodsId());
+            
+            order.setCompleteTime(new Date());
             
             TemplateMessage templateMessage = new TemplateMessage(order.getUser().getWeixinOpenId(), orderCompleteTemplateId);
             templateMessage.addValue("keyword1", product.getName());

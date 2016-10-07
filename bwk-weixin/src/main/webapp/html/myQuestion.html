@@ -160,13 +160,14 @@
             });
             //确认支付
             $('.btn-rb').tap(function(){
+                productId = $(this).closest('li').attr('id');
                 productId = $(this).attr('id');
                 var dia = $(".ui-dialog").dialog("show");
                 dia.on("dialog:action",function(e){
                     if(e.index == 2){
-                        BWK.api.user.orderEnd({id:productId},function(data){
+                        BWK.api.user.orderEnd({id:$(this).attr('id')},function(data){
                             BWK.Utils.dialogAlert('交易已完成，关闭后将前往评论页面',function(){
-                                location.href = "lessonProductComment.html?id="+$(this).closest('li').attr('id');
+                                location.href = "lessonProductComment.html?id="+productId;
                             })
                         });
                     }

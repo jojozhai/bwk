@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/frozen.css">
     <link rel="stylesheet" href="../css/public.css">
     <script src="../lib/zepto.min.js"></script>
+    <script src="../js/city.js"></script>
     <script src="../js/frozen.js"></script>
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <style type="text/css">
@@ -86,36 +87,40 @@
                                 </div>
                                 <div class="ui-form-item ui-border-b">
                                     <label class="ui-border-r"> 性别：</label>
-                                    <input type="text" id="sex" class="ui-toWd" placeholder="输入您的性别" />
+                                    <div style="display:inline-block;padding-left:95px;">
+					               	 	<label class="ui-radio" for="radio">男&nbsp;<input type="radio" value="男" name="sex">
+				                        </label>
+					                    <label class="ui-radio" for="radio">女&nbsp;<input type="radio"  value="女" name="sex"></label>
+                                 	</div>
                                 </div>
                                 <div class="ui-form-item ui-border-b">
                                     <label class="ui-border-r">职业：</label>
-                                    <div class="ui-select">
-			                            <select>
-			                                <option>计算机/互联网/通信/电子</option>
-			                                <option selected="">销售/客服/技术支持</option>
-			                                <option>会计/金融/银行/保险</option>
-			                                <option>生产/营运/采购/物流</option>
-			                                <option>生物/制药/医疗/护理</option>
-			                                <option>广告/市场/媒体/艺术</option>
-			                                <option>建筑/房地产</option>
-			                                <option>人事/行政/高级管理</option>
-			                                <option>咨询/法律/教育/科研</option>
-			                                <option>服务业</option>
-			                                <option>公务员/翻译</option>
-			                                <option>其他</option>
-			                            </select>
-			                        </div>
+                                    <select style="padding-left:95px;color: #a0a0a0;border: 0;background: none;" id="job">
+                                        <option value="0" selected="selected">请选择</option>
+                                        <option value="计算机/互联网/通信/电子">计算机/互联网/通信/电子</option>
+                                        <option value="销售/客服/技术支持">销售/客服/技术支持</option>
+                                        <option value="会计/金融/银行/保险">会计/金融/银行/保险</option>
+                                        <option value="生产/营运/采购/物流">生产/营运/采购/物流</option>
+                                        <option value="生物/制药/医疗/护理">生物/制药/医疗/护理</option>
+                                        <option value="广告/市场/媒体/艺术">广告/市场/媒体/艺术</option>
+                                        <option value="建筑/房地产">建筑/房地产</option>
+                                        <option value="人事/行政/高级管理">人事/行政/高级管理</option>
+                                        <option value="咨询/法律/教育/科研">咨询/法律/教育/科研</option>
+                                        <option value="服务业">服务业</option>
+                                        <option value="公务员/翻译">公务员/翻译</option>
+                                        <option value="其他">其他</option>
+                                    </select>
                                 </div>
                                  <div class="ui-form-item ui-border-b">
                                     <label class="ui-border-r">工作年限：</label>
                                     <div class="ui-select">
-			                            <select>
-			                                <option>学生</option>
-			                                <option selected="">1~3年</option>
-			                                <option>3~5年</option>
-			                                <option>5~10年</option>
-			                                <option>10年以上</option>
+			                            <select id="workyear">
+			                                <option value="0"  selected="selected">请选择</option>
+			                                <option value="学生">学生</option>
+			                                <option value="1~3年">1~3年</option>
+			                                <option value="3~5年">3~5年</option>
+			                                <option value="5~10年">5~10年</option>
+			                                <option value="10年以上">10年以上</option>
 			                            </select>
 			                        </div>
                                 </div>
@@ -128,11 +133,17 @@
                                     <input type="text" id="weixin" class="ui-thWd" placeholder="输入您的微信号" />
                                 </div>
                                 <div class="ui-form-item ui-border-b ui-user-city">
-			                        <span> 城市：</span>
-			                        <input type="text" id="province" class="ui-huWd">
-			                         <span>省</span>
-			                        <input type="text" id="city" class="ui-eiWd">
-			                         <span> 市</span>
+			                        <span style="float:left;"> 城市：</span>
+			                        <div class="ui-select-group" >
+						                <div class="ui-select">
+						                    <select id="province"></select>
+						                </div>
+						                <div class="ui-select">
+						                    <select id="city">
+						                        <option value="0">请选择</option>
+						                    </select>
+						                </div>
+						            </div>
 			                    </div>
                             </form>
                         </div>
@@ -160,12 +171,13 @@
         }
     });
     var paramsObj = {};
+    var shareObj;
 	//TODO 
     Zepto(function($) {
-    	
+    	BWK.Utils.createProvince($('#province'));
         BWK.Utils.loading.show();
     	BWK.api.lesson.lessonDetail(BWK.UrlParams.id,function(data){
-            var dealObj = data||{};
+            var dealObj = shareObj = data||{};
             $('#name').text(dealObj.name);
             $('#teacher').text(dealObj.teacher);
             $('#startTime').text(BWK.Utils.dateformateLocal(new Date(dealObj.startTime),"yyyy-MM-dd hh:mm"));
@@ -195,18 +207,29 @@
     	
         
     	$("#btn1").click(function(){
+    		 if(shareObj.shareSign){
+             	BWK.Utils.dialogAlert(shareObj.shareSignTip);
+             	return false;
+             }
             $(".ui-dialog").dialog("show");
         })
         $('#btn-submit').click(function(){
-            
+           
             //报名
             var params  = [];
-            $('form input').each(function(){
+            $('form input[type="text"]').each(function(){
                 if($(this).val()){
                     params.push({"name":$(this).attr('id'),"value":$(this).val()});
                 }
             });
-
+			params.push({"name":"sex","value":$('input[name="sex"]:checked').val()});
+			
+			//TODO
+			params.push({"name":"job","value":$('#job').val()});
+			
+		    params.push({"name":"province","value":$('#province').val()});
+		    params.push({"name":"city","value":$('#city').val()});
+		    params.push({"name":"workyear","value":$('#workyear').val()});
             BWK.api.user.updateUser(params,function(data){
                 var online = $('input[type="radio"]:checked').val()==1?true:false; 
 
@@ -222,6 +245,10 @@
         	for(var i in data){
         		$('#'+i).val(data[i]);
         	}
+        	$("input[name='sex'][value='"+data.sex+"']").prop('checked',true);
+        	 if(data.province&&data.city){
+             	BWK.Utils.createCity(cityDict[data['province']].sub,data['city']);
+             }
         });
         
 

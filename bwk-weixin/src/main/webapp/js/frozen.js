@@ -228,6 +228,31 @@ BWK.Utils.loading = {
 		}
 	}
 };
+
+BWK.Utils.createProvince = function(dom){
+	var str ='';
+    for(var i = 0;i<cityDict.length;i++){
+        var obj = cityDict[i];
+        str += '<option value="'+i+'">'+obj.name+'</option>';
+    }
+    $(dom).append(str);
+    $(dom).change(function(){
+        var arrIndex = $(dom).val();
+        BWK.Utils.createCity(cityDict[arrIndex].sub);
+    });
+}
+BWK.Utils.createCity = function(arrCity,selVal){
+	var str ='';
+    for(var i = 0;i<arrCity.length;i++){
+        var obj = arrCity[i];
+        str += '<option value="'+obj.name+'">'+obj.name+'</option>';
+    }
+    $('#city').html(str);
+    if(selVal){
+    	$('#city').val(selVal);
+    }
+}
+
 BWK.Page = function(){
 
 	

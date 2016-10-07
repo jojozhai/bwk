@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/frozen.css">
     <link rel="stylesheet" href="../css/public.css">
     <script src="../lib/zepto.min.js"></script>
+    <script src="../js/city.js"></script>
     <script src="../js/frozen.js"></script>
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <style type="text/css">
@@ -59,11 +60,17 @@
                         <input type="text" id="mobile" placeholder="输入您的手机号" />
                     </div>
                     <div class="ui-form-item ui-border-b ui-user-city">
-                        <span> 城市：</span>
-                        <input type="text" id="province" class="ui-huWd"/>
-                         <span>省</span>
-                        <input type="text" id="city" class="ui-eiWd"/>
-                         <span> 市</span>
+                        <span style="float:left;"> 城市：</span>
+                        <div class="ui-select-group" style="margin-left:64px;">
+						     <div class="ui-select">
+						          <select id="province"></select>
+						     </div>
+						     <div class="ui-select">
+						          <select id="city">
+						             <option value="0">请选择</option>
+						          </select>
+						     </div>
+						</div>
                     </div>
                 </form>
             </div>
@@ -83,7 +90,7 @@
     });
     var sharerId,payObj;
     Zepto(function($) {
-        
+    	BWK.Utils.createProvince($('#province'));
         //问题输入
         $(".ui-masssage-cont").click(function(){
             if($(this).html()=="请在500字以内 描述你想咨询的问题"){
@@ -105,8 +112,11 @@
                
             $('#realname').val(data.realname);
             $('#mobile').val(data.mobile);
-            $('#province').val(data.province);
-            $('#city').val(data.city);
+           $('#province').val(data.province);
+            /*$('#city').val(data.city); */
+            if(data.province&&data.city){
+             	BWK.Utils.createCity(cityDict[data['province']].sub,data['city']);
+             }
 
         });
 
@@ -138,14 +148,16 @@
                     });
                 });
 
-                var usereParams = [];
-                
-                $('form input').each(function(){
+                var params  = [];
+                $('form input[type="text"]').each(function(){
                     if($(this).val()){
-                        usereParams.push({"name":$(this).attr('id'),"value":$(this).val()});
+                        params.push({"name":$(this).attr('id'),"value":$(this).val()});
                     }
                 });
-                BWK.api.user.updateUser(usereParams,function(data){
+    			
+    		    params.push({"name":"province","value":$('#province').val()});
+    		    params.push({"name":"city","value":$('#city').val()});
+                BWK.api.user.updateUser(params,function(data){
                 
                 });
 

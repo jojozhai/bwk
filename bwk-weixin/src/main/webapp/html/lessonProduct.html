@@ -160,12 +160,13 @@
                 for (var i = 0; i < dealLessons.length; i++) {
                     var obj = dealLessons[i];
                     if(obj.id!=BWK.UrlParams.id){
-                        str += '<p id="'+obj.id+'"><img src="../img/trangle0.png">'+obj.name+'</p>';
+                        str += '<p id="'+obj.id+'" data-video="'+obj.video+'"><img src="../img/trangle0.png">'+obj.name+'</p>';
                     }
                 };
                 $('.ui-relation-course').append(str);
                 $('.ui-relation-course p').tap(function(){
-                    location.href = "lessonContents.html?id="+$(this).attr('id');
+                    /* location.href = "lessonContents.html?id="+$(this).attr('id'); */
+                    $('#subVideo').find("iframe").attr("src",$(this).data("video"));
                 });
             });
             
@@ -245,7 +246,7 @@
         $('#product-details').html(obj.desc);
         $('#teacherImg').css({'background-image':'url('+obj.lessonInfo.teacherInfo.image+')'});
         $('#teacherName').text(obj.lessonInfo.teacherInfo.name);
-        $('#teacherDesc').html(obj.lessonInfo.teacherInfo.desc);
+        $('#teacherDesc').html('<img style="width:100%;" src="'+obj.lessonInfo.teacherInfo.desc+'" />');
 
         $('#subVideo').html('<iframe height="210" width="100%" src="'+obj.lessonInfo.video+'"  frameborder=0  allowfullscreen></iframe>');
        

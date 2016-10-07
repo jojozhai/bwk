@@ -154,21 +154,23 @@
             _dealProduct(data);
             //相关课  enable=true&teacherId=1023
             var teacherId = data.lessonInfo.teacherInfo.id;
-            BWK.api.lesson.lesson({'enable':true,teacherId:teacherId},function(data){
-                var dealLessons = data.content || [];
-                var str = '';
-                for (var i = 0; i < dealLessons.length; i++) {
-                    var obj = dealLessons[i];
-                    if(obj.id!=BWK.UrlParams.id){
-                        str += '<p id="'+obj.id+'" data-video="'+obj.video+'"><img src="../img/trangle0.png">'+obj.name+'</p>';
-                    }
-                };
-                $('.ui-relation-course').append(str);
-                $('.ui-relation-course p').tap(function(){
-                    /* location.href = "lessonContents.html?id="+$(this).attr('id'); */
-                    $('#subVideo').find("iframe").attr("src",$(this).data("video"));
-                });
-            });
+            //BWK.api.lesson.lesson({'enable':true,teacherId:teacherId},function(data){
+           	if(data.lessonInfo){
+           		 var dealLessons = data.lessonInfo.videos || [];
+                   var str = '';
+                   for (var i = 0; i < dealLessons.length; i++) {
+                       var obj = dealLessons[i];
+                       if(obj.id!=BWK.UrlParams.id){
+                           str += '<p id="'+obj.id+'" data-video="'+obj.link+'"><img src="../img/trangle0.png">'+obj.name+'</p>';
+                       }
+                   };
+                   $('.ui-relation-course').append(str);
+                   $('.ui-relation-course p').tap(function(){
+                       /* location.href = "lessonContents.html?id="+$(this).attr('id'); */
+                       $('#subVideo').find("iframe").attr("src",$(this).data("video"));
+                   });
+           	} 
+            //});
             
             BWK.api.user.getUser(null,function(data){
                 var url = location.href.substring(0,location.href.indexOf('?')+1)+'id='+BWK.UrlParams.id+'&sharerId='+data.id;

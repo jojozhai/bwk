@@ -26,6 +26,11 @@
 			<artifactId>bwk-core</artifactId>
 			<version>${mirage.bwk.version}</version>
 		</dependency>
+		<dependency>
+            <groupId>com.ymt.mirage</groupId>
+            <artifactId>mirage-umeditor</artifactId>
+            <version>${mirage.version}</version>
+        </dependency>
 	</dependencies>
 
 	<build>

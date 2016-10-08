@@ -117,7 +117,7 @@
             }
         });
 
-        var params = {'enable':true,'herald':false,'typeId':BWK.UrlParams.id,page:0,size:5};
+        var params = {'enable':true,'herald':false,'typeId':BWK.UrlParams.id,page:0,size:6};
         var pageNum = 0;
         Zepto(function($){
 
@@ -130,18 +130,19 @@
                         $('.ui-lessonType .ui-col').eq(i).addClass('active');
                     }
                 }
+               params.typeId = $('.ui-lessonType .ui-col').eq(0).attr('id');
+               initReq(true,true);
             });
             
             $('.ui-lessonType').on('click','.ui-col',function(){
                  $('.ui-lessonType .active').removeClass('active');
                   $(this).addClass('active');
                 //分页查询TODO
-                params.typeId = $(this).attr('id');
+               params.typeId = $(this).attr('id');
                 initReq(true,true);
             });
 
-            initReq(true,true);
-
+     
             $('.ui-list-link').on('click','li',function(){
                 location.href = "lessonContents.html?id="+$(this).attr('id');
             });

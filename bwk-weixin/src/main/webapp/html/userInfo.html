@@ -189,7 +189,7 @@
     }
     function _dealInfo(obj) {
         $('.ui-userImg').css({'background-image':'url('+obj.headimgurl+')'});  
-        $("#realname").val(obj.username);
+        $("#realname").val(obj.realname);
         $("input[name='sex'][value='"+obj.sex+"']").prop('checked',true);
         $("#participationCount").val(obj.participationCount);
         $("#birthday").val(obj.birthday);

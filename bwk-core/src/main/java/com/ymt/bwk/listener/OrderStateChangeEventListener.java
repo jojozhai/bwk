@@ -13,6 +13,8 @@ package com.ymt.bwk.listener;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -20,6 +22,8 @@ import org.springframework.stereotype.Component;
 import com.ymt.bwk.domain.Product;
 import com.ymt.bwk.repository.ProductRepository;
 import com.ymt.bwk.schedule.ScheduleService;
+import com.ymt.bwk.spi.sms.SmsDemo;
+import com.ymt.mirage.lesson.domain.Teacher;
 import com.ymt.mirage.order.domain.Order;
 import com.ymt.mirage.order.domain.OrderState;
 import com.ymt.mirage.order.event.OrderStateChangeEvent;
@@ -52,13 +56,45 @@ public class OrderStateChangeEventListener implements ApplicationListener<OrderS
     @Autowired
     private ParamService paramService;
     
+    private Logger logger = LoggerFactory.getLogger(getClass());
+    
+    /**
+     * 订单完成取消
+     */
     private String orderCancelTemplateId = "DK0WU48dJzEjorrbiZGes2YDniU5telOuaWc10R8Ns8";
     
+    /**
+     * 订单完成推送
+     */
     private String orderCompleteTemplateId = "dom90ksI4K4-nAHJF9VPqh6FyFbJpH9bL3V1x4ZEc7s";
+    
+    /**
+     * 接单短信
+     */
+    private String workingSmsCid = "t9aPdGxvElzM";
+    
+    /**
+     * 完成短信
+     */
+    private String complateSmsCid = "VLcyxt0b67de";
     
     @Override
     public void onApplicationEvent(OrderStateChangeEvent event) {
-        if(event.getToState().equals(OrderState.FINISH)){
+        
+        logger.info("order state change, id:"+event.getOrderId()+" from state:"+event.getFromState()+" to state:"+event.getToState());
+        
+        if(event.getToState().equals(OrderState.WORKING)){
+            
+            Order order = orderRepository.findOne(event.getOrderId());
+            Product product = productRepository.findOne(order.getProducts().get(0).getGoodsId());
+            Teacher teacher = product.getLesson().getTeacher();
+            
+            SmsDemo.sms_api2(order.getUser().getMobile(), workingSmsCid, new String[]{
+                    order.getUser().getNickname(), teacher.getName(), teacher.getMobile(), order.getUser().getMobile()});
+            SmsDemo.sms_api2(teacher.getMobile(), workingSmsCid, new String[]{
+                    order.getUser().getNickname(), teacher.getName(), teacher.getMobile(), order.getUser().getMobile()});
+            
+        }else if(event.getToState().equals(OrderState.FINISH)){
             
             scheduleService.clear(event.getOrderId());
             
@@ -94,6 +130,8 @@ public class OrderStateChangeEventListener implements ApplicationListener<OrderS
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            
+            SmsDemo.sms_api2(order.getUser().getMobile(), complateSmsCid, new String[]{order.getId().toString()});
             
         }
     }

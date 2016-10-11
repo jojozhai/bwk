@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
+
 public class SmsDemo {
 
 	/**
@@ -68,7 +70,7 @@ public class SmsDemo {
 	 */
 	public static void sms_api2(String mobile, String cid, String[] params) {
 	    
-	    if(isMobileNO(mobile)) {
+	    if(StringUtils.isNotBlank(mobile) && isMobileNO(mobile)) {
 	        
 		Map<String, String> para = new HashMap<String, String>();
 

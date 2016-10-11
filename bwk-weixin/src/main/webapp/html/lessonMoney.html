@@ -97,7 +97,7 @@
                 str += '<li class="ui-border-t"><span class="ui-numList">'+(i+1)+'</span><div class="ui-avatar">';
                 str += '<span style="background-image:url('+obj.headimgurl+')"></span></div>';
                 str += '<div class="ui-list-info"><span class="ui-userName">'+obj.nickname+'</span><div class="ui-range-score"><span class="ui-lineG"></span>';
-                str += '<span class="ui-userMoney">￥'+(obj.money+obj.moneyPlus)+'</span>';
+                str += '<span class="ui-userMoney">￥'+(obj.money+obj.moneyPlus).toFixed(2)+'</span>';
                 if(i<3){
                     str += '<img class="ui-range-pic" src="../img/jiang'+i+'.png"/>';    
                 }

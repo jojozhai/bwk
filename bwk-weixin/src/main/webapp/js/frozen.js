@@ -160,10 +160,14 @@ BWK.UrlParams = {};
     } 
   }
   if(window.localStorage){
-  	if(BWK.UrlParams.sharerId){  
-
-  		window.localStorage.setItem('sharerId',BWK.UrlParams.sharerId);
-  	}
+	if(location.href.indexOf('lessonProduct.html')>-1){
+		if(BWK.UrlParams.sharerId){  
+	  		window.localStorage.setItem('sharerId',BWK.UrlParams.sharerId);
+	  	}
+	}else{
+		window.localStorage.removeItem('sharerId');
+	} 
+  	
   }	
 })();
 BWK.Utils = {};

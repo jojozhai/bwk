@@ -150,10 +150,10 @@
                     <div class="but-wrap">
                         <div class="ui-btn-small">
                            <label class="ui-checkbox-s">
-                                <input type="radio" name="online" value="1" checked>线上
+                                <input type="radio" name="online" value="1" class="online-off">线上
                             </label>
                             <label class="ui-checkbox-s">
-                                <input type="radio" name="online" value="2">线下
+                                <input type="radio" name="online" class="online-off" value="2">线下
                             </label>
                         </div>
                         <button class="ui-btn-lg ui-btn-primary" id="btn-submit">提交</button>
@@ -185,9 +185,12 @@
             var addr = '';
             if(dealObj.online){
                 addr += '线上';
-            }
-            if(dealObj.offline){
+                $(".online-off").eq(1).attr("disabled","true");
+                $(".online-off").eq(0).attr("checked","checked");
+            }else if(dealObj.offline){
                 addr += (dealObj.online?'/':'') +'线下'+'('+dealObj.address+')';
+                $(".online-off").eq(0).attr("disabled","true");
+                $(".online-off").eq(1).attr("checked","checked");
             }
             $('#address').text(addr);
             $('#image').attr('src',dealObj.image);

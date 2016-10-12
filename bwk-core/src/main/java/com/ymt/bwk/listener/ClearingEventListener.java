@@ -11,6 +11,7 @@
  */
 package com.ymt.bwk.listener;
 
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import org.joda.time.DateTime;
@@ -78,7 +79,7 @@ public class ClearingEventListener implements ApplicationListener<ClearingEvent>
             e.printStackTrace();
         }
 
-        SmsDemo.sms_api2(beneficiary.getMobile(), clearingSmsCid, new String[]{contributor.getNickname(), order.getAmount().toString(), event.getProfit().toString()});
+        SmsDemo.sms_api2(beneficiary.getMobile(), clearingSmsCid, new String[]{contributor.getNickname(), order.getAmount().setScale(2, RoundingMode.DOWN).toString(), event.getProfit().toString()});
     }
 
 }

@@ -14,7 +14,7 @@
     <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <style type="text/css">
     .ui-lesson-header img {display: block;height: 200px;width: 100%;}
-    .ui-lesson-header .ui-lesson-headerIntro {text-align: left;background-color: #fff;padding: 10px 0;}
+    .ui-lesson-header .ui-lesson-headerIntro {text-align: left;background-color: #fff;padding: 10px;}
     .ui-lesson-header h3 {font-size: 18px;margin: 10px 0;}
     .demo-item #desc{color: #a2a2a2;font-size: 12px;margin: 10px;}
     .item-details {background: #fff;margin: 10px 0;padding-bottom: 10px;}
@@ -56,9 +56,9 @@
             <div class="ui-lesson-headerIntro">
                 <h3><span>主题&nbsp;&nbsp;|&nbsp;&nbsp;</span><span id="name"></span></h3>
                 <p >主讲人:<span id="teacher"></span></p>
-                <p>时间:<span id="startTime"></span></p>
+                <p>时　间:<span id="startTime"></span></p>
 
-                <p>地点:<span id="address"></span></p>
+                <p>地　点:<span id="address"></span></p>
             </div>
         </div>
         <div class="demo-item item-details">
@@ -197,13 +197,13 @@
             $('#content').html(dealObj.content);
             $('#desc').html(dealObj.desc);
 
-            paramsObj.imgUrl = data.image;
+            paramsObj.imgUrl = dealObj.image;
             //分享文字
-            BWK.api.lesson.shareText(null,function(data){
-               paramsObj.lessonName = data.name;
-               paramsObj.desc = data.value;
+            //BWK.api.lesson.shareText(null,function(data){
+               paramsObj.lessonName = dealObj.shareTitle;
+               paramsObj.desc = dealObj.shareTip;
                BWK.WeixinShare(paramsObj);  
-            }); 
+            //}); 
            
         }); 
     	

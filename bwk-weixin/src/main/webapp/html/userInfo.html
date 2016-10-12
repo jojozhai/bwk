@@ -197,7 +197,7 @@
         $("#weixin").val(obj.weixin);
         $("#nickname").val(obj.nickname);
 		$("#job").val(obj.job);
- 		$('#province').val(obj.province);     
+ 		$('#province').val(obj.province||"0");   
         if(obj.province&&obj.city){
         	BWK.Utils.createCity(cityDict[obj['province']].sub,obj['city']);
         }

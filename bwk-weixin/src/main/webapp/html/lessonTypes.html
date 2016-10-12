@@ -111,15 +111,16 @@
 
         </section><!-- /.ui-container-->
         <script>
-        $('.ui-list li,.ui-tiled li').click(function(){
-            if($(this).data('href')){
-                location.href= $(this).data('href');
-            }
-        });
+        
 
         var params = {'enable':true,'herald':false,'typeId':BWK.UrlParams.id,page:0,size:6};
         var pageNum = 0;
         Zepto(function($){
+            $('.ui-list li,.ui-tiled li').tap(function(){
+                if($(this).data('href')){
+                    location.href= $(this).data('href');
+                }
+            });
 
             BWK.api.lesson.lessonType(null,function(data){
                 var dealObj = data.children||[];

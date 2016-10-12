@@ -109,10 +109,10 @@
         });
 
         BWK.api.user.getUser(null,function(data){
-               
+             
             $('#realname').val(data.realname);
             $('#mobile').val(data.mobile);
-           $('#province').val(data.province);
+           $('#province').val(data.province||"0");
             /*$('#city').val(data.city); */
             if(data.province&&data.city){
              	BWK.Utils.createCity(cityDict[data['province']].sub,data['city']);

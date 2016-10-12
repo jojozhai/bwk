@@ -82,16 +82,17 @@
     </section>
     <!-- /.ui-container-->
     <script>
-    $('.ui-tiled li').tap(function() {
-        if ($(this).data('href')) {
-            location.href = $(this).data('href');
-        }
-    });
+    
 
     var params = {'enable':true,'page':0,'size':5,'sort':'index,asc'};
     var pageNum = 0;
     Zepto(function($) {
-
+        $('.ui-tiled li').tap(function() {
+            if ($(this).data('href')) {
+                location.href = $(this).data('href');
+            }
+        });
+        
         initReq(true,true);
 
         $('#searchPro').on('keyup',function(){

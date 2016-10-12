@@ -102,7 +102,7 @@
         Zepto(function($){
             if(window.localStorage){
                 var hotObj = JSON.parse(window.localStorage.getItem('hotObj'));
-                $('.ui-header .ui-list-hotImg span').css({'background-image':'url('+hotObj.image+')'});
+                $('.ui-headerNav .ui-list-hotImg span').css({'background-image':'url('+hotObj.image+')'});
                 $('.ui-list-infoType').text(hotObj.name);
                 $('.ui-list-infoDesc').text(hotObj.desc);
                 $('.ui-list-infoPerson').text(hotObj.hot);

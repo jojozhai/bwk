@@ -50,6 +50,7 @@
     .demo-comment{margin-top: 10px;}
     .demo-comment .demo-desc{text-align: center;color:#000;}
     li.nocomment{padding-left:0; }
+    .ui-course-lists p.video-current{color:#80ceff;}
     </style>
 </head>
 
@@ -161,13 +162,15 @@
                    for (var i = 0; i < dealLessons.length; i++) {
                        var obj = dealLessons[i];
                        if(obj.id!=BWK.UrlParams.id){
-                           str += '<p id="'+obj.id+'" data-video="'+obj.link+'"><img src="../img/trangle0.png">'+obj.name+'</p>';
+                           str += '<p data-video="'+obj.link+'"><img src="../img/trangle0.png">'+obj.name+'</p>';
                        }
                    };
-                   str+='<p data-video="'+data.lessonInfo.video+'"><img src="../img/trangle0.png">'+data.lessonInfo.name+'（一）</p>';
+                   str+='<p class="video-current" data-video="'+data.lessonInfo.video+'"><img src="../img/trangle0.png">'+data.lessonInfo.name+'（一）</p>';
                    $('.ui-relation-course').append(str);
                    $('.ui-relation-course p').tap(function(){
                        /* location.href = "lessonContents.html?id="+$(this).attr('id'); */
+                       $(".video-current").removeClass("video-current");
+                       $(this).addClass("video-current");
                        $('#subVideo').find("iframe").attr("src",$(this).data("video"));
                    });
            	} 
@@ -245,7 +248,7 @@
         $('#intro').text(obj.name);
         $('#price').text('￥'+obj.priceDesc);
         $('#productPrice').text('￥'+obj.price);
-        $('#saleCountPlus').text(obj.saleCountPlus+'人已购买');
+        $('#saleCountPlus').text((obj.saleCountPlus+obj.saleCount)+'人已购买');
         $('#product-details').html(obj.desc);
         $('#teacherImg').css({'background-image':'url('+obj.lessonInfo.teacherInfo.image+')'});
         $('#teacherName').text(obj.lessonInfo.teacherInfo.name);

@@ -116,7 +116,7 @@ public class SmsDemo {
 		//ע�⣺���ϲ�����ʱ��������<>�����
 	    
 	    System.out.println(SmsDemo.isMobileNO("13011056600 (select"));
-	    System.out.println(SmsDemo.isMobileNO("13011056600"));
+	    System.out.println(SmsDemo.isMobileNO("18795087665"));
 	}
 
 }

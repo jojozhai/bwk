@@ -169,7 +169,7 @@
             	str += '<li id="'+obj[i].id+'"><div class="ui-avatar"><span style="background-image:url('+obj[i].lessonInfo.teacherInfo.image+')"></span></div><div class="ui-list-info">';
 
             	str += '<h4 class="ui-nowrap">'+obj[i].name+'</h4><p class="ui-nowrap ui-teacher-name"><span>'+obj[i].lessonInfo.teacherInfo.name+'</span><span class="teacher-honour">'+obj[i].intro+'</span></p>';
-            	str += '<p class="ui-nowrap">'+obj[i].saleCountPlus+'约见<span class="ystars"></span><span class="ystars"></span><span class="ystars"></span>';
+            	str += '<p class="ui-nowrap">'+(obj[i].saleCountPlus+obj[i].saleCount)+'人约见<span class="ystars"></span><span class="ystars"></span><span class="ystars"></span>';
             	str += '<span class="ystars"></span><span class="ystars"></span></p></div></li>';
             }
             $('.ui-list-product').append(str);

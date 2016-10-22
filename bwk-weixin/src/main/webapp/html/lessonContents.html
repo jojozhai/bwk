@@ -48,6 +48,7 @@
     .demo-block .ui-list .ui-nomsg{margin-left: 0;padding-left:0;border: none;height: 400px;z-index: 0;}
     .demo-intro{margin-top: 10px;padding: 0px 10px;color: #2196F3;font-size: 12px;text-align: center;}
     .demo-intro img{float:left;width:30px;}
+     .ui-course-lists p.video-current{color:#80ceff;}
     </style>
 </head>
 
@@ -205,25 +206,29 @@
             }
             //相关课  enable=true&teacherId=1023
             var teacherId = data.teacherInfo.id;
-            	var dealLessons = data.videos || [];
-                var str = '';
-                for (var i = 0; i < dealLessons.length; i++) {
-                    var obj = dealLessons[i];
-                    if(obj.id!=BWK.UrlParams.id){
-                        str += '<p id="'+obj.id+'"  data-video="'+obj.link+'"><img src="../img/trangle0.png">'+obj.name+'</p>';
-                    }
-                };
-                str +='<p data-video="'+data.video+'"><img src="../img/trangle0.png">'+data.name+'（一）</p>';
-                $('.ui-course-lists').append(str);
-                $('.ui-course-lists p').tap(function(){
-                    /* location.href = "lessonContents.html?id="+$(this).attr('id'); */
-                    $('#subVideo').find("iframe").attr("src",$(this).data("video"));
-                });
-           
-
-            var paramsObj = {'lessonName':data.shareTitle,'desc':data.shareTip,'imgUrl':data.image};
-            BWK.WeixinShare(paramsObj);   
+           	var dealLessons = data.videos || [];
+            var str = '';
+            for (var i = 0; i < dealLessons.length; i++) {
+                var obj = dealLessons[i];
+                if(obj.id!=BWK.UrlParams.id){
+                    str += '<p data-video="'+obj.link+'"><img src="../img/trangle0.png">'+obj.name+'</p>';
+                }
+            };
+            str +='<p  class="video-current" data-video="'+data.video+'"><img src="../img/trangle0.png">'+data.name+'（一）</p>';
+            $('.ui-course-lists').append(str);
+            $('.ui-course-lists p').tap(function(){
+            	$(".video-current").removeClass("video-current");
+                $(this).addClass("video-current");
+                $('#subVideo').find("iframe").attr("src",$(this).data("video"));
+            });
             
+            var paramsObj = {'lessonName':data.shareTitle,'desc':data.shareTip,'imgUrl':data.image};
+            BWK.api.user.getUser(null,function(data){                
+            	var url = location.href.substring(0,location.href.indexOf('?')+1)+'id='+BWK.UrlParams.id+'&sharerId='+data.id;
+            	paramsObj.shareUrl = url;
+                BWK.WeixinShare(paramsObj);                          
+            });
+                      
         }); 
         
         //查询课程评论
@@ -265,7 +270,7 @@
     //查询课程评论
     function _getCommentsList(){
         //查询课程评论
-        BWK.api.lesson.lessonCommentQuery({'target':'lesson','targetId':BWK.UrlParams.id},function(data){
+        BWK.api.lesson.lessonCommentQuery({'target':'lesson','targetId':BWK.UrlParams.id,sort:'createdTime,desc'},function(data){
             var dealObj = data.content||[];
             $('#commentLength').text('评论（'+dealObj.length+'）');
             _dealComments(dealObj);

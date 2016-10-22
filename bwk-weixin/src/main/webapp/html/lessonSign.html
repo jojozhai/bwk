@@ -183,15 +183,15 @@
             $('#endTime').text(BWK.Utils.dateformateLocal(new Date(dealObj.endTime),"yyyy-MM-dd hh:mm"));
             
             var addr = '';
-            if(dealObj.online){
-                addr += '线上';
+            if(dealObj.online&&!dealObj.offline){
                 $(".online-off").eq(1).attr("disabled","true");
                 $(".online-off").eq(0).attr("checked","checked");
-            }else if(dealObj.offline){
-                addr += (dealObj.online?'/':'') +'线下'+'('+dealObj.address+')';
+            }else if(dealObj.offline&&!dealObj.online){
                 $(".online-off").eq(0).attr("disabled","true");
                 $(".online-off").eq(1).attr("checked","checked");
             }
+            
+            addr += (dealObj.online?'线上':'') +((dealObj.online&&dealObj.offline)?'/':'')+(dealObj.offline?('线下'+'('+dealObj.address+')'):'');
             $('#address').text(addr);
             $('#image').attr('src',dealObj.image);
             $('#content').html(dealObj.content);
@@ -218,23 +218,27 @@
         $('#btn-submit').click(function(){
            
             //报名
+            var flag = true;
             var params  = [];
-            $('form input[type="text"]').each(function(){
+            $('form input[type="text"],form select').each(function(){
                 if($(this).val()){
                     params.push({"name":$(this).attr('id'),"value":$(this).val()});
+                }else{
+                	flag = false;
                 }
             });
+            if(!flag|| $('#job').val()==0 || $('#workyear').val()==0 || $('#province').val()==0){
+            	BWK.Utils.dialogAlert("你好，请完善所有信息后再报名！");
+            	return false;
+            }
 			params.push({"name":"sex","value":$('input[name="sex"]:checked').val()});
-			
 			//TODO
-			params.push({"name":"job","value":$('#job').val()});
-			
-		    params.push({"name":"province","value":$('#province').val()});
-		    params.push({"name":"city","value":$('#city').val()});
-		    params.push({"name":"workyear","value":$('#workyear').val()});
+			//params.push({"name":"job","value":$('#job').val()});
+		    //params.push({"name":"province","value":$('#province').val()});
+		    //params.push({"name":"city","value":$('#city').val()});
+		    //params.push({"name":"workyear","value":$('#workyear').val()});
             BWK.api.user.updateUser(params,function(data){
                 var online = $('input[type="radio"]:checked').val()==1?true:false; 
-
                 BWK.api.lesson.lessonSign({"lessonId":BWK.UrlParams.id,"online":online},function(data){
                     $(".ui-dialog").dialog("hide"); 
                     BWK.Utils.Tips('已报名成功！');

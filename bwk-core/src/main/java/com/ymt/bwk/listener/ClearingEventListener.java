@@ -11,9 +11,9 @@
  */
 package com.ymt.bwk.listener;
 
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -66,17 +66,19 @@ public class ClearingEventListener implements ApplicationListener<ClearingEvent>
         User beneficiary = userRepository.findOne(event.getBeneficiaryId());
         Order order = orderRepository.findOne(event.getOrderId());
         
-        TemplateMessage templateMessage = new TemplateMessage(beneficiary.getWeixinOpenId(), clearingTemplate);
-        templateMessage.addValue("keyword1", order.getId().toString());
-        templateMessage.addValue("keyword2", order.getAmount().toString());
-        templateMessage.addValue("keyword3", event.getProfit().toString());
-        templateMessage.addValue("keyword4", new DateTime().toString("yyyy-MM-dd HH:mm"));
-        String content = paramService.getParam("templateContentForClearing", "%s购买了%s元商品，系统已将奖学金%s元自动打入您的个人账户，继续努力，每月躺赚万元不是梦~~").getValue();
-        templateMessage.addValue("remark", String.format(content, contributor.getNickname(), order.getAmount().setScale(2, RoundingMode.DOWN), event.getProfit()));
-        try {
-            weixinService.pushTemplateMessage(templateMessage);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if(StringUtils.isNotBlank(beneficiary.getWeixinOpenId())){
+            TemplateMessage templateMessage = new TemplateMessage(beneficiary.getWeixinOpenId(), clearingTemplate);
+            templateMessage.addValue("keyword1", order.getId().toString());
+            templateMessage.addValue("keyword2", order.getAmount().toString());
+            templateMessage.addValue("keyword3", event.getProfit().toString());
+            templateMessage.addValue("keyword4", new DateTime().toString("yyyy-MM-dd HH:mm"));
+            String content = paramService.getParam("templateContentForClearing", "%s购买了%s元商品，系统已将奖学金%s元自动打入您的个人账户，继续努力，每月躺赚万元不是梦~~").getValue();
+            templateMessage.addValue("remark", String.format(content, contributor.getNickname(), order.getAmount().setScale(2, RoundingMode.DOWN), event.getProfit()));
+            try {
+                weixinService.pushTemplateMessage(templateMessage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         SmsDemo.sms_api2(beneficiary.getMobile(), clearingSmsCid, new String[]{contributor.getNickname(), order.getAmount().setScale(2, RoundingMode.DOWN).toString(), event.getProfit().toString()});

@@ -270,7 +270,7 @@
     //查询课程评论
     function _getCommentsList(){
        
-        BWK.api.lesson.lessonCommentQuery({'target':'product','targetId':BWK.UrlParams.id},function(data){
+        BWK.api.lesson.lessonCommentQuery({'target':'product','targetId':BWK.UrlParams.id,'sort':'createdTime,desc'},function(data){
             var dealObj = data.content||[];
             $('#commentLength').text('学员点评（'+dealObj.length+'）');
             _dealComments(dealObj);
@@ -283,7 +283,7 @@
             for (var i = 0; i < commentList.length; i++) {
                 var commentObj = commentList[i];
                 str += '<li><div class="ui-list-thumb"><span style="background-image:url('+commentObj.createrHeadimgurl+')"></span></div>';
-                str += '<div class="ui-list-info"><h4 class="ui-nowrap">'+commentObj.createrName+'</h4><div class="ui-txt-info">'+BWK.Utils.dateformateLocal(new Date(commentObj.createdTime),'yyyy-MM-dd hh:mm:ss')+'</div></div></li>';
+                str += '<div class="ui-list-info"><h4 class="ui-nowrap">'+commentObj.createrName+'</h4><div class="ui-txt-info">'+BWK.Utils.dateformateLocal(new Date(commentObj.createdTime),'yyyy-MM-dd')+'</div></div></li>';
                 str += '<li class="ui-border-b">'+commentObj.content+'</li>';
             };
             

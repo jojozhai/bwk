@@ -104,7 +104,7 @@
             $('#name').text(data.name);
             $('#teacherName').text(data.lessonInfo.teacherInfo.name);
             $('#teacherIntro').text(data.lessonInfo.teacherInfo.title);
-            $('#dataNum').text(data.saleCountPlus+"人约见");
+            $('#dataNum').text((data.saleCountPlus+data.saleCount)+"人约见");
             $('#courseMoney').text("￥"+data.price);
         });
 

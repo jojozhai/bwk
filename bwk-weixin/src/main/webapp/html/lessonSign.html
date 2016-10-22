@@ -202,8 +202,14 @@
             //BWK.api.lesson.shareText(null,function(data){
                paramsObj.lessonName = dealObj.shareTitle;
                paramsObj.desc = dealObj.shareTip;
-               BWK.WeixinShare(paramsObj);  
+               //BWK.WeixinShare(paramsObj);  
             //}); 
+           
+            BWK.api.user.getUser(null,function(data){                
+            	var url = location.href.substring(0,location.href.indexOf('?')+1)+'id='+BWK.UrlParams.id+'&sharerId='+data.id;
+            	paramsObj.shareUrl = url;
+                BWK.WeixinShare(paramsObj);                          
+            });
            
         }); 
     	

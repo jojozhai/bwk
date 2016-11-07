@@ -145,5 +145,5 @@ body>a{display: none;}
 .ui-footer .ui-tiled .ui-menu-index .ui-title-img img{width: 55px;}
 .ui-footer .ui-tiled li .ui-title-name{color: #bfbfbf;font-size: 12px;position: absolute;bottom: 5px;width: 100%;text-align: center;}
 .ui-footer .ui-tiled li .ui-menu-current{color:#4cbdff;}
-
+.ui-header a.ui-btn{color:#00a5e0;}
 .ui-video{display: block;width: 100%;height: 210px;}

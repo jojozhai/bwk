@@ -32,7 +32,13 @@ angular.module('productAdminModule',[]).config(function($stateProvider) {
 			saleCount: 0,
 			saleCountPlus: 0,
 			enable: true,
-			index:0
+			index:0,
+			requireName: false,
+			requirePhone: false,
+			requireWeixin: false,
+			requireAddress: false,
+			top: false,
+			topIndex: 0
 		});
 	}
 	
@@ -90,6 +96,8 @@ angular.module('productAdminModule',[]).config(function($stateProvider) {
 	$scope.query();
 	
 }).controller('productFormCtrl',function ($scope, $uibModalInstance, product, commonService, lessonRestService, productRestService) {
+	
+	$scope.types = [{name: '咨询老师', value: '咨询老师'}, {name:'训练营', value:'训练营'}, {name:'尖儿货', value:'尖儿货'}]
 	
 	if(product.id){
 		$scope.product = productRestService.get({id: product.id});

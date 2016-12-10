@@ -41,7 +41,7 @@ import com.ymt.pz365.framework.weixin.support.message.TemplateMessage;
 @Component
 public class OrderStateChangeEventListener implements ApplicationListener<OrderStateChangeEvent> {
 
-    @Autowired
+    @Autowired(required = false)
     private ScheduleService scheduleService;
     
     @Autowired
@@ -57,6 +57,11 @@ public class OrderStateChangeEventListener implements ApplicationListener<OrderS
     private ParamService paramService;
     
     private Logger logger = LoggerFactory.getLogger(getClass());
+    
+    /**
+     * 订单接单消息
+     */
+    private String orderWorkingTemplateId = "ltcUPYOa-IvS4Ofl0pA-woceVYBoCs8FIEqwSlqZNek";
     
     /**
      * 订单完成取消
@@ -89,10 +94,26 @@ public class OrderStateChangeEventListener implements ApplicationListener<OrderS
             Product product = productRepository.findOne(order.getProducts().get(0).getGoodsId());
             Teacher teacher = product.getLesson().getTeacher();
             
-            SmsDemo.sms_api2(order.getUser().getMobile(), workingSmsCid, new String[]{
-                    order.getUser().getNickname(), teacher.getName(), teacher.getMobile(), order.getUser().getMobile()});
-            SmsDemo.sms_api2(teacher.getMobile(), workingSmsCid, new String[]{
-                    order.getUser().getNickname(), teacher.getName(), teacher.getMobile(), order.getUser().getMobile()});
+            if(product.isConsult()) {
+                SmsDemo.sms_api2(order.getUser().getMobile(), workingSmsCid, new String[]{
+                        order.getUser().getNickname(), teacher.getName(), teacher.getMobile(), order.getUser().getMobile()});
+                SmsDemo.sms_api2(teacher.getMobile(), workingSmsCid, new String[]{
+                        order.getUser().getNickname(), teacher.getName(), teacher.getMobile(), order.getUser().getMobile()});
+            }else{
+                
+                TemplateMessage templateMessage = new TemplateMessage(order.getUser().getWeixinOpenId(), orderWorkingTemplateId);
+                templateMessage.addValue("name", product.getName());
+                String content = paramService.getParam("templateContentForWorking", "您的购买已确认，工作人员会在48小时内与您联系，请保持联系畅通。霸王热线：010-56029675（早9点至晚21点）.").getValue();
+                templateMessage.addValue("remark", content);
+                try {
+                    weixinService.pushTemplateMessage(templateMessage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                
+            }
+            
+            
             
         }else if(event.getToState().equals(OrderState.FINISH)){
             

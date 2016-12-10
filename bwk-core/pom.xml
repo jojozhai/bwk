@@ -41,24 +41,24 @@
 			<version>${mirage.version}</version>
 		</dependency>
 		<dependency>
-            <groupId>com.ymt.mirage</groupId>
-            <artifactId>mirage-goods</artifactId>
-            <version>${mirage.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ymt.mirage</groupId>
-            <artifactId>mirage-order</artifactId>
-            <version>${mirage.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ymt.mirage</groupId>
-            <artifactId>mirage-clearing</artifactId>
-            <version>${mirage.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ymt.mirage</groupId>
-            <artifactId>mirage-sms</artifactId>
-            <version>${mirage.version}</version>
-        </dependency>
+			<groupId>com.ymt.mirage</groupId>
+			<artifactId>mirage-goods</artifactId>
+			<version>${mirage.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ymt.mirage</groupId>
+			<artifactId>mirage-order</artifactId>
+			<version>${mirage.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ymt.mirage</groupId>
+			<artifactId>mirage-clearing</artifactId>
+			<version>${mirage.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ymt.mirage</groupId>
+			<artifactId>mirage-sms</artifactId>
+			<version>${mirage.version}</version>
+		</dependency>
 	</dependencies>
 </project>

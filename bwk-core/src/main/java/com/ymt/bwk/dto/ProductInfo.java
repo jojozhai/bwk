@@ -81,6 +81,55 @@ public class ProductInfo {
      */
     private LessonInfo lessonInfo;
     /**
+     * 商品类型
+     */
+    private String type;
+    /**
+     * 
+     */
+    private Boolean requireName;
+    /**
+     * 
+     */
+    private Boolean requirePhone;
+    /**
+     * 
+     */
+    private Boolean requireWeixin;
+    /**
+     * 
+     */
+    private Boolean requireAddress;
+    
+    private Boolean top;
+    
+    private Integer topIndex;
+    
+    /**
+     * @return the top
+     */
+    public Boolean getTop() {
+        return top;
+    }
+    /**
+     * @param top the top to set
+     */
+    public void setTop(Boolean top) {
+        this.top = top;
+    }
+    /**
+     * @return the topIndex
+     */
+    public Integer getTopIndex() {
+        return topIndex;
+    }
+    /**
+     * @param topIndex the topIndex to set
+     */
+    public void setTopIndex(Integer topIndex) {
+        this.topIndex = topIndex;
+    }
+    /**
      * @return the id
      */
     public Long getId() {
@@ -259,6 +308,66 @@ public class ProductInfo {
      */
     public void setShareTip(String shareTip) {
         this.shareTip = shareTip;
+    }
+    /**
+     * @return the type
+     */
+    public String getType() {
+        return type;
+    }
+    /**
+     * @param type the type to set
+     */
+    public void setType(String type) {
+        this.type = type;
+    }
+    /**
+     * @return the requireName
+     */
+    public Boolean getRequireName() {
+        return requireName;
+    }
+    /**
+     * @param requireName the requireName to set
+     */
+    public void setRequireName(Boolean requireName) {
+        this.requireName = requireName;
+    }
+    /**
+     * @return the requirePhone
+     */
+    public Boolean getRequirePhone() {
+        return requirePhone;
+    }
+    /**
+     * @param requirePhone the requirePhone to set
+     */
+    public void setRequirePhone(Boolean requirePhone) {
+        this.requirePhone = requirePhone;
+    }
+    /**
+     * @return the requireWeixin
+     */
+    public Boolean getRequireWeixin() {
+        return requireWeixin;
+    }
+    /**
+     * @param requireWeixin the requireWeixin to set
+     */
+    public void setRequireWeixin(Boolean requireWeixin) {
+        this.requireWeixin = requireWeixin;
+    }
+    /**
+     * @return the requireAddress
+     */
+    public Boolean getRequireAddress() {
+        return requireAddress;
+    }
+    /**
+     * @param requireAddress the requireAddress to set
+     */
+    public void setRequireAddress(Boolean requireAddress) {
+        this.requireAddress = requireAddress;
     }
 
 }

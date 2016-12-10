@@ -139,7 +139,7 @@ public class ScheduleServiceImpl implements ScheduleService, ApplicationListener
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-//        clear();
+        clear();
     }
 
 }

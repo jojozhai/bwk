@@ -16,20 +16,72 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-lg-3">上架:</label>
-                <div class="col-lg-2">
+                <div class="col-lg-1">
                     <div class="custom-checkbox todo-checkbox">
                         <input id="selection" ng-model="product.enable" ng-checked="product.enable" type="checkbox">
                         <label for="selection" style="margin-top: 4px;"></label>
                     </div>
                 </div>
                 <label class="control-label col-lg-2">关键商品:</label>
-                <div class="col-lg-2">
+                <div class="col-lg-1">
                     <div class="custom-checkbox todo-checkbox">
                         <input id="selection2" ng-model="product.key" ng-checked="product.key" type="checkbox">
                         <label for="selection2" style="margin-top: 4px;"></label>
                     </div>
                 </div>
+                <label class="control-label col-lg-2">商品类别:</label>
+                <div class="col-lg-2">
+                    <select class="form-control input-sm" ng-model="product.type" ng-options="type.value as type.name for type in types"></select>
+                </div>
             </div>
+            
+            <div class="form-group">
+                <label class="control-label col-lg-3">置顶:</label>
+                <div class="col-lg-1">
+                    <div class="custom-checkbox todo-checkbox">
+                        <input id="selection71" ng-model="product.top" ng-checked="product.top" type="checkbox">
+                        <label for="selection71" style="margin-top: 4px;"></label>
+                    </div>
+                </div>
+                <label class="control-label col-lg-2"><span class="text_red">*</span>置顶顺序:</label>
+                <div class="col-lg-2">
+                    <input name="topIndex" ng-model="product.topIndex" type="number" class="form-control input-sm" placeholder="置顶顺序" required>
+                    <label class="control-label" ng-show="productForm.topIndex.$invalid && productForm.topIndex.$dirty">置顶顺序不能为空</label>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="control-label col-lg-3">购买必填字段:</label>
+                <div class="col-lg-2">
+                    <label>姓名:</label>
+                    <div class="custom-checkbox todo-checkbox">
+                        <input id="selection31" ng-model="product.requireName" ng-checked="product.requireName" type="checkbox">
+                        <label for="selection31" style="margin-top: 4px;"></label>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <label>手机号:</label>  
+                    <div class="custom-checkbox todo-checkbox">
+                        <input id="selection32" ng-model="product.requirePhone" ng-checked="product.requirePhone" type="checkbox">
+                        <label for="selection32" style="margin-top: 4px;"></label>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <label>微信号:</label>
+                    <div class="custom-checkbox todo-checkbox">
+                        <input id="selection33" ng-model="product.requireWeixin" ng-checked="product.requireWeixin" type="checkbox">
+                        <label for="selection33" style="margin-top: 4px;"></label>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <label>收货地址:</label>
+                    <div class="custom-checkbox todo-checkbox">
+                        <input id="selection34" ng-model="product.requireAddress" ng-checked="product.requireAddress" type="checkbox">
+                        <label for="selection34" style="margin-top: 4px;"></label>
+                    </div>
+                </div>
+            </div>
+            
             <div class="form-group"  ng-class="productForm.shareTitle.$invalid && productForm.shareTitle.$dirty ? 'has-error': ''">
                 <label class="control-label col-lg-3"><span class="text_red">*</span>&nbsp;分享标题:</label>
                 <div class="col-lg-9">

@@ -175,7 +175,7 @@
             });
         
 			//lesson report
-			BWK.api.lesson.lesson({'enable':true,'top':true,'herald':true},function(data){
+			BWK.api.lesson.lesson({'enable':true,'top':true,'herald':true,'sort':'startTime,asc'},function(data){
                 var dealObj = data.content||[];
                 _dealLessonPre(dealObj);
                 BWK.Utils.loading.hide();

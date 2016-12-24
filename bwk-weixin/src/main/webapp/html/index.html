@@ -235,7 +235,7 @@
                 for(var i=0;i<obj.length;i++){
                     str += '<li class="ui-border-t" id="'+obj[i].id+'" data-index="'+i+'"><div class="ui-list-hotImg"><span style="background-image:url('+obj[i].image+')"></span></div>';
                     str += '<div class="ui-list-info"><p class="ui-list-infoType">'+obj[i].name+'</p><p class="ui-list-infoDesc">'+obj[i].desc+'</p>';
-                    str +='<p class="ui-list-infoPerson">'+obj[i].hot+'人参与</p></div></li>';
+                    str +='<p class="ui-list-infoPerson">'+(obj[i].hot+obj[i].hotplus)+'人参与</p></div></li>';
                 }
                 $('.item-hot .ui-list').append(str);
             }

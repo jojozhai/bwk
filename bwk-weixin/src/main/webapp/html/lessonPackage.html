@@ -105,7 +105,7 @@
                 $('.ui-headerNav .ui-list-hotImg span').css({'background-image':'url('+hotObj.image+')'});
                 $('.ui-list-infoType').text(hotObj.name);
                 $('.ui-list-infoDesc').text(hotObj.desc);
-                $('.ui-list-infoPerson').text(hotObj.hot+'人参与');
+                $('.ui-list-infoPerson').text((hotObj.hot+hotObj.hotplus)+'人参与');
             }
             BWK.api.lesson.lesson(params,function(data){
                 var dealObj = data.content||[];

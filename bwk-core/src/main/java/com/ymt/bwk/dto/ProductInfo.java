@@ -24,6 +24,7 @@ import com.ymt.mirage.lesson.dto.LessonInfo;
 public class ProductInfo {
     
     private Long id;
+    private Long sid;
     /**
      * 顺序号
      */
@@ -368,6 +369,18 @@ public class ProductInfo {
      */
     public void setRequireAddress(Boolean requireAddress) {
         this.requireAddress = requireAddress;
+    }
+    /**
+     * @return the sid
+     */
+    public Long getSid() {
+        return sid;
+    }
+    /**
+     * @param sid the sid to set
+     */
+    public void setSid(Long sid) {
+        this.sid = sid;
     }
 
 }

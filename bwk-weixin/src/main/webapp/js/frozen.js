@@ -111,6 +111,10 @@ BWK.api = function() {
 	api.lesson.lessonProdectIntro = function(params,callback){
 		return api.Get('../lesson/'+params.id+'/recommend',null,callback);
 	}
+	//课程预告分享
+	api.lesson.lessonReportShare= function(params,callback){
+		return api.Post('../clearing/user2?sharerId='+params.sharerId,null,callback);
+	}
 
 	api.user = {};
 	api.user.getUser = function(params,callback){

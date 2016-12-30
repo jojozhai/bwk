@@ -57,9 +57,9 @@
             <div class="ui-lesson-headerIntro">
                 <h3><span>主题&nbsp;&nbsp;|&nbsp;&nbsp;</span><span id="name"></span></h3>
                 <p >主讲人:<span id="teacher"></span></p>
-                <p>时　间:<span id="startTime"></span></p>
-
-                <p>地　点:<span id="address"></span></p>
+                <p>课程时间:<span id="startTime"></span></p>
+                <p>课程形式:<span id="lessonType"></span></p>
+                <p class="lessonAddress" style="display:none;">课程地点:<span id="address"></span></p>
             </div>
         </div>
         <div class="demo-item item-details">
@@ -183,7 +183,6 @@
             $('#startTime').text(BWK.Utils.dateformateLocal(new Date(dealObj.startTime),"yyyy-MM-dd hh:mm"));
             $('#endTime').text(BWK.Utils.dateformateLocal(new Date(dealObj.endTime),"yyyy-MM-dd hh:mm"));
             
-            var addr = '';
             if(dealObj.online&&!dealObj.offline){
                 $(".online-off").eq(1).attr("disabled","true");
                 $(".online-off").eq(0).attr("checked","checked");
@@ -192,8 +191,14 @@
                 $(".online-off").eq(1).attr("checked","checked");
             }
             
-            addr += (dealObj.online?'线上':'') +((dealObj.online&&dealObj.offline)?'/':'')+(dealObj.offline?('线下'+'('+dealObj.address+')'):'');
-            $('#address').text(addr);
+            var lessonType = (dealObj.online?'线上':'') +((dealObj.online&&dealObj.offline)?'/':'')+ (dealObj.offline?'线下':'');
+            $('#lessonType').text(lessonType);
+
+            if(dealObj.offline){
+                $('.lessonAddress').show();    
+                $('#address').text(dealObj.address);
+            }
+
             $('#image').attr('src',dealObj.image);
             $('#content').html(dealObj.content);
             $('#desc').html(dealObj.desc);
@@ -249,6 +254,14 @@
                 BWK.api.lesson.lessonSign({"lessonId":BWK.UrlParams.id,"online":online},function(data){
                     $(".ui-dialog").dialog("hide"); 
                     BWK.Utils.Tips('已报名成功！');
+
+                    //成为上下级关系
+                    if(BWK.UrlParams.sharerId){
+                        BWK.api.lesson.lessonReportShare({sharerId:BWK.UrlParams.sharerId},function(data){
+                            //TODO
+                        });    
+                    }
+
                 });
             });
 

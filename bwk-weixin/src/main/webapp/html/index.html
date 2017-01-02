@@ -158,7 +158,7 @@
         Zepto(function($){
             BWK.Utils.loading.show();
             //轮播
-            BWK.api.lesson.swiper({'sort':'index,asc'},function(data){
+            BWK.api.lesson.swiper({'sort':'sort,asc'},function(data){
                 var dealObj = data.content||[];
                 _dealImgList(dealObj);
             });

@@ -52,19 +52,19 @@
         <div class="demo-block">
             <div class="ui-form ui-border-t">
                 <form action="#">
-                    <div class="ui-form-item ui-border-b">
+                    <div class="ui-form-item ui-border-b ui-form-realname">
                         <label>姓名：</label>
                         <input type="text" id="realname" placeholder="输入您的姓名" />
                     </div>
-                    <div class="ui-form-item ui-border-b">
+                    <div class="ui-form-item ui-border-b ui-form-mobile">
                         <label> 手机：</label>
                         <input type="text" id="mobile" placeholder="输入您的手机号" />
                     </div>
-                    <div class="ui-form-item ui-border-b">
+                    <div class="ui-form-item ui-border-b ui-form-weixin"> 
                         <label> 微信号：</label>
                         <input type="text" id="weixin" placeholder="输入您的微信号" />
                     </div>
-                    <div class="ui-form-item ui-border-b">
+                    <div class="ui-form-item ui-border-b ui-form-address"> 
                         <label> 收货地址：</label>
                         <input type="text" id="address" placeholder="输入您的收货地址" />
                     </div>
@@ -116,6 +116,20 @@
             $('#teacherIntro').text(data.lessonInfo.teacherInfo.title);
             $('#dataNum').text((data.saleCountPlus+data.saleCount)+"人约见");
             $('#courseMoney').text("￥"+data.price);
+            
+            if(!productObj.requireName){
+				$('.ui-form-realname').hide();
+    		}
+			if(!productObj.requirePhone ){
+				$('.ui-form-mobile').hide();
+    		}
+			if(!productObj.requireWeixin ){
+				$('.ui-form-weixin').hide();
+    		}
+    		if(!productObj.requireAddress ){
+    			$('.ui-form-address').hide();
+    		}
+            
         });
 
         BWK.api.user.getUser(null,function(data){

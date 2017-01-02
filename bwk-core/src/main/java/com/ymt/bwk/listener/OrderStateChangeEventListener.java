@@ -13,6 +13,7 @@ package com.ymt.bwk.listener;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,11 +114,11 @@ public class OrderStateChangeEventListener implements ApplicationListener<OrderS
                 
             }
             
-            
-            
         }else if(event.getToState().equals(OrderState.FINISH)){
             
             scheduleService.clear(event.getOrderId());
+            
+            
             
         }else if(event.getToState().equals(OrderState.CANCEL)){
             
@@ -141,18 +142,23 @@ public class OrderStateChangeEventListener implements ApplicationListener<OrderS
             
             order.setCompleteTime(new Date());
             
-            TemplateMessage templateMessage = new TemplateMessage(order.getUser().getWeixinOpenId(), orderCompleteTemplateId);
-            templateMessage.addValue("keyword1", product.getName());
-            templateMessage.addValue("keyword2", order.getAmount().toString());
-            String content = paramService.getParam("templateContentForCompleteOrder", "%s您好，您的%s订单已经完成，请到个人中心对老师进行评价，如有异议请于48小时内联系客服，48小时后系统将自动将您的付款支付给老师。").getValue();
-            templateMessage.addValue("remark", String.format(content, order.getUser().getNickname(), product.getName()));
-            try {
-                weixinService.pushTemplateMessage(templateMessage);
-            } catch (Exception e) {
-                e.printStackTrace();
+            if(StringUtils.equals("咨询老师", product.getType())) {
+                
+                TemplateMessage templateMessage = new TemplateMessage(order.getUser().getWeixinOpenId(), orderCompleteTemplateId);
+                templateMessage.addValue("keyword1", product.getName());
+                templateMessage.addValue("keyword2", order.getAmount().toString());
+                String content = paramService.getParam("templateContentForCompleteOrder", "%s您好，您的%s订单已经完成，请到个人中心对老师进行评价，如有异议请于48小时内联系客服，48小时后系统将自动将您的付款支付给老师。").getValue();
+                templateMessage.addValue("remark", String.format(content, order.getUser().getNickname(), product.getName()));
+                try {
+                    weixinService.pushTemplateMessage(templateMessage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                
+                SmsDemo.sms_api2(order.getUser().getMobile(), complateSmsCid, new String[]{order.getId().toString()});
+                
             }
             
-            SmsDemo.sms_api2(order.getUser().getMobile(), complateSmsCid, new String[]{order.getId().toString()});
             
         }
     }

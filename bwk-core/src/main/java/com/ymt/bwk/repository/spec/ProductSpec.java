@@ -37,6 +37,7 @@ public class ProductSpec extends PzSimpleSpecification<Product, ProductInfo> {
     protected void addCondition(QueryWraper<Product> queryWraper) {
         addEqualsCondition(queryWraper, "sid", "id");
         addEqualsCondition(queryWraper, "enable");
+        addEqualsCondition(queryWraper, "top");
         if(StringUtils.isNotBlank(getCondition().getName())) {
             Predicate condition1 = queryWraper.getCb().like(getPath(queryWraper.getRoot(), "name"), "%"+getCondition().getName()+"%");
             Predicate condition2 = queryWraper.getCb().like(getPath(queryWraper.getRoot(), "desc"), "%"+getCondition().getName()+"%");

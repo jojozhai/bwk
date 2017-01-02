@@ -143,6 +143,11 @@ public class Product extends AbstractGoods {
         this.requireAddress = requireAddress;
     }
 
+    /**
+     * @return
+     * @author zhailiang
+     * @since 2017年1月2日
+     */
     public boolean isConsult() {
         if(StringUtils.isBlank(type)) {
             return true;

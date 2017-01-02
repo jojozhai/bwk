@@ -164,10 +164,10 @@
             });
 			
             $('#searchPro').on('keyup',function(){
-                params.page = 0;
-                pageNum = 0;
-                params.name = $.trim($(this).val());
-                initReq(false,true);   
+                BWK.api.lesson.lesson({'enable':true,'herald':false,page:0,size:10,'sort':'createdTime,asc','keywords':$.trim($(this).val())},function(data){
+                    var dealObj = data.content||[]; 
+                    _dealList(dealObj,true);               
+                });  
             });
      
             $('.ui-list-link').on('click','li',function(){

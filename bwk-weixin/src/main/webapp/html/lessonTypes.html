@@ -164,7 +164,7 @@
             });
 			
             $('#searchPro').on('keyup',function(){
-                BWK.api.lesson.lesson({'enable':true,'herald':false,page:0,size:10,'sort':'createdTime,desc','keywords':$.trim($(this).val())},function(data){
+                BWK.api.lesson.lesson({'enable':true,'herald':false,page:0,size:10,'sort':'createdTime,desc','keyword':$.trim($(this).val())},function(data){
                     var dealObj = data.content||[]; 
                     _dealList(dealObj,true);               
                 });  

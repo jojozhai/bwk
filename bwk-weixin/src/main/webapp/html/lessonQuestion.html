@@ -92,7 +92,7 @@
                 location.href = $(this).data('href');
             }
         });
-        BWK.api.lesson.lessonProdectList({'enable':true,'sort':'createdTime,desc','top':true,'sort':'topIndex,desc'},function(data){
+        BWK.api.lesson.lessonProdectList({'enable':true,'top':true,'sort':'topIndex,asc'},function(data){
             var dealObj = data.content||[]; 
             _dealQuestions(dealObj,false);
             initReq(true,false);

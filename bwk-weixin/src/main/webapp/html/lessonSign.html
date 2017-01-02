@@ -183,7 +183,7 @@
             var dealObj = shareObj = data||{};
             $('#name').text(dealObj.name);
             $('#teacher').text(dealObj.teacherInfo.name);
-            $('#startTime').text(BWK.Utils.dateformateLocal(new Date(dealObj.startTime),"yyyy-MM-dd hh:mm"));
+            $('#startTime').text(BWK.Utils.dateformateLocal(new Date(dealObj.startTime),"yyyy/MM/dd hh:mm"));
             $('#endTime').text(BWK.Utils.dateformateLocal(new Date(dealObj.endTime),"yyyy-MM-dd hh:mm"));
             $('#tip').text(dealObj.tip);
             if(dealObj.online&&!dealObj.offline){

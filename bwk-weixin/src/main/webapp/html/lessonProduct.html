@@ -215,7 +215,8 @@
                listCont.removeClass("ui-heightAuto");
                $(this).find("span").html("展开显示更多");
            }
-        })
+        });
+       $('.view-more').trigger('click');
 
     });
     
@@ -240,7 +241,7 @@
         $('.ui-btn-toBuy').click(function(){
             location.href = 'lessonProductDate.html?id='+BWK.UrlParams.id;
         });
-        //$('.ui-course-title').trigger('tap');
+        $('.ui-course-title').trigger('tap');
 
     }
 

@@ -19,9 +19,10 @@
     #teacherIntro{float: left;width:100px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
     #courseMoney{margin-right:16px;}
     .ui-form-item lable,.ui-form-item input{color:#424242;}
-    .ui-form-item input{border:1px solid #eee;padding:4px;}
+    /* .ui-form-item input{border:1px solid #eee;padding:4px;}
     .ui-form-item #realname{margin-left: 66px;width: 120px;}
     .ui-form-item #mobile{margin-left: 66px;width: 160px;}
+   */  
     .ui-teacherAd .ui-avatar{width:60px;height:60px;}
     .ui-teacherAd,.demo-massage{margin:10px;background: #fff;}
     .ui-user-city input{width:78px;text-align: center;}
@@ -97,6 +98,7 @@
         }
     });
     var sharerId,payObj;
+    var productObj;
     Zepto(function($) {
     	//BWK.Utils.createProvince($('#province'));
         //问题输入
@@ -107,7 +109,7 @@
         })
 
         BWK.api.lesson.lessonProdectDetail(BWK.UrlParams.id,function(data){
-        	
+        	productObj = data;
             $('#teacherImg').css({'background-image':'url('+data.lessonInfo.teacherInfo.image+')'});
             $('#name').text(data.name);
             $('#teacherName').text(data.lessonInfo.teacherInfo.name);
@@ -120,11 +122,13 @@
              
             $('#realname').val(data.realname);
             $('#mobile').val(data.mobile);
-           $('#province').val(data.province||"0");
+            $('#weixin').val(data.weixin);
+            //$('#province').val(data.province||"0");
+            $('#address').val(data.address);
             /*$('#city').val(data.city); */
-            if(data.province&&data.city){
+            /* if(data.province&&data.city){
              	BWK.Utils.createCity(cityDict[data['province']].sub,data['city']);
-             }
+             } */
 
         });
 
@@ -136,6 +140,26 @@
             }
         } 
         $('#btnApply').click(function(){
+        	
+        	if(productObj){
+				if(productObj.requireName && !$('#realname').val()){
+					BWK.Utils.dialogAlert('你好，为方便联系，请留下您的姓名！');
+					return false;
+        		}
+				if(productObj.requirePhone && !$('#mobile').val()){
+					BWK.Utils.dialogAlert('你好，为方便联系，请留下您的手机号！');
+					return false;
+        		}
+				if(productObj.requireWeixin && !$('#weixin').val()){
+					BWK.Utils.dialogAlert('你好，为方便联系，请留下您的微信号！');
+					return false;
+        		}
+        		if(productObj.requireAddress && !$('#address').val()){
+        			BWK.Utils.dialogAlert('你好，为方便联系，请留下您的地址！');
+					return false;
+        		}
+        	}
+        	
             BWK.Utils.loading.show();
             //预约购买商品
             BWK.api.lesson.lessonProdectBuy(params,function(data){
@@ -163,8 +187,8 @@
                     }
                 });
     			
-    		    params.push({"name":"province","value":$('#province').val()});
-    		    params.push({"name":"city","value":$('#city').val()});
+    		    //params.push({"name":"province","value":$('#province').val()});
+    		    //params.push({"name":"city","value":$('#city').val()});
                 BWK.api.user.updateUser(params,function(data){
                 
                 });

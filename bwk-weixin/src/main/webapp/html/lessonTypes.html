@@ -50,7 +50,12 @@
             </ul>
         </footer>
         <section class="ui-container">
-           
+           <section class="ui-input-wrap">
+                <div class="ui-input ui-border-radius">
+                    <input type="text" id="searchPro" name="" value="" placeholder="查询课程或老师名字" />
+                </div>
+                <span class="ui-btn-search"></span>
+            </section>
             <div class="ui-lessonType">
                 <div class="ui-row-flex">
                     <div class="ui-col active">
@@ -113,7 +118,7 @@
         <script>
         
 
-        var params = {'enable':true,'herald':false,'typeId':BWK.UrlParams.id,page:0,size:6};
+        var params = {'enable':true,'herald':false,'typeId':BWK.UrlParams.id,page:0,size:6,top:false,'sort':'createdTime,asc'};
         var pageNum = 0;
         Zepto(function($){
             $('.ui-list li,.ui-tiled li').tap(function(){
@@ -132,17 +137,38 @@
                     }
                 }
                params.typeId = $('.ui-lessonType .ui-col').eq(0).attr('id');
-               initReq(true,true);
+               
+               BWK.api.lesson.lesson({'enable':true,'herald':false,'typeId':params.typeId,top:true},function(data){
+                   var dealObj = data.content||[]; 
+                   _dealList(dealObj,true);
+                   initReq(true,false);   
+               }); 
+               
             });
             
             $('.ui-lessonType').on('click','.ui-col',function(){
                  $('.ui-lessonType .active').removeClass('active');
                   $(this).addClass('active');
+                  if(params.name){
+                	  params.name = null;
+                  }
                 //分页查询TODO
                params.typeId = $(this).attr('id');
-                initReq(true,true);
-            });
+               
+               BWK.api.lesson.lesson({'enable':true,'herald':false,'typeId':params.typeId,top:true},function(data){
+                   var dealObj = data.content||[]; 
+                   _dealList(dealObj,true);
+                   initReq(true,false);   
+               }); 
 
+            });
+			
+            $('#searchPro').on('keyup',function(){
+                params.page = 0;
+                pageNum = 0;
+                params.name = $.trim($(this).val());
+                initReq(false,true);   
+            });
      
             $('.ui-list-link').on('click','li',function(){
                 location.href = "lessonContents.html?id="+$(this).attr('id');

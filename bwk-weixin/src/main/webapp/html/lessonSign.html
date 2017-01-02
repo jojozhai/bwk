@@ -34,6 +34,7 @@
     .ui-form-item label,.ui-form-item input,.ui-form-item span,.ui-form-item select{font-size:12px;}
     .ui-form-item select option{list-style:none;}
     .ui-user-city input{width:70px;text-align: center;padding:0}
+    .ui-user-city .ui-select{margin-right:0;width:50%;}
     #content{padding: 0 10px;position: relative;z-index: 10;}
     #content img{width: 100%;}
     .ui-footer{border-top: 0;}
@@ -60,6 +61,7 @@
                 <p>课程时间:<span id="startTime"></span></p>
                 <p>课程形式:<span id="lessonType"></span></p>
                 <p class="lessonAddress" style="display:none;">课程地点:<span id="address"></span></p>
+                <p style="color:red;">温馨提示:<span id="tip" style="color:#000;"></span></p>
             </div>
         </div>
         <div class="demo-item item-details">
@@ -182,7 +184,7 @@
             $('#teacher').text(dealObj.teacherInfo.name);
             $('#startTime').text(BWK.Utils.dateformateLocal(new Date(dealObj.startTime),"yyyy-MM-dd hh:mm"));
             $('#endTime').text(BWK.Utils.dateformateLocal(new Date(dealObj.endTime),"yyyy-MM-dd hh:mm"));
-            
+            $('#tip').text(dealObj.tip);
             if(dealObj.online&&!dealObj.offline){
                 $(".online-off").eq(1).attr("disabled","true");
                 $(".online-off").eq(0).attr("checked","checked");

@@ -84,7 +84,7 @@
     <script>
     
 
-    var params = {'enable':true,'page':0,'size':5,'sort':'sort,asc'};
+    var params = {'enable':true,'page':0,'size':5,'sort':'sort,asc','top':false};
     var pageNum = 0;
     Zepto(function($) {
         $('.ui-tiled li').tap(function() {
@@ -92,9 +92,12 @@
                 location.href = $(this).data('href');
             }
         });
-        
-        initReq(true,true);
-
+        BWK.api.lesson.lessonProdectList({'enable':true,'sort':'createdTime,asc','top':true},function(data){
+            var dealObj = data.content||[]; 
+            _dealQuestions(dealObj,false);
+            initReq(true,false);
+        }); 
+ 
         $('#searchPro').on('keyup',function(){
             params.page = 0;
             pageNum = 0;

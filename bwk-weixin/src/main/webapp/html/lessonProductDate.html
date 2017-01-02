@@ -59,7 +59,15 @@
                         <label> 手机：</label>
                         <input type="text" id="mobile" placeholder="输入您的手机号" />
                     </div>
-                    <div class="ui-form-item ui-border-b ui-user-city">
+                    <div class="ui-form-item ui-border-b">
+                        <label> 微信号：</label>
+                        <input type="text" id="weixin" placeholder="输入您的微信号" />
+                    </div>
+                    <div class="ui-form-item ui-border-b">
+                        <label> 收货地址：</label>
+                        <input type="text" id="address" placeholder="输入您的收货地址" />
+                    </div>
+                    <!-- <div class="ui-form-item ui-border-b ui-user-city">
                         <span style="float:left;"> 城市：</span>
                         <div class="ui-select-group" style="margin-left:64px;">
 						     <div class="ui-select">
@@ -71,7 +79,7 @@
 						          </select>
 						     </div>
 						</div>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>
@@ -90,7 +98,7 @@
     });
     var sharerId,payObj;
     Zepto(function($) {
-    	BWK.Utils.createProvince($('#province'));
+    	//BWK.Utils.createProvince($('#province'));
         //问题输入
         $(".ui-masssage-cont").click(function(){
             if($(this).html()=="请在500字以内 描述你想咨询的问题"){

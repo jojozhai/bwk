@@ -174,7 +174,14 @@ BWK.UrlParams = {};
 		//window.localStorage.removeItem('sharerId');
 	//} 
   	
-  }	
+  }
+  //百度统计
+  var _hmt = _hmt || [];
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?109cf1870b07ff734bbd4c94e4845f1e";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+	
 })();
 BWK.Utils = {};
 BWK.Utils.dateformate = function(date){

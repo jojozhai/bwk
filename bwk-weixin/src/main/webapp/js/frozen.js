@@ -4,10 +4,10 @@ if (!window.BWK) {
 	window.BWK = {};
 }
 BWK.globalConfig = {
-	appId:'wx1e7083d81297c15f',
-	redirect_uri:'http://wx.chenhao-life.com/weixin/weixin/oauth',
-	//appId:'wx016ebcb63afc3dc1',
-	//redirect_uri:'http://wx.51bwk.com/weixin/weixin/oauth',
+	//appId:'wx1e7083d81297c15f',
+	//redirect_uri:'http://wx.chenhao-life.com/weixin/weixin/oauth',
+	appId:'wx016ebcb63afc3dc1',
+	redirect_uri:'http://wx.51bwk.com/weixin/weixin/oauth',
 	DEBUG:false
 }
 BWK.api = function() {	

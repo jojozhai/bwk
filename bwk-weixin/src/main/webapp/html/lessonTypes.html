@@ -166,7 +166,9 @@
             $('#searchPro').on('keyup',function(){
                 BWK.api.lesson.lesson({'enable':true,'herald':false,page:0,size:10,'sort':'createdTime,desc','keyword':$.trim($(this).val())},function(data){
                     var dealObj = data.content||[]; 
-                    _dealList(dealObj,true);               
+                    _dealList(dealObj,true);  
+                    $('.ui-loading-wrap').hide();
+                    $(window).unbind('scroll');
                 });  
             });
      

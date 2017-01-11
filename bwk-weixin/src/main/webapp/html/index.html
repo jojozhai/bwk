@@ -28,7 +28,7 @@
             .item-ad .ui-list li{padding: 5px 0;}
             .item-ad .ui-list li h4{font-size: 14px;color: #4a4a4a;}
             .item-ad .ui-list li .ui-info-desc{font-size: 10px;color: #c8c8c8;margin-top: 5px;}
-            
+
             .item-hot{background-color: #fff;}
             .item-hot .demo-desc{font-size: 15px;color: #454545;}
             .item-hot .demo-desc img{width: 20px;display: block;float: left;margin-right: 10px;}
@@ -49,10 +49,10 @@
             }
             .item-hot .ui-list li .ui-list-info .ui-list-infoDesc{font-size: 12px;padding-top: 10px;}
             .item-hot .ui-list li .ui-list-info .ui-list-infoPerson{font-size:12px;position: absolute;bottom: 0;width: 100%;padding: 5px 0;}
-            
+
         </style>
     </head>
-    
+
     <body ontouchstart>
         <footer class="ui-footer ui-footer-btn">
             <ul class="ui-tiled ui-border-t">
@@ -105,14 +105,14 @@
                         <h5>兴趣爱好</h5>
                     </div>
                 </div>
-                
+
             </div>
-            
+
             <div class="demo-item item-ad">
                 <p class="demo-desc"><img src="../img/calendar.png" />课程预告<a href="lessonReport.html">更多 ></a></p>
                 <div class="demo-block">
                     <ul class="ui-list ui-border-tb">
-                        <!-- 
+                        <!--
                         <li class="ui-border-t">
                             <div class="ui-avatar">
                                 <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
@@ -147,7 +147,7 @@
             </div>
 
         </section><!-- /.ui-container-->
-        
+
         <script>
         $('.ui-list li,.ui-tiled li').click(function(){
             if($(this).data('href')){
@@ -158,11 +158,11 @@
         Zepto(function($){
             BWK.Utils.loading.show();
             //轮播
-            BWK.api.lesson.swiper({'sort':'sort,asc'},function(data){
+            BWK.api.lesson.swiper({'sort':'index,asc'},function(data){
                 var dealObj = data.content||[];
                 _dealImgList(dealObj);
             });
-  	
+
          	//分类 TODO
          	BWK.api.lesson.lessonType(null,function(data){
                 var dealObj = data.children||[];
@@ -173,7 +173,7 @@
                     location.href = "lessonTypes.html?id="+$(this).attr('id');
                 });
             });
-        
+
 			//lesson report
 			BWK.api.lesson.lesson({'enable':true,'top':true,'herald':true,'sort':'startTime,asc'},function(data){
                 var dealObj = data.content||[];
@@ -184,12 +184,12 @@
                 var dealObj = data.children||[];
                 dealItemHot = dealObj;
                 _dealSurprise(dealObj);
-            }); 
-			
+            });
+
         });
-        
+
         function _dealImgList(obj){
-            
+
             $('.ui-slider-content').css({width:obj.length*100+'%'});
             $('.ui-slider-content').empty();
             var str = "";
@@ -198,22 +198,22 @@
                     str += '<li><a href="'+obj[i].link+'" ><img src="'+obj[i].image+'" /></a></li>';
                 }
                 $('.ui-slider-content').append(str);
-                
+
                 var slider = new fz.Scroll('.ui-slider', {
                     role: 'slider',
                     indicator: true,
                     autoplay: true,
                     interval: 3000
-                });  
+                });
             }
-                 
+
         }
         /**课程预告**/
         function _dealLessonPre(obj){
         	var str = "";
             if(obj&&obj.length>0){
                 for(var i=0;i<obj.length;i++){
-                    
+
                     var endDate = new Date(obj[i].startTime);
                     var mdstr = (endDate.getMonth()+1)+'月'+endDate.getDate()+'日';
                     var timestr = (endDate.getHours()<10?'0'+endDate.getHours():endDate.getHours())+':'+(endDate.getMinutes()<10?'0'+endDate.getMinutes():endDate.getMinutes());
@@ -226,9 +226,9 @@
             $('.item-ad ul').on('click','li',function(){
                 location.href = "lessonSign.html?id="+$(this).attr('id');
             });
-            
+
         }
-        /**专题**/                  
+        /**专题**/
         function _dealSurprise(obj){
         	var str = "";
             if(obj&&obj.length>0){
@@ -239,16 +239,16 @@
                 }
                 $('.item-hot .ui-list').append(str);
             }
-            
+
             $('.item-hot ul').on('click','li',function(){
                 location.href = "lessonPackage.html?id="+$(this).attr('id');
                 var selIndex = $(this).data('index');
                 if(window.localStorage){
                     window.localStorage.setItem('hotObj',JSON.stringify(dealItemHot[selIndex]));
-                } 
+                }
             });
         }
-        
+
         </script>
     </body>
 </html>

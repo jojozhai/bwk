@@ -7,8 +7,8 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<pzx.admin.version>1.0.0-SNAPSHOT</pzx.admin.version>
-		<pzx.framework.version>1.0.0-SNAPSHOT</pzx.framework.version>
+		<pzx.admin.version>1.0.1-SNAPSHOT</pzx.admin.version>
+		<pzx.framework.version>1.0.1-SNAPSHOT</pzx.framework.version>
 		<mirage.version>1.0.0-SNAPSHOT</mirage.version>
 		<mirage.bwk.version>1.0.0-SNAPSHOT</mirage.bwk.version>
 	</properties>
@@ -92,7 +92,6 @@
 	<modules>
 		<module>../bwk-admin</module>
 		<module>../bwk-core</module>
-		
 		<module>../bwk-weixin</module>
 	</modules>
 </project>

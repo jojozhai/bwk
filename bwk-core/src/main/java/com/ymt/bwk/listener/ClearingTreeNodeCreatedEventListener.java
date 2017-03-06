@@ -63,7 +63,7 @@ public class ClearingTreeNodeCreatedEventListener implements ApplicationListener
             
             SmsDemo.sms_api2(parent.getUser().getMobile(), cidForClearingNodeAdd, new String[]{user.getUser().getNickname()});
             if(parent.getParent() != null) {
-                SmsDemo.sms_api2(parent.getParent().getUser().getMobile(), cidForClearingNodeAdd2, new String[]{parent.getUser().getNickname(), user.getUser().getNickname()});
+//                SmsDemo.sms_api2(parent.getParent().getUser().getMobile(), cidForClearingNodeAdd2, new String[]{parent.getUser().getNickname(), user.getUser().getNickname()});
             }
             
             TemplateMessage templateMessage = new TemplateMessage(user.getUser().getWeixinOpenId(), clearingNodeAddTemplate);

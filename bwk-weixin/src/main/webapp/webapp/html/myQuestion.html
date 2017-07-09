@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>我咨询的老师</title>
+    <link rel="stylesheet" href="../css/frozen.css">
+    <link rel="stylesheet" href="../css/public.css">
+    <script src="../lib/zepto.min.js"></script>
+    <script src="../js/frozen.js"></script>
+    <style type="text/css">
+    .ui-tab-content {margin-top: 0;}
+    .demo-block.ui-myteacher {margin: 10px;}
+    .ui-myteacher  .ui-list>li {margin-left: 0;padding: 15px;}
+    .demo-block.ui-myteacher .ui-list{background: #f6f6f6;}
+    .demo-block.ui-myteacher .ui-list li{margin-bottom: 20px;background: #fff;}
+    .ui-list-info .ui-teacher-name{color:#333;}
+    .ui-list-info .ui-nowrap{line--height:24px;}
+    .ui-btn-sure{margin-top:80px;color:#999;font-size: 12px;text-align: center;}
+    .ui-btn-sure a{color: #999;}
+    .ui-btn-sure .ui-teleph{margin-top:40px;}
+    .item-passed .ui-list li{margin-left:0;}
+    .item-passed .ui-avatar{margin: 20px 10px 20px 10px;height: 60px;width: 60px;}
+    .item-passed h4{height:30px;color:#585858;}
+    .pad16{padding-left:16px;}
+    .btn-r{color: #fff;border-radius: 11px;padding: 4px 10px;float: right;background-color:#f66161;}
+    .btn-r.btn-rb{background-color:#18b4ed;margin-right: 8px;}
+    </style>
+</head>
+
+<body ontouchstart>
+    <header class="ui-header ui-header-positive ui-border-b">
+        <h1>我咨询的老师</h1>
+    </header>
+    <section class="ui-container">
+        <div class="demo-block">
+            <div class="ui-tab">
+                <ul class="ui-tab-nav ui-border-b">
+                    <li class="current">进行中</li>
+                    <li>已结束</li>
+                </ul>
+                <ul class="ui-tab-content" style="width:200%">
+                    <li>
+                        <div class="demo-block ui-myteacher">
+                            <ul class="ui-list">
+                                <li>
+                                    <div class="ui-avatar">
+                                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+                                    </div>
+                                    <div class="ui-list-info">
+                                        <h4 class="ui-nowrap">远程：高数老不回怎么办，点击看看</h4>
+                                        <p class="ui-nowrap ui-teacher-name">OIHIOD</p>
+                                        <p class="ui-nowrap"><span>北京大学博士</span><button class="btn-r">取消</button><button class="btn-r btn-rb">确定</button></p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="ui-avatar">
+                                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+                                    </div>
+                                    <div class="ui-list-info">
+                                        <h4 class="ui-nowrap">远程：高数老不回怎么办，点击看看</h4>
+                                        <p class="ui-nowrap ui-teacher-name">马云</p>
+                                        <p class="ui-nowrap"><span>这是内容</span><button class="btn-r">取消</button><button class="btn-r btn-rb">确定</button></p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="ui-btn-sure">
+                                <button class="ui-btn-lg ui-btn-primary">确定</button>
+                                <p class="ui-teleph">霸王课热线</p>
+                                <p><a  href="tel:010-56029675">010-56029675</a></p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="item-passed">
+                        <div class="demo-block ui-item-list">
+                            <ul class="ui-list">
+                                <li class="ui-border-b">
+                                    <div class="ui-avatar">
+                                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+                                    </div>
+                                    <div class="ui-list-info">
+                                        <h4 class="ui-nowrap">职业规划</h4>
+                                        <p class="ui-nowrap"><span>李季</span><span class="pad16">北京大学博士</span><button class="btn-r">已取消</button></p>
+                                    </div>
+                                </li>
+                                <li class="ui-border-b">
+                                    <div class="ui-avatar">
+                                        <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+                                    </div>
+                                    <div class="ui-list-info">
+                                        <h4 class="ui-nowrap">职业规划</h4>
+                                        <p class="ui-nowrap"><span>李季</span><span class="pad16">北京大学博士</span><button class="btn-r btn-rb">已完成</button></p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="ui-loading-wrap">
+                                <p>加载中</p>
+                                <i class="ui-loading"></i>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- /.ui-container-->
+    <script>
+    (function() {
+        var tab = new fz.Scroll('.ui-tab', {
+            role: 'tab',
+            autoplay: false,
+            interval: 3000
+        });
+        /* 滑动开始前 */
+        tab.on('beforeScrollStart', function(fromIndex, toIndex) {
+            console.log(fromIndex, toIndex); // from 为当前页，to 为下一页
+        })
+    })();
+    $('.ui-list li,.ui-tiled li').click(function() {
+        if ($(this).data('href')) {
+            location.href = $(this).data('href');
+        }
+    });
+
+    Zepto(function($) {
+        //列表 finish=true/false  
+        BWK.api.user.userOrderList({'finish':false}, function(data) {
+            var dealObj = data.content || [];
+            _dealImgList(dealObj);
+
+            //state 有INIT(进行中) FINISH（完成） 和 CANCEL（取消）
+        });
+
+        $('.ui-list').on('click','li',function(){
+             location.href = "lessonProduct.html?id=1042";
+        });
+
+    });
+
+    function _dealImgList(obj) {
+
+        $('.ui-slider-content').css({
+            width: obj.length * 100 + '%'
+        });
+        $('.ui-slider-content').empty();
+        var str = "";
+        if (obj && obj.length > 0) {
+            for (var i = 0; i < obj.length; i++) {
+                str += '<li><a href="subjectDetail.html?id=' + obj[i].id + '&name=' + obj[i].name + '" ><img src="' + obj[i].image + '"></a></li>';
+            }
+            $('.ui-slider-content').html(str);
+
+            var slider = new fz.Scroll('.ui-slider', {
+                role: 'slider',
+                indicator: true,
+                autoplay: true,
+                interval: 3000
+            });
+        }
+
+    }
+    </script>
+</body>
+
+</html>

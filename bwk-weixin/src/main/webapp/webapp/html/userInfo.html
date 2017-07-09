@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>报名课程</title>
+    <link rel="stylesheet" href="../css/frozen.css">
+    <link rel="stylesheet" href="../css/public.css">
+    <script src="../lib/zepto.min.js"></script>
+    <script src="../js/frozen.js"></script>
+    <style type="text/css">
+    .ui-userinfo-header{position: relative;font-size: 16px;color: #fff}
+    .ui-userinfo-header .ui-setBg{display: block;height: 200px;width: 100%;}
+    .ui-userinfo-header .ui-userP{position: absolute;text-align: center;top: 50%;margin-top: -40px;left: 50%;margin-left: -47px;}
+    .ui-userP .ui-avatar{display: block;height:80px;width: 80px;}
+    .ui-form-item label:not(.ui-switch):not(.ui-checkbox):not(.ui-checkbox-s):not(.ui-radio){width: 80px;}
+    .ui-sign-lesson .ui-dialog-cnt{width: 80%;}
+    .ui-sign-lesson .ui-dialog-hd{background-color: #fff; margin-bottom: 10px;}
+    .ui-sign-lesson .ui-dialog-hd h3{font-weight: 600;font-size: 14px;color: #3d3d3d;background-color:#fff;}
+    .ui-sign-lesson .ui-form label{color: #424242;}
+    .ui-sign-lesson .but-wrap {text-align: center;background-color: #fff;padding: 20px 0;}
+    .ui-sign-lesson .but-wrap label{color: #7e7e7e;}
+    .ui-sign-lesson .but-wrap .ui-btn-primary{width: 150px;margin: 20px auto 10px;height: 35px;line-height: 35px;}
+    </style>
+</head>
+
+<body ontouchstart>
+    <section class="ui-container">
+        <div class="demo-block ui-userinfo-header">
+            <img class="ui-setBg" src="http://placeholder.qiniudn.com/640x200" />
+            <div class="ui-userP">
+                <span class="ui-avatar"></span>
+            </div>
+        </div>
+        <div class="demo-block ui-sign-lesson">
+            
+                    <div class="demo-block">
+                        <div class="ui-form ui-border-t">
+                            <form action="#">
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        姓名：
+                                    </label>
+                                    <input type="text" id="realname" class="ui-toWd" placeholder="输入您的姓名" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        性别：
+                                    </label>
+                                    <input type="text" id="sex" class="ui-toWd" placeholder="输入您的性别" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        职业：
+                                    </label>
+                                    <input type="text" id="participationCount" class="ui-toWd" placeholder="输入您的职业" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        年龄：
+                                    </label>
+                                    <input type="text" id="birthday" class="ui-toWd" placeholder="输入您的年龄" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        手机号：
+                                    </label>
+                                    <input type="text" id="mobile" class="ui-thWd" placeholder="输入您的手机号" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        微信号：
+                                    </label>
+                                    <input type="text" id="weixin" class="ui-thWd" placeholder="输入您的微信号" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        微信昵称：
+                                    </label>
+                                    <input type="text" id="nickname" class="ui-foWd" placeholder="输入您的微信昵称" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        所在城市：
+                                    </label>
+                                    <input type="text" id="city" class="ui-foWd" placeholder="输入您的所在城市" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="but-wrap">
+                        
+                        <button class="ui-btn-lg ui-btn-primary" id="btn-submit">提交</button>
+                    </div>
+                
+            
+        </div>
+    </section>
+    <!-- /.ui-container-->
+    <script>
+    
+    Zepto(function($) {
+    	
+    	
+        $('#btn-submit').click(function(){
+            
+            //报名
+            var params  = [];
+            $('form input').each(function(){
+                if($(this).val()){
+                    params.push({"name":$(this).attr('id'),"value":$(this).val()});
+                }
+            });
+
+            BWK.api.user.updateUser(params,function(data){
+
+                
+            });
+
+        })
+        //查询个人信息
+        BWK.api.user.getUser(null,function(data){
+            console.log(data);
+            _dealInfo(data);
+        });
+        
+
+
+    });
+  
+    function _dealInfo(obj) {
+        $("#realname").val(obj.username);
+        $("#sex").val(obj.sex);
+        $("#participationCount").val(obj.participationCount);
+        $("#birthday").val(obj.birthday);
+        $("#mobile").val(obj.mobile);
+        $("#weixin").val(obj.weixin);
+        $("#nickname").val(obj.nickname);
+        $("#city").val(obj.city);
+
+
+    }
+    </script>
+</body>
+
+</html>

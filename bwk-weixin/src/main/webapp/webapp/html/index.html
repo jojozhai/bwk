@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="format-detection" content="telephone=no">
+        <title>霸王课</title>
+        <link rel="stylesheet" href="../css/frozen.css">
+        <link rel="stylesheet" href="../css/public.css">
+        <script src="../lib/zepto.min.js"></script>
+        <script src="../js/frozen.js"></script>
+        <style type="text/css">
+            .ui-slider{height: 200px;padding-top: 0;}
+            .ui-slider img{height: 200px;}
+            .ui-slider-indicators{-webkit-box-pack:center;}
+            .ui-slider-indicators li{background-color: #fff;}
+            .ui-slider-indicators li.current{background-color: rgba(0,0,0,0.3);}
+            .ui-slider-indicators li.current:before{background-color: rgba(0,0,0,0.3);}
+            .ui-row-flex{background-color: #fff;}
+            .ui-row-flex .ui-col{background: none;border: none;}
+            .ui-row-flex .ui-col h5{font-size: 12px;color: #9e9e9e;}
+            .item-ad{margin: 10px;background-color: #fff;}
+            .item-ad .demo-desc{font-size: 14px;color: #888;}
+            .item-ad .demo-desc img,.item-hot .demo-desc img{width: 25px;display: block; float: left;margin-right: 5px;}
+            .item-ad .demo-desc a{float:right;color: #888;font-size: 12px;}
+            .item-ad .ui-list .ui-avatar{margin-right: 20px;}
+            .item-ad .ui-list{margin-bottom: 0;}
+            .item-ad .ui-list li h4{font-size: 14px;color: #4a4a4a;}
+            .item-ad .ui-list li .ui-info-desc{font-size: 10px;color: #c8c8c8;margin-top: 5px;}
+            
+            .item-hot{background-color: #fff;}
+            .item-hot .demo-desc{font-size: 15px;color: #454545;}
+            .item-hot .demo-desc img{width: 20px;display: block;float: left;margin-right: 10px;}
+            .item-hot .ui-list li{margin:10px;}
+            .item-hot .ui-list li .ui-list-hotImg{width: 100%;height: 150px;}
+            .item-hot .ui-list .ui-list-hotImg span{background-image: url(../img/indexbgimg.png);height: 150px;display: block;background-size: 100%;}
+            .item-hot .ui-list li .ui-list-info{position: absolute;left: 0;height: 100%;padding: 0;width: 100%;background: rgba(0,0,0,0.5);}
+            .item-hot .ui-list li .ui-list-info p{color: #fff;text-align: center;padding: 5px 0;}
+            .item-hot .ui-list li .ui-list-info .ui-list-infoType{
+                font-size: 15px;
+                border: 1px solid #fff;
+                width: 150px;
+                margin: 0 auto;
+                border-top-left-radius: 20px;
+                border-bottom-right-radius: 20px;
+                -webkit-border-top-left-radius:20px;
+                -webkit-border-bottom-right-radius:20px;
+            }
+            .item-hot .ui-list li .ui-list-info .ui-list-infoDesc{font-size: 12px;padding-top: 10px;}
+            .item-hot .ui-list li .ui-list-info .ui-list-infoPerson{font-size:12px;position: absolute;bottom: 0;width: 100%;padding: 5px 0;}
+            
+        </style>
+    </head>
+    
+    <body ontouchstart>
+        <header class="ui-header ui-header-positive ui-border-b">
+            <h1>霸王大学</h1>
+        </header>
+        <footer class="ui-footer ui-footer-btn">
+            <ul class="ui-tiled ui-border-t">
+                <li data-href="lessonTypes.html" >
+                    <div class="ui-title-img"><img src="../img/footerType.png"  /></div>
+                    <div class="ui-title-name">课程分类</div>
+                </li>
+                <li data-href="lessonQuestion.html" >
+                    <div class="ui-title-img"><img src="../img/footerTeacher.png"  /></div>
+                    <div class="ui-title-name">咨询老师</div>
+                </li>
+                <li data-href="index.html" class="ui-menu-index">
+                    <div class="ui-title-img"><img src="../img/menuIndexSel.png"  /></div>
+                </li>
+                <li data-href="lessonMoney.html">
+                    <div class="ui-title-img ui-img-money"><img src="../img/footerMoney.png"  /></div>
+                    <div class="ui-title-name">奖学金</div>
+                </li>
+                <li data-href="userCenter.html">
+                    <div class="ui-title-img"><img src="../img/footerUser.png"  /></div>
+                    <div class="ui-title-name">个人中心</div>
+                </li>
+            </ul>
+        </footer>
+        <section class="ui-container">
+			<!-- 轮播 -->
+            <div class="ui-slider">
+                <ul class="ui-slider-content"></ul>
+            </div>
+            <div class="ui-lessonType">
+                <div class="ui-row-flex">
+                    <div class="ui-col ">
+                        <div><span class="lessonType lessonType1"></span></div>
+                        <h5>职场提升</h5>
+                    </div>
+                    <div class="ui-col">
+                        <div><span class="lessonType lessonType2"></span></div>
+                        <h5>创新营销</h5>
+                    </div>
+                    <div class="ui-col">
+                        <div><span class="lessonType lessonType3"></span></div>
+                        <h5>创业之路</h5>
+                    </div>
+                    <div class="ui-col">
+                        <div><span class="lessonType lessonType4"></span></div>
+                        <h5>个人提升</h5>
+                    </div>
+                    <div class="ui-col">
+                        <div><span class="lessonType lessonType5"></span></div>
+                        <h5>兴趣爱好</h5>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="demo-item item-ad">
+                <p class="demo-desc"><img src="../img/calendar.png" />课程预告<a href="lessonReport.html">更多 ></a></p>
+                <div class="demo-block">
+                    <ul class="ui-list ui-border-tb">
+                        <!-- 
+                        <li class="ui-border-t">
+                            <div class="ui-avatar">
+                                <span style="background-image:url(http://placeholder.qiniudn.com/100x100)"></span>
+                            </div>
+                            <div class="ui-list-info">
+                                <h4 class="ui-nowrap ui-info-title">打造爆款产品要素进阶</h4>
+                                <p class="ui-nowrap ui-info-desc">8月11号 19：30</p>
+                            </div>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+            </div>
+            <div class="demo-item item-hot">
+                <p class="demo-desc"><img src="../img/hot.png" />精彩回顾</p>
+                <div class="demo-block">
+                    <ul class="ui-list ui-border-tb">
+                        <!--
+                        <li class="ui-border-t">
+                            <div class="ui-list-hotImg">
+                                <span style="background-image:url(../img/indexbgimg.png)"></span>
+                            </div>
+                            <div class="ui-list-info">
+                               <p class="ui-list-infoType">职场新人必看课程</p>
+                               <p class="ui-list-infoDesc">简单易懂，制作精良，专辑内课程</p>
+                               <p class="ui-list-infoPerson">54655人参与</p>
+                            </div>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+            </div>
+
+        </section><!-- /.ui-container-->
+        <script>
+        $('.ui-list li,.ui-tiled li').click(function(){
+            if($(this).data('href')){
+                location.href= $(this).data('href');
+            }
+        });
+
+        Zepto(function($){
+            //轮播
+            BWK.api.lesson.swiper(null,function(data){
+                var dealObj = data.content||[];
+                _dealImgList(dealObj);
+            });
+  	
+         	//分类 TODO
+         	BWK.api.lesson.lessonType(null,function(data){
+                var dealObj = data.children||[];
+                for(var i=0;i<dealObj.length;i++){
+                	$('.ui-lessonType .ui-col').eq(i).attr('id',dealObj[i].id);
+                }
+                $('.ui-lessonType').on('click','.ui-col',function(){
+                    location.href = "lessonTypes.html?id="+$(this).attr('id');
+                });
+            });
+        
+			//lesson report
+			BWK.api.lesson.lesson({'enable':true,'top':true},function(data){
+                var dealObj = data.content||[];
+                _dealLessonPre(dealObj);
+            });
+			BWK.api.lesson.tag(null,function(data){
+                var dealObj = data.children||[];
+                _dealSurprise(dealObj);
+            }); 
+			
+        });
+        
+        function _dealImgList(obj){
+            
+            $('.ui-slider-content').css({width:obj.length*100+'%'});
+            $('.ui-slider-content').empty();
+            var str = "";
+            if(obj&&obj.length>0){
+                for(var i=0;i<obj.length;i++){
+                    str += '<li><a href="'+obj.link+'" ><img style="background-image:url('+obj[i].image+')"></a></li>';
+                }
+                $('.ui-slider-content').append(str);
+                
+                var slider = new fz.Scroll('.ui-slider', {
+                    role: 'slider',
+                    indicator: true,
+                    autoplay: true,
+                    interval: 3000
+                });  
+            }
+                 
+        }
+        /**课程预告**/
+        function _dealLessonPre(obj){
+        	var str = "";
+            if(obj&&obj.length>0){
+                for(var i=0;i<obj.length;i++){
+                    str += '<li class="ui-border-t" id="'+obj[i].id+'"><div class="ui-avatar"><span style="background-image:url('+obj[i].image+')"></span></div>';
+                    str += '<div class="ui-list-info"><h4 class="ui-nowrap ui-info-title">'+obj[i].name+'</h4>';
+                    str +='<p class="ui-nowrap ui-info-desc">'+BWK.Utils.dateformateLocal(new Date(obj[i].endTime),"yyyy-MM-dd hh:mm")+'</p></div></li>';
+                }
+                $('.item-ad .ui-list').append(str);
+            }
+            $('.item-ad ul').on('click','li',function(){
+                location.href = "lessonSign.html?id="+$(this).attr('id');
+            });
+            
+        }
+        /**专题**/                  
+        function _dealSurprise(obj){
+        	var str = "";
+            if(obj&&obj.length>0){
+                for(var i=0;i<obj.length;i++){
+                    str += '<li class="ui-border-t" id="'+obj[i].id+'"><div class="ui-list-hotImg"><span style="background-image:url('+obj[i].image+')"></span></div>';
+                    str += '<div class="ui-list-info"><p class="ui-list-infoType">'+obj[i].name+'</p><p class="ui-list-infoDesc">'+obj[i].desc+'</p>';
+                    str +='<p class="ui-list-infoPerson">'+obj[i].hot+'人参与</p></div></li>';
+                }
+                $('.item-hot .ui-list').append(str);
+            }
+            
+            $('.item-hot ul').on('click','li',function(){
+                location.href = "lessonPackage.html?id="+$(this).attr('id');
+            });
+        }
+        
+        </script>
+    </body>
+</html>

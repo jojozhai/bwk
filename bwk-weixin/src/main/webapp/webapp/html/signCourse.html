@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>报名课程</title>
+    <link rel="stylesheet" href="../css/frozen.css">
+    <link rel="stylesheet" href="../css/public.css">
+    <script src="../lib/zepto.min.js"></script>
+    <script src="../js/frozen.js"></script>
+    <style type="text/css">
+    .ui-slider {
+        height: 200px;
+        padding-top: 0;
+    }
+    
+    .ui-slider img {
+        height: 200px;
+    }
+    
+    .ui-slider-indicators {
+        -webkit-box-pack: center;
+    }
+    
+    .ui-slider-indicators li {
+        background-color: #fff;
+    }
+    
+    .ui-slider-indicators li.current {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+    
+    .ui-slider-indicators li.current:before {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+    
+    .ui-course-pre {
+        text-align: center;
+        background: #fff;
+        padding: 10px 0;
+    }
+    
+    .ui-course-pre h3 {
+        font-weight: 600;
+        height: 40px;
+        line-height: 40px;
+        display: inline-block;
+    }
+    
+    .line_fl{
+        margin-right: 8px;
+    }
+    .line_fr {
+        margin-left: 8px;
+    }
+    
+    .line_vertical {
+        width: 0;
+        height: 12px;
+        display: inline-block;
+        border: 1px solid #000;
+        margin-right: 8px;
+    }
+    
+    .ui-course-pre p {
+        color: #acacac;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+    }
+    
+    .item-details,.item-text {
+        background: #fff;
+        margin-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .item-details .demo-desc {
+        border-bottom: 1px solid #e0e0e0;
+        color: #333;
+    }
+    
+    .item-details img {
+        width: 96%;
+        margin: 10px auto;
+        display: block;
+    }
+    .item-text p{
+        color: #acacac;
+        margin-bottom: 10px;
+        padding:20px 2% 0;
+        font-size: 14px;
+    }
+    .item-text .ui-btn-lg{
+        width: 48%;
+        margin:20px auto 40px;
+    }
+    .ui-sign-lesson .ui-dialog-cnt{
+        width: 78%;
+    }
+    .ui-sign-lesson .ui-btn-lg{
+       width: 48%;
+       margin:10px auto 0;
+    }
+    .ui-sign-lesson .ui-dialog-hd{
+        margin-bottom: 10px;
+        background:#fff;
+        border-top-left-radius: 6px;
+       border-top-right-radius: 6px;
+    }
+    .ui-sign-lesson .ui-dialog-hd h3{
+        font-weight: 600;
+        font-size: 14px;
+    }
+    .ui-sign-lesson .but-wrap{
+       background: #fff;
+       padding: 10px 0 30px;
+       border-bottom-left-radius: 6px;
+       border-bottom-right-radius: 6px;
+       text-align: center;
+    }
+    .ui-sign-lesson .ui-form-item label{
+        font-weight: 600;
+    }
+    .ui-sign-lesson .ui-form-item input{
+       padding-left: 0;
+       margin-left: 20px;
+       border:1px solid #ccc;
+        padding: 4px;
+        border-radius: 2px;
+    }
+    .ui-form-item label:not(.ui-switch):not(.ui-checkbox):not(.ui-checkbox-s):not(.ui-radio){
+        width: auto;
+        font-size: 12px;
+    }
+    .ui-sign-lesson .ui-form-item .ui-toWd{
+        width:120px;
+        margin-left: 50px;
+    }
+    .ui-sign-lesson .ui-form-item .ui-thWd{
+        width:168px;
+        margin-left: 70px;
+    }
+    .ui-sign-lesson .ui-form-item .ui-foWd{
+        width: 154px;
+        margin-left: 84px;
+    }
+    .but-wrap span:first-child{
+        margin-right: 10px;
+    }
+    .but-wrap span i{
+        height:14px;
+        width: 14px;
+        display: inline-block;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-image: url(../img/rightD.png);
+    }
+    .but-wrap span.active i{
+        background-image: url(../img/rightL.png);
+    }
+    .ui-btn-small{
+        display: inline-block;
+    }
+    </style>
+</head>
+
+<body ontouchstart>
+    <section class="ui-container">
+        <div class="ui-slider">
+            <ul class="ui-slider-content" style="width: 300%">
+                <!--  <li><a ><img style="background-image:url(http://placeholder.qiniudn.com/640x200)" /></a></li>
+                    <li><span style="background-image:url(http://placeholder.qiniudn.com/640x200)"></span></li>
+                    <li><span style="background-image:url(http://placeholder.qiniudn.com/640x200)"></span></li> -->
+            </ul>
+        </div>
+        <div class="ui-course-pre">
+            <h3><span class="line_fl">——</span>两小时颠覆你的PPT视觉<span class="line_fr">——</span></h3>
+            <p>主讲人:<span>雷军</span></p>
+            <p>时间:<span>8月13日19:00-20:30</span></p>
+            <p>地点:<span>直播间/北京</span></p>
+        </div>
+        <div class="demo-item item-details">
+            <p class="demo-desc"><span class="line_vertical"></span>活动详情</p>
+            <img src="../img/detail_ad0.png">
+        </div>
+        <div class="demo-item item-text">
+            <p>接触烘培已经2年多了，刚开始做戚风的时候很不顺利，内心很是抓狂，戚风作为入门级的蛋糕，能做好它以后在烘培界才有机会风生水起~慢慢地才掌握了做蛋糕的诀窍，虽然还是有很多次会败给它。</p>
+                <p>我喜欢吃盐渍橙丁，总是喜欢做蛋糕的时候撒一把进去，既香甜又有嚼劲，层次感更突出，品尝过一次，便不可忽略它的存在。</p>
+                <p>经常看到很多人有晒早餐的习惯，灰常羡慕，厌倦了每天黄豆豆浆&炸油条&肉包子，于是，某天早上，我早起了一会，做了可可戚风，榨了新鲜蔬菜汁，还P了图哈哈~想要把生活搞得活泼起来其实还是很简单的嘛~
+            </p>
+            <button class="ui-btn-lg ui-btn-primary" id="btn1">立即参加</button>
+        </div>
+        <div class="demo-block ui-sign-lesson">
+            <div class="ui-dialog">
+                <div class="ui-dialog-cnt" >
+                    <header class="ui-dialog-hd">
+                        <h3>完善您的报名信息</h3>
+                        <i class="ui-dialog-close" data-role="button"></i>
+                    </header>
+                    <div class="demo-block">
+                        <div class="ui-form ui-border-t">
+                            <form action="#">
+                                <div class="ui-form-item ui-border-b">
+                                    <label>
+                                        姓名：
+                                    </label>
+                                    <input type="text" class="ui-toWd" placeholder="输入您的姓名" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label>
+                                        性别：
+                                    </label>
+                                    <input type="text" class="ui-toWd" placeholder="输入您的性别" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        职业：
+                                    </label>
+                                    <input type="text" class="ui-toWd" placeholder="输入您的职业" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label>
+                                        年龄：
+                                    </label>
+                                    <input type="text" class="ui-toWd" placeholder="输入您的年龄" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label>
+                                        手机号：
+                                    </label>
+                                    <input type="text" class="ui-thWd" placeholder="输入您的手机号" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        微信号：
+                                    </label>
+                                    <input type="text" class="ui-thWd" placeholder="输入您的微信号" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        微信昵称：
+                                    </label>
+                                    <input type="text" class="ui-foWd" placeholder="输入您的微信昵称" />
+                                </div>
+                                <div class="ui-form-item ui-border-b">
+                                    <label class="ui-border-r">
+                                        所在城市：
+                                    </label>
+                                    <input type="text" class="ui-foWd" placeholder="输入您的所在城市" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="but-wrap">
+                        <div class="ui-btn-small"><span class="active"><i></i>线上</span><span><i></i>线下</span></div>
+                        <button class="ui-btn-lg ui-btn-primary" id="btn1">提交</button>
+                    </div>
+                </div>        
+            </div>
+        </div>
+    </section>
+    <!-- /.ui-container-->
+    <script>
+    $('.ui-list li,.ui-tiled li').click(function() {
+        if ($(this).data('href')) {
+            location.href = $(this).data('href');
+        }
+    });
+    //弹框
+    (function (){
+            $("#btn1").click(function(){
+                $(".ui-dialog").dialog("show");
+            })
+        })();
+    Zepto(function($) {
+        //轮播
+        BWK.api.lesson.swiper(null, function(data) {
+            var dealObj = data.content || [];
+            _dealImgList(dealObj);
+        });
+
+    });
+
+    function _dealImgList(obj) {
+
+        $('.ui-slider-content').css({
+            width: obj.length * 100 + '%'
+        });
+        $('.ui-slider-content').empty();
+        var str = "";
+        if (obj && obj.length > 0) {
+            for (var i = 0; i < obj.length; i++) {
+                str += '<li><a href="subjectDetail.html?id=' + obj[i].id + '&name=' + obj[i].name + '" ><img src="' + obj[i].image + '"></a></li>';
+            }
+            $('.ui-slider-content').html(str);
+
+            var slider = new fz.Scroll('.ui-slider', {
+                role: 'slider',
+                indicator: true,
+                autoplay: true,
+                interval: 3000
+            });
+        }
+
+    }
+    </script>
+</body>
+
+</html>

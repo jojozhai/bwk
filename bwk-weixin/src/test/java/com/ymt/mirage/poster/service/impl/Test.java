@@ -29,7 +29,7 @@ public class Test extends BaseTest{
     
     @org.junit.Test
     public void test() throws Exception {
-        userPosterService.create(1676L, 148868L);
+//        userPosterService.create(1676L, 148868L);
     }
 
 }
